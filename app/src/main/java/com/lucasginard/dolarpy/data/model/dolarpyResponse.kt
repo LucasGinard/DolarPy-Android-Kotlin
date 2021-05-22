@@ -29,5 +29,5 @@ data class com_ven(
         var name: String? = "",
         var compra: Double,
         var venta: Double,
-        @SerializedName("referencial_diario") val referencialDiario: Double? = null
+        @SerializedName("referencial_diario") var referencialDiario: Double? = null
 )

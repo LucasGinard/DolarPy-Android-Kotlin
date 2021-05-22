@@ -6,7 +6,6 @@
     android:layout_width="170dp"
     android:layout_height="160dp"
     android:layout_margin="5dp"
-    android:layout_marginLeft="0dp"
     app:cardBackgroundColor="@color/primaryColor"
     app:cardElevation="8sp">
 
@@ -30,7 +29,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
-                android:text="Compra:"
+                android:text="@string/dolarBuy"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -61,7 +60,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
-                android:text="Venta:"
+                android:text="@string/dolarSell"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -93,9 +92,9 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5sp"
-                android:text="Ref Día:"
+                android:text="@string/dolarRef"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvRefM"

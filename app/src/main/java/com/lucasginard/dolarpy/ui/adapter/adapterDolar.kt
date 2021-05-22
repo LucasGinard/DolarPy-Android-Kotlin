@@ -6,9 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.com_ven
 
-class adapterDolar (private val localesDolar: List<com_ven>) : RecyclerView.Adapter<dolarViewHolder>() {
+class adapterDolar (private val localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter<dolarViewHolder>() {
 
     var auxLocalesDolar:ArrayList<com_ven> ?= null
+
+    init {
+        if (auxLocalesDolar.isNullOrEmpty()){
+            auxLocalesDolar = localesDolar
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): dolarViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -19,20 +25,23 @@ class adapterDolar (private val localesDolar: List<com_ven>) : RecyclerView.Adap
 
     override fun onBindViewHolder(holder: dolarViewHolder, position: Int) {
         val item = localesDolar[position]
-        if (auxLocalesDolar.isNullOrEmpty()){
-            holder.bind(item)
-        }else{
-            auxLocalesDolar!![position].let { holder.bind(it) }
+        holder.bind(item)
+    }
+
+    fun calcularCotizacion(ingresado:Int){
+        val item = localesDolar
+        for ((i,x) in item.withIndex()){
+            x.compra = ingresado * auxLocalesDolar?.get(i)!!.compra
+            x.venta = ingresado * auxLocalesDolar?.get(i)!!.venta
+            if (x.referencialDiario != null){
+                x.referencialDiario = ingresado * auxLocalesDolar?.get(i)!!.referencialDiario!!
+            }
         }
     }
 
-    fun calcularCotizacion(ingresado:Int): ArrayList<com_ven>? {
-        val item = localesDolar
-        for (x in item){
-            x.compra = ingresado * x.compra
-            x.venta = ingresado * x.venta
-            auxLocalesDolar?.add(x)
-        }
-        return auxLocalesDolar
+    fun clearCotizacion(lista:ArrayList<com_ven>){
+        localesDolar.clear()
+        localesDolar.addAll(lista)
     }
+
 }

@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(bindding.root)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            var i = Intent(this@MainActivity, Home::class.java)
+            val i = Intent(this@MainActivity, Home::class.java)
             startActivity(i)
         }, SPLASH_DISPLAY_LENGTH.toLong())
 

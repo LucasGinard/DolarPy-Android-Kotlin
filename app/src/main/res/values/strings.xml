@@ -2,4 +2,12 @@
     <string name="app_name">DolarPy</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="titleAPP">💸 DolarPy 💸</string>
+    <string name="lastUpdate">Actualizado: </string>
+    <string name="dolarBuy">Compra:</string>
+    <string name="dolarSell">Venta:</string>
+    <string name="dolarRef">Ref Día:</string>
+
+
+
 </resources>
