@@ -11,6 +11,7 @@ import com.lucasginard.dolarpy.Utils.Tools
 import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.databinding.ActivityMainBinding
 import com.lucasginard.dolarpy.domain.MainRepository
+import com.lucasginard.dolarpy.ui.home.Home
 import com.lucasginard.dolarpy.ui.viewModel.MainViewModel
 import com.lucasginard.dolarpy.ui.viewModel.MyViewModelFactory
 

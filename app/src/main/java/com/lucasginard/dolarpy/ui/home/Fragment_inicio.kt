@@ -21,8 +21,9 @@ class fragment_inicio : Fragment() {
 
     private lateinit var _binding :FragmentInicioBinding
     private lateinit var adapter: adapterDolar
-    var lista = ArrayList<com_ven>()
-    var listaSave = ArrayList<com_ven>()
+    private var lista = ArrayList<com_ven>()
+    private var listaSave = ArrayList<com_ven>()
+    private var monto = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,13 +54,14 @@ class fragment_inicio : Fragment() {
     private fun getDolaresIngresados(){
         _binding.etMontoIngresado.doAfterTextChanged {
             if (!it.isNullOrEmpty()){
-                adapter.calcularCotizacion(it.toString().toInt())
+                monto = _binding.etMontoIngresado.text.toString()
+                adapter.calcularCotizacion(monto.toInt())
                 adapter.notifyDataSetChanged()
             }else{
                 adapter.clearCotizacion()
             }
 
-            Log.d("ValorOriginal","${Tools.listBase[1].compra}")
+            Log.d("ValorOriginal","$monto")
         }
         if (Tools.lastUpdate != ""){
             _binding.tvLastUpdate.visibility = View.VISIBLE

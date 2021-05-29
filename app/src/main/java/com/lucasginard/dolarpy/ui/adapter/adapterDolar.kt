@@ -38,10 +38,10 @@ class adapterDolar (var localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter
             val item = com_ven("",0.0,0.0,null)
             if (ingresado != null) {
                 item.name = auxLocalesDolar?.get(i)?.name
-                item.compra = ingresado * x.compra
-                item.venta  = ingresado * x.venta
-                if (x.referencialDiario != null){
-                    item.referencialDiario = ingresado * x.referencialDiario!!
+                item.compra = ingresado * Tools.listBase[i].compra
+                item.venta  = ingresado * Tools.listBase[i].venta
+                if (Tools.listBase[i].referencialDiario != null){
+                    item.referencialDiario = ingresado * Tools.listBase[i].referencialDiario!!
                 }
             }
             itemaux.add(item)

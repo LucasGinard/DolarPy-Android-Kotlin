@@ -1,10 +1,11 @@
-package com.lucasginard.dolarpy.ui
+package com.lucasginard.dolarpy.ui.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.lucasginard.dolarpy.databinding.ActivityHomeBinding
+import com.lucasginard.dolarpy.ui.fragment_inicio
 
 
 class Home : AppCompatActivity() {
