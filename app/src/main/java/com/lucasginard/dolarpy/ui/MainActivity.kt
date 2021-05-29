@@ -18,7 +18,7 @@ import com.lucasginard.dolarpy.ui.viewModel.MyViewModelFactory
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bindding: ActivityMainBinding
-    private val SPLASH_DISPLAY_LENGTH = 5000
+    private var SPLASH_DISPLAY_LENGTH = 7000
     lateinit var viewModel: MainViewModel
     private val retrofitService = apiService.getInstance()
 
@@ -65,10 +65,11 @@ class MainActivity : AppCompatActivity() {
             Tools.listBase.add(it.dolarpy.set)
             Tools.listBase.add(it.dolarpy.vision)
             Tools.lastUpdate = it.update
+            SPLASH_DISPLAY_LENGTH = 0
         })
 
         viewModel.errorMessage.observe(this, Observer {
-            Tools.dialogCustom(this, "Sin conexión compruebe su conexion")
+            Tools.dialogCustom(this, "Sin conexión compruebe su conexión")
         })
         viewModel.getAllDolar()
     }

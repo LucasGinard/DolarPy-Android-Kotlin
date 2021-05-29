@@ -1,4 +1,4 @@
-package com.lucasginard.dolarpy.ui.adapter
+    package com.lucasginard.dolarpy.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.Utils.Tools
 import com.lucasginard.dolarpy.com_ven
 
-class adapterDolar (private val localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter<dolarViewHolder>() {
+class adapterDolar (var localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter<dolarViewHolder>() {
 
     var auxLocalesDolar:ArrayList<com_ven> ?= null
 
@@ -32,13 +32,25 @@ class adapterDolar (private val localesDolar: ArrayList<com_ven>) : RecyclerView
     }
 
     fun calcularCotizacion(ingresado:Int ?= null){
-        val item = localesDolar
-        for ((i,x) in item.withIndex()){
-            x.compra = 5 * auxLocalesDolar?.get(i)!!.compra
-            x.venta = 5 * auxLocalesDolar?.get(i)!!.venta
-            if (x.referencialDiario != null){
-                x.referencialDiario = 5 * auxLocalesDolar?.get(i)!!.referencialDiario!!
+        val listItems = auxLocalesDolar
+        val itemaux = ArrayList<com_ven>()
+        for ((i,x) in listItems!!.withIndex()){
+            val item = com_ven("",0.0,0.0,null)
+            if (ingresado != null) {
+                item.name = auxLocalesDolar?.get(i)?.name
+                item.compra = ingresado * x.compra
+                item.venta  = ingresado * x.venta
+                if (x.referencialDiario != null){
+                    item.referencialDiario = ingresado * x.referencialDiario!!
+                }
             }
+            itemaux.add(item)
+        }
+        if (ingresado != null) {
+            localesDolar.clear()
+            localesDolar.addAll(itemaux)
+            itemaux.clear()
+            notifyDataSetChanged()
         }
     }
 

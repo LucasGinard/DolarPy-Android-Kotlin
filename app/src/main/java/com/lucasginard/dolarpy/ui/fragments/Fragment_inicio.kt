@@ -1,6 +1,8 @@
 package com.lucasginard.dolarpy.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,8 +21,8 @@ class fragment_inicio : Fragment() {
 
     private lateinit var _binding :FragmentInicioBinding
     private lateinit var adapter: adapterDolar
-    val lista = ArrayList<com_ven>()
-    val listaSave = ArrayList<com_ven>()
+    var lista = ArrayList<com_ven>()
+    var listaSave = ArrayList<com_ven>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +31,7 @@ class fragment_inicio : Fragment() {
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding  = FragmentInicioBinding.inflate(inflater, container, false)
         configureRecycler()
         getDolaresIngresados()
@@ -46,32 +48,33 @@ class fragment_inicio : Fragment() {
          )
          _binding .rvDolar.adapter = adapter
     }
-var flat = false
+
+    @SuppressLint("SetTextI18n")
     private fun getDolaresIngresados(){
         _binding.etMontoIngresado.doAfterTextChanged {
-            if (!flat){
-                adapter.calcularCotizacion()
+            if (!it.isNullOrEmpty()){
+                adapter.calcularCotizacion(it.toString().toInt())
                 adapter.notifyDataSetChanged()
-                flat = true
             }else{
                 adapter.clearCotizacion()
             }
+
+            Log.d("ValorOriginal","${Tools.listBase[1].compra}")
         }
         if (Tools.lastUpdate != ""){
             _binding.tvLastUpdate.visibility = View.VISIBLE
             _binding.tvLastUpdate.text = "${getText(R.string.lastUpdate)} ${Tools.lastUpdate}"
         }
         lista.addAll(Tools.listBase)
-        listaSave.addAll(Tools.listBase)
+        val list:List<com_ven> = Tools.listBase
+        listaSave.addAll(list)
         adapter.notifyDataSetChanged()
     }
 
     companion object {
-        fun newInstance() =
-            fragment_inicio().apply {
-                arguments = Bundle().apply {
-
-                }
+        fun newInstance() = fragment_inicio().apply {
+            arguments = Bundle().apply {
             }
+        }
     }
 }

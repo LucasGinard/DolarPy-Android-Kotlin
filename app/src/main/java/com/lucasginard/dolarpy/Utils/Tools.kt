@@ -40,7 +40,6 @@ open class Tools {
                             DialogInterface.OnClickListener { dialog, id ->
                                 // FIRE ZE MISSILES!
                             })
-            // Create the AlertDialog object and return it
             builder.create()
             builder.show()
         }
