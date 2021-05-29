@@ -36,7 +36,7 @@ open class Tools {
         fun dialogCustom(activity:Activity,Dialog:String){
             val builder = AlertDialog.Builder(activity)
             builder.setMessage(Dialog)
-                    .setPositiveButton(R.string.btnAceppt,
+                    .setPositiveButton(R.string.btnAccept,
                             DialogInterface.OnClickListener { dialog, id ->
                                 // FIRE ZE MISSILES!
                             })

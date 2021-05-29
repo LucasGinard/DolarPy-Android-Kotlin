@@ -46,7 +46,7 @@
             android:id="@+id/etMontoIngresado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Monto"
+            android:hint="@string/hintAmount"
             android:imeOptions="actionDone"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>

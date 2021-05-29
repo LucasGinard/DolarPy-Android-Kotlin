@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DolarPy</string>
+    <string name="lastUpdate">Updated: </string>
+    <string name="dolarBuy">Buy:</string>
+    <string name="dolarSell">Sell:</string>
+    <string name="dolarRef">Ref Day:</string>
+    <string name="btnAccept">Accept</string>
+    <string name="btnCancel">Cancel</string>
+    <string name="hintAmount">Amount</string>
+
+</resources>
