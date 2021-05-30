@@ -13,13 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.Utils.Tools
 import com.lucasginard.dolarpy.com_ven
-import com.lucasginard.dolarpy.databinding.FragmentInicioBinding
+import com.lucasginard.dolarpy.databinding.FragmentCotizacionBinding
 import com.lucasginard.dolarpy.ui.adapter.adapterDolar
 
 
-class fragment_inicio : Fragment() {
+class cotizacionFragment : Fragment() {
 
-    private lateinit var _binding :FragmentInicioBinding
+    private lateinit var _binding :FragmentCotizacionBinding
     private lateinit var adapter: adapterDolar
     private var lista = ArrayList<com_ven>()
     private var listaSave = ArrayList<com_ven>()
@@ -33,7 +33,7 @@ class fragment_inicio : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        _binding  = FragmentInicioBinding.inflate(inflater, container, false)
+        _binding  = FragmentCotizacionBinding.inflate(inflater, container, false)
         configureRecycler()
         getDolaresIngresados()
         return  _binding .root
@@ -74,7 +74,7 @@ class fragment_inicio : Fragment() {
     }
 
     companion object {
-        fun newInstance() = fragment_inicio().apply {
+        fun newInstance() = cotizacionFragment().apply {
             arguments = Bundle().apply {
             }
         }

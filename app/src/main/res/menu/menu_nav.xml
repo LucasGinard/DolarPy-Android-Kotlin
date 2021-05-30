@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_ubi"
+        android:title="@string/navUbicacion"
+        android:icon="@drawable/ic_nav_item"
+        />
+    <item
+        android:id="@+id/nav_coti"
+        android:title="@string/navCotizacion"
+        android:icon="@drawable/ic_baseline_attach_money_24"
+        />
+    <item
+        android:id="@+id/nav_info"
+        android:title="@string/navInfo"
+        android:icon="@drawable/ic_nav_info"
+        />
+</menu>

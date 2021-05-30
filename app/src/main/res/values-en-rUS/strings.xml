@@ -8,5 +8,7 @@
     <string name="btnAccept">Accept</string>
     <string name="btnCancel">Cancel</string>
     <string name="hintAmount">Amount</string>
-
+    <string name="navCotizacion">Quotation</string>
+    <string name="navInfo">Info</string>
+    <string name="navUbicacion">Locations</string>
 </resources>

@@ -9,5 +9,5 @@
         android:id="@+id/fragment_inicio"
         android:name="com.lucasginard.dolarpy.ui.fragment_inicio"
         android:label="fragment_inicio"
-        tools:layout="@layout/fragment_inicio" />
+        tools:layout="@layout/fragment_cotizacion" />
 </navigation>

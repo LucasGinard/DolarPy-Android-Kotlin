@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">DolarPy</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="titleAPP" translatable="false">💸 DolarPy 💸</string>
     <string name="lastUpdate">Actualizado: </string>
     <string name="dolarBuy">Compra:</string>
@@ -9,5 +8,8 @@
     <string name="btnAccept">Aceptar</string>
     <string name="btnCancel">Cancelar</string>
     <string name="hintAmount">Monto</string>
+    <string name="navCotizacion">Cotizaciones</string>
+    <string name="navInfo">Info</string>
+    <string name="navUbicacion">Ubicaciones</string>
 
 </resources>
