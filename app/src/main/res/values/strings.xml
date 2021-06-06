@@ -11,5 +11,5 @@
     <string name="navCotizacion">Cotizaciones</string>
     <string name="navInfo">Info</string>
     <string name="navUbicacion">Ubicaciones</string>
-
+    <string name="textLicense" translatable="false">Apache-2.0 License</string>
 </resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "983083292625",
+    "project_id": "dolarpy-67180",
+    "storage_bucket": "dolarpy-67180.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983083292625:android:23a1c59d082da862b4b2f0",
+        "android_client_info": {
+          "package_name": "com.lucasginard.dolarpy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983083292625-ovsg5c6tj5hgrn6ciioscao1t2tq81ar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTkb6O955GrTOAY2508mebG4ZTDTTIiYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983083292625-ovsg5c6tj5hgrn6ciioscao1t2tq81ar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
