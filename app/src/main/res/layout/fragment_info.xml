@@ -96,7 +96,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Informa un Error/Bug "
+                        android:text="@string/textInform"
                         android:textColor="#FFFFFF"
                         android:textSize="20sp" />
 
@@ -127,7 +127,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="16dp"
-                        android:hint=" Mensaje"
+                        android:hint="@string/textMessage"
                         app:errorEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -146,7 +146,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
-                        android:text="Enviar" />
+                        android:text="@string/btnSend" />
 
                 </LinearLayout>
 
@@ -157,7 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="contribuir al código"
+                android:text="@string/textHelpCode"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -187,6 +187,7 @@
                     android:id="@+id/imageView"
                     android:layout_width="24dp"
                     android:layout_height="27dp"
+                    android:contentDescription="@string/app_name"
                     android:src="@drawable/ic_code"
                     app:tint="#3F51B5" />
 
@@ -194,7 +195,7 @@
                     android:id="@+id/tvGitHub"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="GitHub"
+                    android:text="@string/textGitHub"
                     android:textColor="#3F51B5"
                     android:textSize="20sp" />
 
@@ -202,6 +203,7 @@
                     android:id="@+id/imageView2"
                     android:layout_width="24dp"
                     android:layout_height="27dp"
+                    android:contentDescription="@string/app_name"
                     android:src="@drawable/ic_code"
                     app:tint="#3F51B5" />
 

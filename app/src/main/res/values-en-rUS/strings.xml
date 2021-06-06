@@ -9,6 +9,12 @@
     <string name="btnCancel">Cancel</string>
     <string name="hintAmount">Amount</string>
     <string name="navCotizacion">Quotation</string>
-    <string name="navInfo">Info</string>
+    <string name="navInfo">About</string>
     <string name="navUbicacion">Locations</string>
+    <string name="textInform">Report Error/Bug</string>
+    <string name="textHelpCode">Contribute to the code</string>
+    <string name="btnSend">Send</string>
+    <string name="textMessage">Message</string>
+    <string name="textError">Please complete the field</string>
+
 </resources>

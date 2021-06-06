@@ -27,9 +27,7 @@ open class Tools {
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f
             )
-            animation.duration = 2000
-            animation.repeatCount = Animation.INFINITE
-            animation.repeatMode = Animation.REVERSE
+            animation.duration = 500
             view.startAnimation(animation)
         }
 

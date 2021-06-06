@@ -12,4 +12,12 @@
     <string name="navInfo">Info</string>
     <string name="navUbicacion">Ubicaciones</string>
     <string name="textLicense" translatable="false">Apache-2.0 License</string>
+    <string name="textInform">Informa un Error/Bug</string>
+    <string name="textHelpCode">Contribuir al código</string>
+    <string name="btnSend">Enviar</string>
+    <string name="textMessage">Mensaje</string>
+    <string name="textGitHub" translatable="false">GitHub</string>
+    <string name="textError">Por Favor complete el campo</string>
+
+
 </resources>

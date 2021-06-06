@@ -3,15 +3,13 @@ package com.lucasginard.dolarpy.ui.home.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.isEmpty
-import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import com.lucasginard.dolarpy.R
+import com.lucasginard.dolarpy.Utils.Tools
 import com.lucasginard.dolarpy.databinding.FragmentInfoBinding
 
 
@@ -29,10 +27,17 @@ class infoFragment : Fragment() {
     ): View? {
         _binding = FragmentInfoBinding.inflate(inflater, container, false)
         configureOnClickListener()
+        configureUI()
         return _binding.root
     }
 
+    private fun configureUI(){
+        Tools.rotarImagen(_binding.ivIcon)
+
+    }
+
     private fun configureOnClickListener(){
+
         _binding.linearTextReport.setOnClickListener {
             if (_binding.linearForm.visibility == View.GONE){
                 _binding.linearForm.visibility = View.VISIBLE
@@ -44,8 +49,15 @@ class infoFragment : Fragment() {
         }
 
         _binding.btnSend.setOnClickListener {
+            var emails = arrayOf("contactolucasginard@gmail.com")
             if(isValid()){
-                Log.d("testValid","si")
+                val intent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:")
+                    putExtra(Intent.EXTRA_EMAIL, emails)
+                    putExtra(Intent.EXTRA_SUBJECT, "Report Bug/Error")
+                    putExtra(Intent.EXTRA_TEXT, _binding.tvArea.editText?.text)
+                }
+                startActivity(intent)
             }
         }
 
@@ -59,7 +71,7 @@ class infoFragment : Fragment() {
 
     private fun isValid(): Boolean {
         return if (_binding.tvArea.editText?.text.isNullOrEmpty()){
-            _binding.tvArea.error = "Ingrese"
+            _binding.tvArea.error = getString(R.string.textError)
             false
         }else{
             true
