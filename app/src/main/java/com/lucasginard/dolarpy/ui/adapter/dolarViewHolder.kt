@@ -13,14 +13,14 @@ class dolarViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val binding = ItemDolarBinding.bind(view)
     fun bind(local: com_ven){
         binding.tvLocal.text = local.name
+        val df =  DecimalFormat("#,###");
         if (local.referencialDiario != null){
-            val df =  DecimalFormat("##0,000.00");
+            //val df =  DecimalFormat("##0,000.00");
             binding.linearRef.visibility = View.VISIBLE
             binding.tvCompraM.text = "₲${df.format(local.compra)}"
             binding.tvVentaM.text =  "₲${df.format(local.venta)}"
             binding.tvRefM.text = "₲${df.format(local.referencialDiario)}"
         }else{
-            val df =  DecimalFormat("#,###");
             binding.tvCompraM.text = "₲${df.format(local.compra.toInt()).replace(",",".")}"
             binding.tvVentaM.text =  "₲${df.format(local.venta.toInt()).replace(",",".")}"
             if (Resources.getSystem().displayMetrics.heightPixels > 800){
