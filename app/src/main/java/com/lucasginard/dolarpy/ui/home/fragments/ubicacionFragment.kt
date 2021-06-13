@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.lucasginard.dolarpy.R
+import com.lucasginard.dolarpy.Utils.Tools
 import com.lucasginard.dolarpy.databinding.FragmentUbicacionBinding
 
 
@@ -20,7 +21,7 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
     private lateinit var _binding :FragmentUbicacionBinding
     private lateinit var GoogleMap: GoogleMap
     private var mapView: MapView? = null
-    private var empresasCotizacion  = mapOf<String,LatLng>(
+    private var empresasCotizacion  = mapOf(
         Pair("Vision Banco Central",LatLng(-25.2894519,-57.571821)),
         Pair("BBVA",LatLng(-25.288306,-57.6262421)),
         Pair("Cambios Chaco",LatLng(-25.2935472,-57.6420617))
@@ -35,7 +36,7 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         _binding  = FragmentUbicacionBinding.inflate(inflater, container, false)
-        initMaps()
+        configureUI()
         mapView = _binding.mapViewF
         mapView?.onCreate(savedInstanceState)
         mapView?.onResume()
@@ -48,16 +49,19 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
         return _binding.root
     }
 
-    private fun initMaps(){
-        val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
-        ActivityCompat.requestPermissions(requireActivity(), permissions,0)
-    }
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    private fun configureUI(){
+        Tools.rotarImagen(_binding.ivIcon2)
+
+        _binding.normal.setOnCheckedChangeListener { compoundButton, b ->
+            if (b){
+                GoogleMap.mapType = com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL
+            }
+        }
+        _binding.satellite.setOnCheckedChangeListener { compoundButton, b ->
+            if (b){
+                GoogleMap.mapType = com.google.android.gms.maps.GoogleMap.MAP_TYPE_SATELLITE
+            }
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {

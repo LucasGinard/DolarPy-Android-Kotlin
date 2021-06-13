@@ -29,7 +29,7 @@
             android:required="false" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="KEY MAPS" />
+            android:value="AIzaSyBLkEJ1G4ouCrN0_ZYSsn4RYPIUdXUWcyU"/>
     </application>
 
 </manifest>
