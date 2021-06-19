@@ -33,7 +33,6 @@ class infoFragment : Fragment() {
 
     private fun configureUI(){
         Tools.rotarImagen(_binding.ivIcon)
-
     }
 
     private fun configureOnClickListener(){

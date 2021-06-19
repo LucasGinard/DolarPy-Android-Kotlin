@@ -1,11 +1,9 @@
 package com.lucasginard.dolarpy.ui.home.fragments
 
-import android.Manifest
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -24,8 +22,18 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
     private var empresasCotizacion  = mapOf(
         Pair("Vision Banco Central",LatLng(-25.2894519,-57.571821)),
         Pair("BBVA",LatLng(-25.288306,-57.6262421)),
-        Pair("Cambios Chaco",LatLng(-25.2935472,-57.6420617))
-    )
+        Pair("Cambios Chaco",LatLng(-25.2935472,-57.6420617)),
+        Pair("Cambios M&D",LatLng(-25.2941856,-57.5815143)),
+        Pair("Mundial Cambios",LatLng(-25.2822143,-57.6549689)),
+        Pair("MaxiCambios",LatLng(-25.2946103,-57.6323844)),
+        Pair("La Moneda Cambios",LatLng(-25.5227634,-54.6536922)),
+        Pair("Cambios Chaco S.A",LatLng(-25.3147567,-57.5814258)),
+        Pair("Interfisa",LatLng(-25.3151002,-57.5814257)),
+        Pair("Cambios Alberdi",LatLng(-25.3147567,-57.5814258)),
+        Pair("Bonanza Cambios S.A",LatLng(-25.5109695,-54.6146669)),
+        Pair("BCP",LatLng(-25.2780422,-57.5778163)),
+        Pair("Cambios Alberdi",LatLng(-25.3147567,-57.5814258)),
+        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
