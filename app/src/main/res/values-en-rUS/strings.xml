@@ -16,5 +16,6 @@
     <string name="btnSend">Send</string>
     <string name="textMessage">Message</string>
     <string name="textError">Please complete the field</string>
+    <string name="textSate">Satelite</string>
 
 </resources>

@@ -79,7 +79,6 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/switch_maps"
         android:checkedButton="@+id/normal"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -90,27 +89,29 @@
             android:id="@+id/satellite"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:layout_weight="1"
-            android:background="@drawable/switch_selected"
+            android:background="@drawable/button_right_corner"
             android:button="@null"
             android:gravity="center"
-            android:text="Satelite" />
+            android:text="@string/textSate"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/normal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginTop="4dp"
-            android:layout_marginRight="4dp"
+            android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
             android:layout_weight="1"
-            android:background="@drawable/switch_selected"
+            android:background="@drawable/button_left_corner"
             android:button="@null"
             android:gravity="center"
-            android:text="Normal" />
+            android:text="@string/textSateNormal"
+            android:textColor="@color/white" />
     </RadioGroup>
 
 

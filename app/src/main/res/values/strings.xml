@@ -18,6 +18,9 @@
     <string name="textMessage">Mensaje</string>
     <string name="textGitHub" translatable="false">GitHub</string>
     <string name="textError">Por Favor complete el campo</string>
+    <string name="textSateNormal" translatable="false">Normal</string>
+    <string name="textSate">Satélite</string>
+
 
 
 </resources>

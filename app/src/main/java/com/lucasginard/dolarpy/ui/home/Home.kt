@@ -33,7 +33,7 @@ class Home : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-
+        moveTaskToBack(true)
     }
     private fun BottomNavigationView.setOnNavigationItemSelectedListener() {
         setOnNavigationItemSelectedListener {

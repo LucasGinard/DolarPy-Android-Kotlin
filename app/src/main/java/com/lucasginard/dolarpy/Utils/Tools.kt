@@ -15,7 +15,7 @@ open class Tools {
         val listBase = ArrayList<com_ven>()
         var lastUpdate =""
 
-        fun setMargin(view: View, left: Int, right: Int, top: Int, bottom: Int) {
+        fun setMargin(view: View, left: Int =0, right: Int  =0, top: Int  =0, bottom: Int  =0) {
             val params = view.layoutParams as ViewGroup.MarginLayoutParams
             params.setMargins(left, top, right, bottom)
             view.layoutParams = params

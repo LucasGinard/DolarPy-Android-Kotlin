@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -11,6 +12,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.Utils.Tools
+import com.lucasginard.dolarpy.Utils.setTint
 import com.lucasginard.dolarpy.databinding.FragmentUbicacionBinding
 
 
@@ -59,16 +61,29 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
 
     private fun configureUI(){
         Tools.rotarImagen(_binding.ivIcon2)
+        backgroundTint()
 
         _binding.normal.setOnCheckedChangeListener { compoundButton, b ->
             if (b){
                 GoogleMap.mapType = com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL
+                backgroundTint()
             }
         }
         _binding.satellite.setOnCheckedChangeListener { compoundButton, b ->
             if (b){
                 GoogleMap.mapType = com.google.android.gms.maps.GoogleMap.MAP_TYPE_SATELLITE
+                backgroundTint(true)
             }
+        }
+    }
+
+    private fun backgroundTint(boolean: Boolean = false){
+        if (!boolean){
+            _binding.normal.setTint(R.color.primaryColor)
+            _binding.satellite.setTint(R.color.secondColor)
+        }else{
+            _binding.normal.setTint(R.color.secondColor)
+            _binding.satellite.setTint(R.color.primaryColor)
         }
     }
 
