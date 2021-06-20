@@ -7,6 +7,7 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.Utils.Tools
 import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.databinding.ActivityMainBinding
@@ -70,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.errorMessage.observe(this, Observer {
-            Tools.dialogCustom(this, "Sin conexión compruebe su conexión")
+            Tools.dialogCustom(this, getString(R.string.textErrorNet))
         })
         viewModel.getAllDolar()
     }

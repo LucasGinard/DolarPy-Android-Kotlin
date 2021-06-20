@@ -20,6 +20,7 @@
     <string name="textError">Por Favor complete el campo</string>
     <string name="textSateNormal" translatable="false">Normal</string>
     <string name="textSate">Satélite</string>
+    <string name="textErrorNet">Sin conexión compruebe su conexión</string>
 
 
 
