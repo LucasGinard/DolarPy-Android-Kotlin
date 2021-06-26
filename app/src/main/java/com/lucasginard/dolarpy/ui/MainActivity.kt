@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.Utils.Tools
+import com.lucasginard.dolarpy.Utils.setBackground
 import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.databinding.ActivityMainBinding
 import com.lucasginard.dolarpy.domain.MainRepository
@@ -28,15 +29,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bindding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bindding.root)
+        configureUI()
+
         getApi()
         Handler(Looper.getMainLooper()).postDelayed({
             val i = Intent(this@MainActivity, Home::class.java)
             startActivity(i)
         }, SPLASH_DISPLAY_LENGTH.toLong())
-
+        configureUI()
     }
 
-    fun getApi(){
+    private fun configureUI(){
+        bindding.contraintBase.setBackground()
+    }
+
+    private fun getApi(){
         viewModel = ViewModelProvider(this, MyViewModelFactory(MainRepository(retrofitService))).get(MainViewModel::class.java)
         viewModel.getDolarList.observe(this, Observer {
             it.dolarpy.amambay.name = "AMANBAY"
@@ -74,5 +81,10 @@ class MainActivity : AppCompatActivity() {
             Tools.dialogCustom(this, getString(R.string.textErrorNet))
         })
         viewModel.getAllDolar()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        configureUI()
     }
 }

@@ -2,8 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contraintBase"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_light"
     tools:context=".ui.home.Home">
 
     <FrameLayout
@@ -21,13 +23,13 @@
         android:id="@+id/navView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/nav_background"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color"
         app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_nav"
-        app:itemIconTint="@color/nav_item_color"
-        app:itemTextColor="@color/nav_item_color"
-        android:background="@drawable/nav_background"/>
+        app:menu="@menu/menu_nav" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lucasginard.dolarpy.R
+import com.lucasginard.dolarpy.Utils.setBackground
 import com.lucasginard.dolarpy.databinding.ActivityHomeBinding
 import com.lucasginard.dolarpy.ui.cotizacionFragment
 import com.lucasginard.dolarpy.ui.home.fragments.infoFragment
@@ -21,7 +22,7 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bindding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(bindding.root)
-
+        configureUI()
 
         bindding.navView.setOnNavigationItemSelectedListener()
         bindding.navView.selectedItemId = R.id.nav_coti
@@ -32,9 +33,14 @@ class Home : AppCompatActivity() {
         ft.commit()
     }
 
+    private fun configureUI() {
+        bindding.contraintBase.setBackground()
+    }
+
     override fun onBackPressed() {
         moveTaskToBack(true)
     }
+
     private fun BottomNavigationView.setOnNavigationItemSelectedListener() {
         setOnNavigationItemSelectedListener {
             val fm: FragmentManager = supportFragmentManager
@@ -56,6 +62,11 @@ class Home : AppCompatActivity() {
             }
             return@setOnNavigationItemSelectedListener true
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        configureUI()
     }
 }
 
