@@ -1,5 +1,7 @@
-    package com.lucasginard.dolarpy.ui.adapter
+package com.lucasginard.dolarpy.ui.adapter
 
+import android.content.res.Resources
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +21,12 @@ class adapterDolar (var localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): dolarViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return dolarViewHolder(layoutInflater.inflate(R.layout.item_dolar, parent, false))
+        Log.d("valorHeight",Resources.getSystem().displayMetrics.heightPixels.toString())
+        return if(Resources.getSystem().displayMetrics.heightPixels <= 2060 ){
+            dolarViewHolder(layoutInflater.inflate(R.layout.item_dolar_small, parent, false))
+        }else{
+            dolarViewHolder(layoutInflater.inflate(R.layout.item_dolar, parent, false))
+        }
     }
 
     override fun getItemCount(): Int = auxLocalesDolar!!.size

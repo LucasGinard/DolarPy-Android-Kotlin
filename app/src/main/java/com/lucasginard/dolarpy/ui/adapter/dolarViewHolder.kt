@@ -21,10 +21,12 @@ class dolarViewHolder(view: View): RecyclerView.ViewHolder(view) {
             binding.tvCompraM.text = "₲${df.format(local.compra)}"
             binding.tvVentaM.text =  "₲${df.format(local.venta)}"
             binding.tvRefM.text = "₲${df.format(local.referencialDiario)}"
+            setMargin(binding.linearCompra, left = 8, top = 20)
+            setMargin(binding.linearVenta,  left = 8, top = 50)
         }else{
             binding.tvCompraM.text = "₲${df.format(local.compra.toInt()).replace(",",".")}"
             binding.tvVentaM.text =  "₲${df.format(local.venta.toInt()).replace(",",".")}"
-            if (Resources.getSystem().displayMetrics.heightPixels > 800){
+            if (Resources.getSystem().displayMetrics.heightPixels > 800 && binding.linearRef.visibility == View.GONE){
                 setMargin(binding.linearCompra, left = 8, top = 40)
                 setMargin(binding.linearVenta,  left = 8, top = 70)
             }

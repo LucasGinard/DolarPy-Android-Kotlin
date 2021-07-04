@@ -1,9 +1,10 @@
 # 💸DolarPy Android Kotlin💸
-WebService: https://dolar.melizeche.com/api/1.0/ 
+🌐WebService: https://dolar.melizeche.com/api/1.0/
 
 
 Versión Android en Kotlin de 💸DolarPy💸: https://dolar.melizeche.com/
 
+:octocat: Repo: https://github.com/melizeche/dolarPy
 
 ## Construido con 🛠️ (Build in)
 * [AndroidStudio](https://developer.android.com/studio) - v4.2.1
