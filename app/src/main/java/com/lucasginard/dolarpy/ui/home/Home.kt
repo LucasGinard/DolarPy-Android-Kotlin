@@ -2,7 +2,6 @@ package com.lucasginard.dolarpy.ui.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -41,6 +40,11 @@ class Home : AppCompatActivity() {
         moveTaskToBack(true)
     }
 
+    override fun onResume() {
+        super.onResume()
+        configureUI()
+    }
+
     private fun BottomNavigationView.setOnNavigationItemSelectedListener() {
         setOnNavigationItemSelectedListener {
             val fm: FragmentManager = supportFragmentManager
@@ -64,10 +68,6 @@ class Home : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        configureUI()
-    }
 }
 
 

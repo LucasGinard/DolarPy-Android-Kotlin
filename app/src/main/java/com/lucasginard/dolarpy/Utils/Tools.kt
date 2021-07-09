@@ -13,6 +13,7 @@ import com.lucasginard.dolarpy.com_ven
 open class Tools {
     companion object{
         val listBase = ArrayList<com_ven>()
+        var flatCheck = false
         var lastUpdate =""
 
         fun setMargin(view: View, left: Int =0, right: Int  =0, top: Int  =0, bottom: Int  =0) {

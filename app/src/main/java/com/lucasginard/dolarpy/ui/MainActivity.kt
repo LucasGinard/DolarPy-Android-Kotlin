@@ -29,14 +29,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bindding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bindding.root)
-        configureUI()
 
         getApi()
+        configureUI()
         Handler(Looper.getMainLooper()).postDelayed({
             val i = Intent(this@MainActivity, Home::class.java)
             startActivity(i)
         }, SPLASH_DISPLAY_LENGTH.toLong())
-        configureUI()
     }
 
     private fun configureUI(){
@@ -79,6 +78,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.errorMessage.observe(this, Observer {
             Tools.dialogCustom(this, getString(R.string.textErrorNet))
+            Tools.flatCheck = true
         })
         viewModel.getAllDolar()
     }

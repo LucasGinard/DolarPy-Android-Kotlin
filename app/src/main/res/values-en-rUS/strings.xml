@@ -18,5 +18,6 @@
     <string name="textError">Please complete the field</string>
     <string name="textSate">Satelite</string>
     <string name="textErrorNet">Offline check your connection</string>
+    <string name="tryConnect">Retry connection</string>
 
 </resources>

@@ -8,21 +8,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.Utils.Tools
 import com.lucasginard.dolarpy.com_ven
+import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.databinding.FragmentCotizacionBinding
+import com.lucasginard.dolarpy.domain.MainRepository
 import com.lucasginard.dolarpy.ui.adapter.adapterDolar
+import com.lucasginard.dolarpy.ui.viewModel.MainViewModel
+import com.lucasginard.dolarpy.ui.viewModel.MyViewModelFactory
 
 
 class cotizacionFragment : Fragment() {
 
     private lateinit var _binding :FragmentCotizacionBinding
     private lateinit var adapter: adapterDolar
-    private var lista = ArrayList<com_ven>()
+    private val retrofitService = apiService.getInstance()
+    lateinit var viewModel: MainViewModel
+
     private var listaSave = ArrayList<com_ven>()
+    private var lista = ArrayList<com_ven>()
     private var monto = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,12 +43,28 @@ class cotizacionFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         _binding  = FragmentCotizacionBinding.inflate(inflater, container, false)
+        configureUI()
         configureRecycler()
         getDolaresIngresados()
+        configureOnClickListener()
         return  _binding .root
     }
 
-     fun configureRecycler(){
+    private fun configureUI(){
+        if (Tools.flatCheck){
+            _binding.etMonto.visibility = View.GONE
+            _binding.tvConnect.visibility = View.VISIBLE
+        }
+    }
+
+    private fun configureOnClickListener() {
+        _binding.tvConnect.setOnClickListener {
+            getApi()
+            _binding.pgLoading.visibility = View.VISIBLE
+        }
+    }
+
+    private fun configureRecycler(){
         adapter = adapterDolar(lista)
          _binding.rvDolar.layoutManager = GridLayoutManager(
                  requireContext(),
@@ -61,7 +86,6 @@ class cotizacionFragment : Fragment() {
                 adapter.clearCotizacion()
             }
 
-            Log.d("ValorOriginal","$monto")
         }
         if (Tools.lastUpdate != ""){
             _binding.tvLastUpdate.visibility = View.VISIBLE
@@ -71,6 +95,56 @@ class cotizacionFragment : Fragment() {
         val list:List<com_ven> = Tools.listBase
         listaSave.addAll(list)
         adapter.notifyDataSetChanged()
+    }
+
+    private fun getApi(){
+        viewModel = ViewModelProvider(this, MyViewModelFactory(MainRepository(retrofitService))).get(MainViewModel::class.java)
+        viewModel.getDolarList.observe(requireActivity(), Observer {
+            it.dolarpy.amambay.name = "AMANBAY"
+            it.dolarpy.bbva.name = "BBVA"
+            it.dolarpy.bcp.name = "BCP"
+            it.dolarpy.bonanza.name = "BONANZA"
+            it.dolarpy.cambiosalberdi.name = "CAMBIOS ALBERDI"
+            it.dolarpy.cambioschaco.name = "CAMBIOS CHACO"
+            it.dolarpy.interfisa.name = "INTERFISA"
+            it.dolarpy.lamoneda.name = "LA MONEDA"
+            it.dolarpy.maxicambios.name = "MAXICAMBIOS"
+            it.dolarpy.mundialcambios.name = "MUNDIAL CAMBIOS"
+            it.dolarpy.mydcambios.name = "MYD CAMBIOS"
+            it.dolarpy.set.name = "SET"
+            it.dolarpy.vision.name = "Visión Banco"
+            Tools.listBase.clear()
+            Tools.listBase.add(it.dolarpy.amambay)
+            Tools.listBase.add(it.dolarpy.bbva)
+            Tools.listBase.add(it.dolarpy.bcp)
+            Tools.listBase.add(it.dolarpy.bonanza)
+            Tools.listBase.add(it.dolarpy.cambiosalberdi)
+            Tools.listBase.add(it.dolarpy.cambioschaco)
+            Tools.listBase.add(it.dolarpy.interfisa)
+            Tools.listBase.add(it.dolarpy.lamoneda)
+            Tools.listBase.add(it.dolarpy.maxicambios)
+            Tools.listBase.add(it.dolarpy.mundialcambios)
+            Tools.listBase.add(it.dolarpy.mydcambios)
+            Tools.listBase.add(it.dolarpy.set)
+            Tools.listBase.add(it.dolarpy.vision)
+            Tools.lastUpdate = it.update
+            _binding.etMonto.visibility = View.VISIBLE
+            _binding.tvConnect.visibility = View.GONE
+            _binding.pgLoading.visibility = View.GONE
+            Tools.flatCheck = false
+            getDolaresIngresados()
+        })
+
+        viewModel.errorMessage.observe(requireActivity(), Observer {
+            Tools.dialogCustom(requireActivity(), getString(R.string.textErrorNet))
+            if (_binding.etMonto.visibility == View.VISIBLE && Tools.listBase.isNotEmpty()){
+                adapter.notifyDataSetChanged()
+            }
+            _binding.recycler.visibility = View.GONE
+            _binding.pgLoading.visibility = View.GONE
+            _binding.tvConnect.visibility = View.VISIBLE
+        })
+        viewModel.getAllDolar()
     }
 
     companion object {

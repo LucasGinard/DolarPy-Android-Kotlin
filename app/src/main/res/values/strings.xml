@@ -21,7 +21,6 @@
     <string name="textSateNormal" translatable="false">Normal</string>
     <string name="textSate">Satélite</string>
     <string name="textErrorNet">Sin conexión compruebe su conexión</string>
-
-
+    <string name="tryConnect">Reintentar conexión</string>
 
 </resources>
