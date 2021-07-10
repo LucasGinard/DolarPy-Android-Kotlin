@@ -1,14 +1,13 @@
 package com.lucasginard.dolarpy.Utils
 
 import android.app.Activity
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.view.animation.RotateAnimation
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.com_ven
+
 
 open class Tools {
     companion object{
@@ -32,14 +31,13 @@ open class Tools {
             view.startAnimation(animation)
         }
 
-        fun dialogCustom(activity:Activity,Dialog:String){
-            val builder = AlertDialog.Builder(activity)
-            builder.setMessage(Dialog)
-                    .setPositiveButton(R.string.btnAccept,
-                            DialogInterface.OnClickListener { dialog, id ->
-                                // FIRE ZE MISSILES!
-                            })
-            builder.create()
+        fun dialogCustom(activity: Activity, text: String, btnAccept: () -> Unit?={}) {
+            val builder = MaterialAlertDialogBuilder(activity)
+            builder.setMessage(text)
+                    .setPositiveButton(R.string.btnAccept){dialog ,it ->
+                        btnAccept()
+                        dialog.dismiss()
+                    }
             builder.show()
         }
     }

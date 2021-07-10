@@ -26,10 +26,10 @@ import com.lucasginard.dolarpy.ui.viewModel.MyViewModelFactory
 class cotizacionFragment : Fragment() {
 
     private lateinit var _binding :FragmentCotizacionBinding
+    private lateinit var viewModel: MainViewModel
     private lateinit var adapter: adapterDolar
-    private val retrofitService = apiService.getInstance()
-    lateinit var viewModel: MainViewModel
 
+    private val retrofitService = apiService.getInstance()
     private var listaSave = ArrayList<com_ven>()
     private var lista = ArrayList<com_ven>()
     private var monto = ""
@@ -91,6 +91,7 @@ class cotizacionFragment : Fragment() {
             _binding.tvLastUpdate.visibility = View.VISIBLE
             _binding.tvLastUpdate.text = "${getText(R.string.lastUpdate)} ${Tools.lastUpdate}"
         }
+        lista.clear()
         lista.addAll(Tools.listBase)
         val list:List<com_ven> = Tools.listBase
         listaSave.addAll(list)
@@ -129,6 +130,7 @@ class cotizacionFragment : Fragment() {
             Tools.listBase.add(it.dolarpy.vision)
             Tools.lastUpdate = it.update
             _binding.etMonto.visibility = View.VISIBLE
+            _binding.recycler.visibility = View.VISIBLE
             _binding.tvConnect.visibility = View.GONE
             _binding.pgLoading.visibility = View.GONE
             Tools.flatCheck = false
@@ -138,7 +140,7 @@ class cotizacionFragment : Fragment() {
         viewModel.errorMessage.observe(requireActivity(), Observer {
             Tools.dialogCustom(requireActivity(), getString(R.string.textErrorNet))
             if (_binding.etMonto.visibility == View.VISIBLE && Tools.listBase.isNotEmpty()){
-                adapter.notifyDataSetChanged()
+                getApi()
             }
             _binding.recycler.visibility = View.GONE
             _binding.pgLoading.visibility = View.GONE
