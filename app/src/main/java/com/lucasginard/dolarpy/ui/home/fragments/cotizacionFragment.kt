@@ -92,6 +92,9 @@ class cotizacionFragment : Fragment() {
             getDolarSave()
         }
 
+        _binding.btnRefresh.setOnClickListener {
+            getApi()
+        }
     }
 
     private fun configureRecycler(){
@@ -127,6 +130,7 @@ class cotizacionFragment : Fragment() {
     private fun getApi(){
         viewModel = ViewModelProvider(this, MyViewModelFactory(MainRepository(retrofitService))).get(MainViewModel::class.java)
         viewModel.getDolarList.observe(requireActivity(), Observer {
+            deleteDolarList()
             it.dolarpy.amambay.name = "AMANBAY"
             it.dolarpy.bbva.name = "BBVA"
             it.dolarpy.bcp.name = "BCP"
@@ -159,19 +163,26 @@ class cotizacionFragment : Fragment() {
             _binding.recycler.visibility = View.VISIBLE
             _binding.tvConnect.visibility = View.GONE
             _binding.pgLoading.visibility = View.GONE
+            _binding.btnRefresh.visibility = View.GONE
             Tools.flatCheck = false
             getDolaresIngresados()
             saveStringUpdate(it.update)
+            if (Tools.lastUpdate != ""){
+                _binding.tvLastUpdate.visibility = View.VISIBLE
+                _binding.tvLastUpdate.text = "${getText(R.string.lastUpdate)} ${Tools.lastUpdate}"
+                saveStringUpdate(Tools.lastUpdate)
+            }
+            getListSave(Tools.listBase)
         })
 
         viewModel.errorMessage.observe(requireActivity(), Observer {
             Tools.dialogCustom(requireActivity(), getString(R.string.textErrorNet))
-            if (_binding.etMonto.visibility == View.VISIBLE && Tools.listBase.isNotEmpty()){
+            if (_binding.etMonto.visibility == View.VISIBLE && Tools.listBase.isNotEmpty() && !Tools.flatCheck){
                 getApi()
+                _binding.recycler.visibility = View.GONE
+                _binding.pgLoading.visibility = View.GONE
+                _binding.tvConnect.visibility = View.VISIBLE
             }
-            _binding.recycler.visibility = View.GONE
-            _binding.pgLoading.visibility = View.GONE
-            _binding.tvConnect.visibility = View.VISIBLE
         })
         viewModel.getAllDolar()
     }
@@ -191,9 +202,10 @@ class cotizacionFragment : Fragment() {
                     _binding.tvConnect.visibility = View.GONE
                     _binding.etMonto.visibility = View.VISIBLE
                     _binding.recycler.visibility = View.VISIBLE
+                    _binding.tvLastUpdate.visibility = View.VISIBLE
+                    _binding.btnRefresh.visibility = View.VISIBLE
                     adapter.notifyDataSetChanged()
                     getDolaresIngresados()
-                    _binding.tvLastUpdate.visibility = View.VISIBLE
                     _binding.tvLastUpdate.text = "${getString(R.string.tvUpdateSave)}${preference.getString("lastUpdate","")}"
                 }
             }
@@ -214,10 +226,16 @@ class cotizacionFragment : Fragment() {
         }
     }
 
-    fun saveStringUpdate(name:String) {
+    private fun saveStringUpdate(name:String) {
         val editor = preference.edit()
         editor.putString("lastUpdate",name)
         editor.apply()
+    }
+
+    private fun deleteDolarList(){
+        GlobalScope.launch {
+            DolarApp.database.dolarDao().deleteDates()
+        }
     }
 
     companion object {

@@ -1,9 +1,6 @@
 package com.lucasginard.dolarpy.database
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface DolarDao {
@@ -16,8 +13,8 @@ interface DolarDao {
     @Query("SELECT * FROM dolar_entity where id = (:id)")
     fun getDolarById(id: Long): DolarEntity
 
-    @Delete
-    fun deleteTask(dolarEntity: DolarEntity):Int
+    @Update
+    fun updateDolar(dolarEntity: DolarEntity)
 
     @Query("DELETE FROM dolar_entity")
     fun deleteDates()
