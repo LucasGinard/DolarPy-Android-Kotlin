@@ -20,5 +20,6 @@
     <string name="textErrorNet">Offline check your connection</string>
     <string name="tryConnect">Retry connection</string>
     <string name="tvSaveText">Last saved quotes</string>
+    <string name="tvUpdateSave">Last save:</string>
 
 </resources>

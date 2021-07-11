@@ -23,5 +23,5 @@
     <string name="textErrorNet">Sin conexión compruebe su conexión</string>
     <string name="tryConnect">Reintentar conexión</string>
     <string name="tvSaveText">Ultimas cotizaciones guardadas</string>
-
+    <string name="tvUpdateSave">Último guardado:</string>
 </resources>

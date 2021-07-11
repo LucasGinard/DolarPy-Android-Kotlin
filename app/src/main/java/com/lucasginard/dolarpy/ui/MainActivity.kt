@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lucasginard.dolarpy.DolarApp
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.Utils.Tools
 import com.lucasginard.dolarpy.Utils.setBackground
+import com.lucasginard.dolarpy.Utils.setTint
 import com.lucasginard.dolarpy.com_ven
 import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.database.DolarEntity
@@ -26,8 +28,9 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bindding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
+
     private var SPLASH_DISPLAY_LENGTH = 7000
-    lateinit var viewModel: MainViewModel
     private val retrofitService = apiService.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,7 +86,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.errorMessage.observe(this, Observer {
-            Tools.dialogCustom(this, getString(R.string.textErrorNet))
+            val tintRed = ContextCompat.getColor(this, R.color.danger)
+            bindding.progressBar.setTint(tintRed)
             Tools.flatCheck = true
         })
         viewModel.getAllDolar()

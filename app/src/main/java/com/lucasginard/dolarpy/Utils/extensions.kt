@@ -1,13 +1,21 @@
 package com.lucasginard.dolarpy.Utils
 
+import android.content.res.ColorStateList
 import android.content.res.Configuration
+import android.os.Build
+import android.widget.ProgressBar
 import android.widget.RadioButton
+import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.lucasginard.dolarpy.R
 
 fun RadioButton.setTint(color:Int = R.color.primaryColor){
     this.backgroundTintList = ContextCompat.getColorStateList(this.context , color)
+}
+
+fun ProgressBar.setTint(@ColorInt color: Int) {
+    indeterminateTintList = ColorStateList.valueOf(color)
 }
 
 fun ConstraintLayout.setBackground(){

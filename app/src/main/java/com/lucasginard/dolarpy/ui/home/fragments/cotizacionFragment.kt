@@ -1,8 +1,9 @@
 package com.lucasginard.dolarpy.ui
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,12 +33,14 @@ import kotlin.collections.ArrayList
 
 class cotizacionFragment : Fragment() {
 
+    private lateinit var listDolarSave: MutableList<DolarEntity>
+    private lateinit var preference: SharedPreferences
     private lateinit var _binding :FragmentCotizacionBinding
     private lateinit var viewModel: MainViewModel
-    lateinit var listDolarSave: MutableList<DolarEntity>
     private lateinit var adapter: adapterDolar
 
     private val retrofitService = apiService.getInstance()
+    private val sharedName = "UpdateSave"
     private var listaSave = ArrayList<com_ven>()
     private var lista = ArrayList<com_ven>()
     private var monto = ""
@@ -59,14 +62,23 @@ class cotizacionFragment : Fragment() {
     }
 
     private fun configureUI(){
+        preference = requireActivity().getSharedPreferences(sharedName,Context.MODE_PRIVATE)
         if (Tools.flatCheck){
             _binding.etMonto.visibility = View.GONE
+            _binding.recycler.visibility = View.GONE
             _binding.tvConnect.visibility = View.VISIBLE
         }
+
         listDolarSave = ArrayList()
         if (Tools.listBase.isNotEmpty() && Tools.flatSave){
             getListSave(Tools.listBase)
             Tools.flatSave = false
+        }
+
+        if (Tools.lastUpdate != ""){
+            _binding.tvLastUpdate.visibility = View.VISIBLE
+            _binding.tvLastUpdate.text = "${getText(R.string.lastUpdate)} ${Tools.lastUpdate}"
+            saveStringUpdate(Tools.lastUpdate)
         }
     }
 
@@ -104,10 +116,6 @@ class cotizacionFragment : Fragment() {
                 adapter.clearCotizacion()
             }
 
-        }
-        if (Tools.lastUpdate != ""){
-            _binding.tvLastUpdate.visibility = View.VISIBLE
-            _binding.tvLastUpdate.text = "${getText(R.string.lastUpdate)} ${Tools.lastUpdate}"
         }
         lista.clear()
         lista.addAll(Tools.listBase)
@@ -153,6 +161,7 @@ class cotizacionFragment : Fragment() {
             _binding.pgLoading.visibility = View.GONE
             Tools.flatCheck = false
             getDolaresIngresados()
+            saveStringUpdate(it.update)
         })
 
         viewModel.errorMessage.observe(requireActivity(), Observer {
@@ -184,6 +193,8 @@ class cotizacionFragment : Fragment() {
                     _binding.recycler.visibility = View.VISIBLE
                     adapter.notifyDataSetChanged()
                     getDolaresIngresados()
+                    _binding.tvLastUpdate.visibility = View.VISIBLE
+                    _binding.tvLastUpdate.text = "${getString(R.string.tvUpdateSave)}${preference.getString("lastUpdate","")}"
                 }
             }
         }
@@ -201,6 +212,12 @@ class cotizacionFragment : Fragment() {
             val recoveryDolar = DolarApp.database.dolarDao().getDolarById(id)
             listDolarSave.add(recoveryDolar)
         }
+    }
+
+    fun saveStringUpdate(name:String) {
+        val editor = preference.edit()
+        editor.putString("lastUpdate",name)
+        editor.apply()
     }
 
     companion object {
