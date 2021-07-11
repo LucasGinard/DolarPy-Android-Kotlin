@@ -16,6 +16,7 @@ import com.lucasginard.dolarpy.ui.home.fragments.ubicacionFragment
 class Home : AppCompatActivity() {
 
     private lateinit var bindding:ActivityHomeBinding
+    private var idSave:Int = R.id.nav_coti
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,10 @@ class Home : AppCompatActivity() {
         val ft: FragmentTransaction = fm.beginTransaction()
         ft.replace(bindding.fragmentHome.id, cotizacionFragment.newInstance())
         ft.commit()
+
+        if (savedInstanceState != null) {
+            idSave = savedInstanceState.getInt("idSave");
+        }
     }
 
     private fun configureUI() {
@@ -43,6 +48,13 @@ class Home : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         configureUI()
+        bindding.navView.setOnNavigationItemSelectedListener()
+        bindding.navView.selectedItemId = idSave
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("idSave", idSave);
     }
 
     private fun BottomNavigationView.setOnNavigationItemSelectedListener() {
@@ -54,14 +66,17 @@ class Home : AppCompatActivity() {
                 R.id.nav_ubi ->{
                     ft.replace(bindding.fragmentHome.id, ubicacionFragment.newInstance())
                     ft.commit()
+                    idSave = it.itemId
                 }
                 R.id.nav_coti ->{
                     ft.replace(bindding.fragmentHome.id, cotizacionFragment.newInstance())
                     ft.commit()
+                    idSave = it.itemId
                 }
                 R.id.nav_info ->{
                     ft.replace(bindding.fragmentHome.id, infoFragment.newInstance())
                     ft.commit()
+                    idSave = it.itemId
                 }
             }
             return@setOnNavigationItemSelectedListener true

@@ -21,5 +21,5 @@
     <string name="tryConnect">Retry connection</string>
     <string name="tvSaveText">Last saved quotes</string>
     <string name="tvUpdateSave">Last save:</string>
-
+    <string name="tvVersion">Version: </string>
 </resources>

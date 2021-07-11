@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.lucasginard.dolarpy.BuildConfig
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.Utils.Tools
 import com.lucasginard.dolarpy.databinding.FragmentInfoBinding
@@ -33,6 +34,7 @@ class infoFragment : Fragment() {
 
     private fun configureUI(){
         Tools.rotarImagen(_binding.ivIcon)
+        _binding.tvVersion.text = "${getString(R.string.tvVersion)}${BuildConfig.VERSION_NAME}"
     }
 
     private fun configureOnClickListener(){
