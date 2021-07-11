@@ -15,3 +15,4 @@ Versión Android en Kotlin de 💸DolarPy💸: https://dolar.melizeche.com/
 * [RetroFit](https://square.github.io/retrofit/) - v2.9.0
 * [ViewBinding](https://developer.android.com/topic/libraries/view-binding)
 * [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - v1.3.6
+* [Room](https://developer.android.com/jetpack/androidx/releases/room) - v2.3.0

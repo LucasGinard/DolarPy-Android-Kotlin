@@ -21,7 +21,6 @@ class adapterDolar (var localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): dolarViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        Log.d("valorHeight",Resources.getSystem().displayMetrics.heightPixels.toString())
         return if(Resources.getSystem().displayMetrics.heightPixels <= 2060 ){
             dolarViewHolder(layoutInflater.inflate(R.layout.item_dolar_small, parent, false))
         }else{

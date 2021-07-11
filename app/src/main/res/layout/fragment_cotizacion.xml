@@ -125,7 +125,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tvReconnect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -144,9 +144,34 @@
             android:layout_width="0dp"
             android:layout_height="4dp"
             android:background="#176EFF"
-            app:layout_constraintBottom_toBottomOf="@+id/textView6"
-            app:layout_constraintEnd_toEndOf="@+id/textView6"
-            app:layout_constraintStart_toStartOf="@+id/textView6" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvReconnect"
+            app:layout_constraintEnd_toEndOf="@+id/tvReconnect"
+            app:layout_constraintStart_toStartOf="@+id/tvReconnect" />
+
+        <TextView
+            android:id="@+id/tvDataSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tvSaveText"
+            android:textColor="#176EFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvReconnect"
+            app:layout_constraintVertical_bias="0.257" />
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:background="#176EFF"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDataSave"
+            app:layout_constraintEnd_toEndOf="@+id/tvDataSave"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvDataSave" />
 
         <ProgressBar
             android:id="@+id/pgLoading"
@@ -158,7 +183,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view3" />
+            app:layout_constraintTop_toBottomOf="@+id/view4" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

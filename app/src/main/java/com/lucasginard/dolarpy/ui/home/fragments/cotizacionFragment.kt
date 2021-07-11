@@ -12,21 +12,29 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.lucasginard.dolarpy.DolarApp
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.Utils.Tools
 import com.lucasginard.dolarpy.com_ven
 import com.lucasginard.dolarpy.data.apiService
+import com.lucasginard.dolarpy.database.DolarEntity
 import com.lucasginard.dolarpy.databinding.FragmentCotizacionBinding
 import com.lucasginard.dolarpy.domain.MainRepository
 import com.lucasginard.dolarpy.ui.adapter.adapterDolar
 import com.lucasginard.dolarpy.ui.viewModel.MainViewModel
 import com.lucasginard.dolarpy.ui.viewModel.MyViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlin.collections.ArrayList
 
 
 class cotizacionFragment : Fragment() {
 
     private lateinit var _binding :FragmentCotizacionBinding
     private lateinit var viewModel: MainViewModel
+    lateinit var listDolarSave: MutableList<DolarEntity>
     private lateinit var adapter: adapterDolar
 
     private val retrofitService = apiService.getInstance()
@@ -55,13 +63,23 @@ class cotizacionFragment : Fragment() {
             _binding.etMonto.visibility = View.GONE
             _binding.tvConnect.visibility = View.VISIBLE
         }
+        listDolarSave = ArrayList()
+        if (Tools.listBase.isNotEmpty() && Tools.flatSave){
+            getListSave(Tools.listBase)
+            Tools.flatSave = false
+        }
     }
 
     private fun configureOnClickListener() {
-        _binding.tvConnect.setOnClickListener {
+        _binding.tvReconnect.setOnClickListener {
             getApi()
             _binding.pgLoading.visibility = View.VISIBLE
         }
+
+        _binding.tvDataSave.setOnClickListener {
+            getDolarSave()
+        }
+
     }
 
     private fun configureRecycler(){
@@ -147,6 +165,42 @@ class cotizacionFragment : Fragment() {
             _binding.tvConnect.visibility = View.VISIBLE
         })
         viewModel.getAllDolar()
+    }
+
+    private fun getDolarSave() {
+        GlobalScope.launch {
+            listDolarSave = DolarApp.database.dolarDao().getAllDolar()
+            if (Tools.listBase.isEmpty()){
+                val List = ArrayList<com_ven>()
+                for (x in listDolarSave){
+                    val com = com_ven(x.name,x.buy,x.sell)
+                    List.add(com)
+                }
+                Tools.listBase.clear()
+                Tools.listBase.addAll(List)
+                withContext(Dispatchers.Main){
+                    _binding.tvConnect.visibility = View.GONE
+                    _binding.etMonto.visibility = View.VISIBLE
+                    _binding.recycler.visibility = View.VISIBLE
+                    adapter.notifyDataSetChanged()
+                    getDolaresIngresados()
+                }
+            }
+        }
+    }
+
+    private fun getListSave(list:ArrayList<com_ven>){
+        for (x in list){
+            addDolar(DolarEntity(name = x.name!!,buy = x.compra,sell= x.venta))
+        }
+    }
+
+    private fun addDolar(dolar: DolarEntity){
+        GlobalScope.launch {
+            val id = DolarApp.database.dolarDao().addDolar(dolar)
+            val recoveryDolar = DolarApp.database.dolarDao().getDolarById(id)
+            listDolarSave.add(recoveryDolar)
+        }
     }
 
     companion object {

@@ -12,7 +12,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.DolarPy"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:name=".DolarApp">
         <activity android:name=".ui.home.Home"/>
         <activity android:name=".ui.MainActivity">
             <intent-filter>
