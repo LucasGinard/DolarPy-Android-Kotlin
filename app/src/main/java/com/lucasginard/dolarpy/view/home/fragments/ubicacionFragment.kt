@@ -1,4 +1,4 @@
-package com.lucasginard.dolarpy.ui.home.fragments
+package com.lucasginard.dolarpy.view.home.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -62,7 +62,8 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
         Tools.rotarImagen(_binding.ivIcon2)
         backgroundTint()
 
-        _binding.normal.setOnCheckedChangeListener { compoundButton, b ->
+        if (::GoogleMap.isInitialized){
+            _binding.normal.setOnCheckedChangeListener { compoundButton, b ->
             if (b){
                 GoogleMap.mapType = com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL
                 backgroundTint()
@@ -73,6 +74,9 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
                 GoogleMap.mapType = com.google.android.gms.maps.GoogleMap.MAP_TYPE_SATELLITE
                 backgroundTint(true)
             }
+        }
+        }else{
+            Tools.dialogCustom(requireActivity(),"Compruebe su servicio de Maps")
         }
     }
 

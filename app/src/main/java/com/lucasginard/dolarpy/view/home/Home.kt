@@ -1,4 +1,4 @@
-package com.lucasginard.dolarpy.ui.home
+package com.lucasginard.dolarpy.view.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,9 +8,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.Utils.setBackground
 import com.lucasginard.dolarpy.databinding.ActivityHomeBinding
-import com.lucasginard.dolarpy.ui.cotizacionFragment
-import com.lucasginard.dolarpy.ui.home.fragments.infoFragment
-import com.lucasginard.dolarpy.ui.home.fragments.ubicacionFragment
+import com.lucasginard.dolarpy.view.cotizacionFragment
+import com.lucasginard.dolarpy.view.home.fragments.infoFragment
+import com.lucasginard.dolarpy.view.home.fragments.ubicacionFragment
 
 
 class Home : AppCompatActivity() {

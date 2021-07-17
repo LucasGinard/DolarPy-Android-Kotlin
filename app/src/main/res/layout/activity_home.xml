@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_light"
-    tools:context=".ui.home.Home">
+    tools:context=".view.home.Home">
 
     <FrameLayout
         android:id="@+id/fragmentHome"

@@ -1,4 +1,4 @@
-package com.lucasginard.dolarpy.ui.viewModel
+package com.lucasginard.dolarpy.view.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

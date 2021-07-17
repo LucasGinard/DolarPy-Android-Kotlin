@@ -1,4 +1,4 @@
-package com.lucasginard.dolarpy.ui.home.fragments
+package com.lucasginard.dolarpy.view.home.fragments
 
 import android.content.Intent
 import android.net.Uri

@@ -1,4 +1,4 @@
-package com.lucasginard.dolarpy.ui
+package com.lucasginard.dolarpy.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,14 +13,12 @@ import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.Utils.Tools
 import com.lucasginard.dolarpy.Utils.setBackground
 import com.lucasginard.dolarpy.Utils.setTint
-import com.lucasginard.dolarpy.com_ven
 import com.lucasginard.dolarpy.data.apiService
-import com.lucasginard.dolarpy.database.DolarEntity
 import com.lucasginard.dolarpy.databinding.ActivityMainBinding
 import com.lucasginard.dolarpy.domain.MainRepository
-import com.lucasginard.dolarpy.ui.home.Home
-import com.lucasginard.dolarpy.ui.viewModel.MainViewModel
-import com.lucasginard.dolarpy.ui.viewModel.MyViewModelFactory
+import com.lucasginard.dolarpy.view.home.Home
+import com.lucasginard.dolarpy.view.viewModel.MainViewModel
+import com.lucasginard.dolarpy.view.viewModel.MyViewModelFactory
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 

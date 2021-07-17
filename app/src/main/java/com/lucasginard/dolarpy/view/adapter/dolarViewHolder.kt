@@ -1,7 +1,6 @@
-package com.lucasginard.dolarpy.ui.adapter
+package com.lucasginard.dolarpy.view.adapter
 
 import android.content.res.Resources
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.lucasginard.dolarpy.Utils.Tools.Companion.setMargin
@@ -15,7 +14,7 @@ class dolarViewHolder(view: View): RecyclerView.ViewHolder(view) {
     fun bind(local: com_ven){
         binding.tvLocal.text = local.name
         val df =  DecimalFormat("#,###")
-        if (local.referencialDiario != null){
+        if (local.referencialDiario != null && local.name == "BCP"){
             //val df =  DecimalFormat("##0,000.00")
             binding.linearRef.visibility = View.VISIBLE
             binding.tvCompraM.text = "₲${df.format(local.compra)}"
@@ -24,6 +23,7 @@ class dolarViewHolder(view: View): RecyclerView.ViewHolder(view) {
             setMargin(binding.linearCompra, left = 8, top = 20)
             setMargin(binding.linearVenta,  left = 8, top = 50)
         }else{
+            binding.linearRef.visibility = View.GONE
             binding.tvCompraM.text = "₲${df.format(local.compra.toInt()).replace(",",".")}"
             binding.tvVentaM.text =  "₲${df.format(local.venta.toInt()).replace(",",".")}"
             if (Resources.getSystem().displayMetrics.heightPixels > 800 && binding.linearRef.visibility == View.GONE){

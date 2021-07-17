@@ -1,4 +1,4 @@
-package com.lucasginard.dolarpy.ui
+package com.lucasginard.dolarpy.view
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -21,9 +21,9 @@ import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.database.DolarEntity
 import com.lucasginard.dolarpy.databinding.FragmentCotizacionBinding
 import com.lucasginard.dolarpy.domain.MainRepository
-import com.lucasginard.dolarpy.ui.adapter.adapterDolar
-import com.lucasginard.dolarpy.ui.viewModel.MainViewModel
-import com.lucasginard.dolarpy.ui.viewModel.MyViewModelFactory
+import com.lucasginard.dolarpy.view.adapter.adapterDolar
+import com.lucasginard.dolarpy.view.viewModel.MainViewModel
+import com.lucasginard.dolarpy.view.viewModel.MyViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

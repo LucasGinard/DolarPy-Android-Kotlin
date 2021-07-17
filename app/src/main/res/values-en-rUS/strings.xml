@@ -22,4 +22,6 @@
     <string name="tvSaveText">Last saved quotes</string>
     <string name="tvUpdateSave">Last save:</string>
     <string name="tvVersion">Version: </string>
+    <string name="initMaps">Check your Maps service</string>
+
 </resources>
