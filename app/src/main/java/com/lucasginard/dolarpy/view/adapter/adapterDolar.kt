@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.Utils.Tools
+import com.lucasginard.dolarpy.utils.Tools
 import com.lucasginard.dolarpy.com_ven
 
 class adapterDolar (var localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter<dolarViewHolder>() {

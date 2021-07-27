@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.lucasginard.dolarpy.BuildConfig
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.Utils.Tools
+import com.lucasginard.dolarpy.utils.Tools
 import com.lucasginard.dolarpy.databinding.FragmentInfoBinding
 
 

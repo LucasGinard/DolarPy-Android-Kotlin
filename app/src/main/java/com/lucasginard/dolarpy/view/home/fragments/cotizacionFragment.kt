@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lucasginard.dolarpy.DolarApp
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.Utils.Tools
+import com.lucasginard.dolarpy.utils.Tools
 import com.lucasginard.dolarpy.com_ven
 import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.database.DolarEntity
@@ -120,6 +120,7 @@ class cotizacionFragment : Fragment() {
             }
 
         }
+        Tools.listBase.removeIf { it.venta == 0.0 && it.compra == 0.0 }
         lista.clear()
         lista.addAll(Tools.listBase)
         val list:List<com_ven> = Tools.listBase

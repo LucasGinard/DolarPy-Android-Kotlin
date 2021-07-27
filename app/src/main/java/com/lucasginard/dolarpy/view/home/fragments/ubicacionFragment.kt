@@ -10,8 +10,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.Utils.Tools
-import com.lucasginard.dolarpy.Utils.setTint
+import com.lucasginard.dolarpy.utils.Tools
+import com.lucasginard.dolarpy.utils.setTint
 import com.lucasginard.dolarpy.databinding.FragmentUbicacionBinding
 
 
@@ -61,23 +61,6 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
     private fun configureUI(){
         Tools.rotarImagen(_binding.ivIcon2)
         backgroundTint()
-
-        if (::GoogleMap.isInitialized){
-            _binding.normal.setOnCheckedChangeListener { compoundButton, b ->
-            if (b){
-                GoogleMap.mapType = com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL
-                backgroundTint()
-            }
-        }
-        _binding.satellite.setOnCheckedChangeListener { compoundButton, b ->
-            if (b){
-                GoogleMap.mapType = com.google.android.gms.maps.GoogleMap.MAP_TYPE_SATELLITE
-                backgroundTint(true)
-            }
-        }
-        }else{
-            Tools.dialogCustom(requireActivity(),"Compruebe su servicio de Maps")
-        }
     }
 
     private fun backgroundTint(boolean: Boolean = false){
@@ -103,6 +86,22 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
                     .title(x.key)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_maps))
             )
+        }
+        if (::GoogleMap.isInitialized){
+            _binding.normal.setOnCheckedChangeListener { compoundButton, b ->
+                if (b){
+                    GoogleMap.mapType = com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL
+                    backgroundTint()
+                }
+            }
+            _binding.satellite.setOnCheckedChangeListener { compoundButton, b ->
+                if (b){
+                    GoogleMap.mapType = com.google.android.gms.maps.GoogleMap.MAP_TYPE_SATELLITE
+                    backgroundTint(true)
+                }
+            }
+        }else{
+            Tools.dialogCustom(requireActivity(),getString(R.string.initMaps))
         }
     }
 

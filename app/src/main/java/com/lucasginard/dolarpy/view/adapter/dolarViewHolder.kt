@@ -3,7 +3,7 @@ package com.lucasginard.dolarpy.view.adapter
 import android.content.res.Resources
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.lucasginard.dolarpy.Utils.Tools.Companion.setMargin
+import com.lucasginard.dolarpy.utils.Tools.Companion.setMargin
 import com.lucasginard.dolarpy.com_ven
 import com.lucasginard.dolarpy.databinding.ItemDolarBinding
 import java.text.DecimalFormat

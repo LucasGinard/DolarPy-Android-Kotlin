@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.Utils.setBackground
+import com.lucasginard.dolarpy.utils.setBackground
 import com.lucasginard.dolarpy.databinding.ActivityHomeBinding
 import com.lucasginard.dolarpy.view.cotizacionFragment
 import com.lucasginard.dolarpy.view.home.fragments.infoFragment

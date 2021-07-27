@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lucasginard.dolarpy.DolarApp
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.Utils.Tools
-import com.lucasginard.dolarpy.Utils.setBackground
-import com.lucasginard.dolarpy.Utils.setTint
+import com.lucasginard.dolarpy.utils.Tools
+import com.lucasginard.dolarpy.utils.setBackground
+import com.lucasginard.dolarpy.utils.setTint
 import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.databinding.ActivityMainBinding
 import com.lucasginard.dolarpy.domain.MainRepository
