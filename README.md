@@ -1,6 +1,9 @@
 # 💸DolarPy Android Kotlin💸
-🌐WebService: https://dolar.melizeche.com/api/1.0/
+### 📲Descarga/Download: [Aqui/Here](https://play.google.com/store/apps/details?id=com.lucasginard.dolarpy)
 
+![](presentacion_readme/presentacionImg.png)
+
+🌐WebService: https://dolar.melizeche.com/api/1.0/
 
 Versión Android en Kotlin de 💸DolarPy💸: https://dolar.melizeche.com/
 
@@ -16,3 +19,7 @@ Versión Android en Kotlin de 💸DolarPy💸: https://dolar.melizeche.com/
 * [ViewBinding](https://developer.android.com/topic/libraries/view-binding)
 * [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - v1.3.6
 * [Room](https://developer.android.com/jetpack/androidx/releases/room) - v2.3.0
+
+## App Corriendo 	🏃 (Running app)
+![](presentacion_readme/app1_light.gif)
+![](presentacion_readme/app1_night.gif)
