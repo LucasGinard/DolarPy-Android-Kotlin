@@ -12,6 +12,7 @@ import com.lucasginard.dolarpy.BuildConfig
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.utils.Tools
 import com.lucasginard.dolarpy.databinding.FragmentInfoBinding
+import com.lucasginard.dolarpy.utils.DialogConfig
 
 
 class infoFragment : Fragment() {
@@ -68,6 +69,16 @@ class infoFragment : Fragment() {
             startActivity(intent)
         }
 
+        _binding.tvTwitter.setOnClickListener {
+            val uri: Uri = Uri.parse("https://twitter.com/DolarPy")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
+
+        _binding.btnConfigure.setOnClickListener {
+            Tools.rotarImagen(_binding.btnConfigure)
+            DialogConfig.showDialogConfigure(activity)
+        }
     }
 
     private fun isValid(): Boolean {

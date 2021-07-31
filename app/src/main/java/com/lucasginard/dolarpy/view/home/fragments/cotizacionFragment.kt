@@ -132,7 +132,7 @@ class cotizacionFragment : Fragment() {
         viewModel = ViewModelProvider(this, MyViewModelFactory(MainRepository(retrofitService))).get(MainViewModel::class.java)
         viewModel.getDolarList.observe(requireActivity(), Observer {
             deleteDolarList()
-            it.dolarpy.amambay.name = "AMANBAY"
+            it.dolarpy.amambay.name = "AMAMBAY"
             it.dolarpy.bbva.name = "BBVA"
             it.dolarpy.bcp.name = "BCP"
             it.dolarpy.bonanza.name = "BONANZA"

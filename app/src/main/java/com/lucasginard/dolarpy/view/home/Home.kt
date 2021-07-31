@@ -48,8 +48,8 @@ class Home : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         configureUI()
-        bindding.navView.setOnNavigationItemSelectedListener()
         bindding.navView.selectedItemId = idSave
+        bindding.navView.setOnNavigationItemSelectedListener()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

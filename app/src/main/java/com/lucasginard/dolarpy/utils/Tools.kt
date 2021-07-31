@@ -1,12 +1,24 @@
 package com.lucasginard.dolarpy.utils
 
 import android.app.Activity
+import android.app.Dialog
+import android.content.Context
+import android.content.res.Configuration
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.animation.RotateAnimation
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.com_ven
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 open class Tools {

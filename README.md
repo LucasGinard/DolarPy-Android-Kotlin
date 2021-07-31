@@ -8,7 +8,7 @@ Versión Android en Kotlin de 💸DolarPy💸: https://dolar.melizeche.com/
 
 ## Construido con 🛠️ (Build in)
 * [AndroidStudio](https://developer.android.com/studio) - v4.2.2
-* [Kotlin](https://kotlinlang.org) - Lenguaje/language - v1.5.10
+* [Kotlin](https://kotlinlang.org) - Lenguaje/Language - v1.5.10
 * [MVVM](https://es.wikipedia.org/wiki/Modelo–vista–modelo_de_vista) - Arquitectura/Architecture 👷
 
 ## Librerias Utilizadas 📚 (Libraries used)

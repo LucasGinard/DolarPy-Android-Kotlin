@@ -23,5 +23,10 @@
     <string name="tvUpdateSave">Last save:</string>
     <string name="tvVersion">Version: </string>
     <string name="initMaps">Check your Maps service</string>
+    <string name="tvTitleTwitter">Follow the bot to receive the latest quotes</string>
+    <string name="tvModeDark">Dark Mode:</string>
+    <string name="tvLenguaje">Language:</string>
+    <string name="tvTitleConfig">🛠️Settings</string>
+
 
 </resources>

@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
     private fun getApi(){
         viewModel = ViewModelProvider(this, MyViewModelFactory(MainRepository(retrofitService))).get(MainViewModel::class.java)
         viewModel.getDolarList.observe(this, Observer {
-            it.dolarpy.amambay.name = "AMANBAY"
+            it.dolarpy.amambay.name = "AMAMBAY"
             it.dolarpy.bbva.name = "BBVA"
             it.dolarpy.bcp.name = "BCP"
             it.dolarpy.bonanza.name = "BONANZA"

@@ -26,5 +26,9 @@
     <string name="tvUpdateSave">Último guardado:</string>
     <string name="tvVersion">Versión: </string>
     <string name="initMaps">Compruebe su servicio de Maps</string>
+    <string name="tvTitleTwitter">Sigue al bot para recibir las ultimas cotizaciones</string>
+    <string name="tvLenguaje">Idioma:</string>
+    <string name="tvModeDark">Modo Oscuro:</string>
+    <string name="tvTitleConfig">🛠️Configuraciónes</string>
 
 </resources>
