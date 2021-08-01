@@ -1,5 +1,7 @@
 package com.lucasginard.dolarpy.view.home.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +12,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.lucasginard.dolarpy.R
+import com.lucasginard.dolarpy.databinding.FragmentUbicacionBinding
 import com.lucasginard.dolarpy.utils.Tools
 import com.lucasginard.dolarpy.utils.setTint
-import com.lucasginard.dolarpy.databinding.FragmentUbicacionBinding
 
 
 class ubicacionFragment : Fragment(), OnMapReadyCallback {
@@ -79,6 +81,7 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
         }
         val py = LatLng(-25.294589, -57.578563)
         googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(py, 6f))
+        googleMap?.uiSettings?.isMapToolbarEnabled = false
         for (x in empresasCotizacion){
             GoogleMap.addMarker(
                 MarkerOptions()
@@ -86,6 +89,11 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
                     .title(x.key)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_maps))
             )
+        }
+        googleMap?.setOnInfoWindowClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/place/${it.position.latitude},${it.position.longitude}"))
+            startActivity(intent)
+            return@setOnInfoWindowClickListener
         }
         if (::GoogleMap.isInitialized){
             _binding.normal.setOnCheckedChangeListener { compoundButton, b ->

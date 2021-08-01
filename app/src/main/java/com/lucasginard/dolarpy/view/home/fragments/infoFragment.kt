@@ -1,6 +1,8 @@
 package com.lucasginard.dolarpy.view.home.fragments
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,11 +15,13 @@ import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.utils.Tools
 import com.lucasginard.dolarpy.databinding.FragmentInfoBinding
 import com.lucasginard.dolarpy.utils.DialogConfig
+import com.lucasginard.dolarpy.utils.setAppLocale
 
 
 class infoFragment : Fragment() {
 
     private lateinit var _binding:FragmentInfoBinding
+    private lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,14 +32,15 @@ class infoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentInfoBinding.inflate(inflater, container, false)
-        configureOnClickListener()
         configureUI()
+        configureOnClickListener()
         return _binding.root
     }
 
     private fun configureUI(){
         Tools.rotarImagen(_binding.ivIcon)
         _binding.tvVersion.text = "${getString(R.string.tvVersion)}${BuildConfig.VERSION_NAME}"
+        preferences = requireActivity().getSharedPreferences("saveSettings", Context.MODE_PRIVATE)
     }
 
     private fun configureOnClickListener(){
@@ -43,6 +48,7 @@ class infoFragment : Fragment() {
         _binding.linearTextReport.setOnClickListener {
             if (_binding.linearForm.visibility == View.GONE){
                 _binding.linearForm.visibility = View.VISIBLE
+                _binding.tvArea.requestFocus()
                 _binding.ivArrow.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_arrow_up))
             }else{
                 _binding.linearForm.visibility = View.GONE
@@ -77,7 +83,7 @@ class infoFragment : Fragment() {
 
         _binding.btnConfigure.setOnClickListener {
             Tools.rotarImagen(_binding.btnConfigure)
-            DialogConfig.showDialogConfigure(activity)
+            DialogConfig.showDialogConfigure(activity,preferences)
         }
     }
 
