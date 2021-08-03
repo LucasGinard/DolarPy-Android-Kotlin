@@ -1,26 +1,28 @@
 package com.lucasginard.dolarpy.view
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lucasginard.dolarpy.DolarApp
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.utils.Tools
-import com.lucasginard.dolarpy.utils.setBackground
-import com.lucasginard.dolarpy.utils.setTint
 import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.databinding.ActivityMainBinding
 import com.lucasginard.dolarpy.domain.MainRepository
-import com.lucasginard.dolarpy.view.home.Home
+import com.lucasginard.dolarpy.utils.*
+import com.lucasginard.dolarpy.view.home.HomeActivity
 import com.lucasginard.dolarpy.view.viewModel.MainViewModel
 import com.lucasginard.dolarpy.view.viewModel.MyViewModelFactory
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,22 +32,52 @@ class MainActivity : AppCompatActivity() {
 
     private var SPLASH_DISPLAY_LENGTH = 7000
     private val retrofitService = apiService.getInstance()
+    private lateinit var preferences: SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bindding.root)
-
-        getApi()
         configureUI()
+        getApi()
         Handler(Looper.getMainLooper()).postDelayed({
-            val i = Intent(this@MainActivity, Home::class.java)
+            val i = Intent(this@MainActivity, HomeActivity::class.java)
             startActivity(i)
         }, SPLASH_DISPLAY_LENGTH.toLong())
     }
 
     private fun configureUI(){
         bindding.contraintBase.setBackground()
+        preferences = this.getSharedPreferences("saveSettings", Context.MODE_PRIVATE)
+        if (preferences.getBoolean("flatSaveLenguaje",false)){
+            val lenguaje = preferences.getString("saveLenguaje","")
+            if (Locale.getDefault().language != lenguaje){
+                when(lenguaje){
+                    "es" ->{
+                        this.setAppLocale("es")
+                        this.recreate()
+                    }
+                    else ->{
+                        this.setAppLocale("en")
+                        this.recreate()
+                    }
+                }
+            }
+        }
+        if (preferences.getBoolean("flatSaveMode",false)){
+            val saveMode = preferences.getInt("saveMode",3)
+            if (saveMode != 3){
+                when(saveMode){
+                    1 ->{
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    }
+                    0 ->{
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    }
+                }
+            }
+        }
     }
 
     private fun getApi(){

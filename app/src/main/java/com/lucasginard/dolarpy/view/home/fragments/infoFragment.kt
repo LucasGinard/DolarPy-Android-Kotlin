@@ -15,7 +15,6 @@ import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.utils.Tools
 import com.lucasginard.dolarpy.databinding.FragmentInfoBinding
 import com.lucasginard.dolarpy.utils.DialogConfig
-import com.lucasginard.dolarpy.utils.setAppLocale
 
 
 class infoFragment : Fragment() {
@@ -83,7 +82,8 @@ class infoFragment : Fragment() {
 
         _binding.btnConfigure.setOnClickListener {
             Tools.rotarImagen(_binding.btnConfigure)
-            DialogConfig.showDialogConfigure(activity,preferences)
+            val dialog = DialogConfig(requireContext(),activity,preferences)
+            dialog.show()
         }
     }
 

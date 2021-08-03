@@ -177,7 +177,7 @@ class cotizacionFragment : Fragment() {
         })
 
         viewModel.errorMessage.observe(requireActivity(), Observer {
-            Tools.dialogCustom(requireActivity(), getString(R.string.textErrorNet))
+            Tools.dialogCustom(requireActivity(), getString(R.string.textErrorNet),{})
             if (_binding.etMonto.visibility == View.VISIBLE && Tools.listBase.isNotEmpty() && !Tools.flatCheck){
                 getApi()
                 _binding.recycler.visibility = View.GONE

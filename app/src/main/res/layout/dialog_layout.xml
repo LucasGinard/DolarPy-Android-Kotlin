@@ -103,6 +103,15 @@
 
                 </LinearLayout>
 
+                <Button
+                    android:id="@+id/btnAceppt"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btnAccept"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
+                    />
+
             </LinearLayout>
 
 

@@ -109,7 +109,7 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
                 }
             }
         }else{
-            Tools.dialogCustom(requireActivity(),getString(R.string.initMaps))
+            Tools.dialogCustom(requireActivity(),getString(R.string.initMaps),{})
         }
     }
 

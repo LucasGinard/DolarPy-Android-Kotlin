@@ -30,5 +30,7 @@
     <string name="tvLenguaje">Idioma:</string>
     <string name="tvModeDark">Modo Oscuro:</string>
     <string name="tvTitleConfig">🛠️Configuraciónes</string>
+    <string name="dialogLanguage">Si cambia el idioma, la pantalla se actualizará</string>
+    <string name="dialogMode">Si cambia el modo se reiniciara la app</string>
 
 </resources>

@@ -14,7 +14,7 @@
         android:theme="@style/Theme.DolarPy"
         android:usesCleartextTraffic="true"
         android:name=".DolarApp">
-        <activity android:name=".view.home.Home"/>
+        <activity android:name=".view.home.HomeActivity"/>
         <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

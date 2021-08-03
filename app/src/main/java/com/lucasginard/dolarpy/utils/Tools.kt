@@ -44,6 +44,20 @@ open class Tools {
             view.startAnimation(animation)
         }
 
+        fun dialogCustom(activity: Activity, text: String, btnAccept: () -> Unit?={}, btnCancel: () -> Unit?={} ) {
+            val builder = MaterialAlertDialogBuilder(activity)
+            builder.setMessage(text)
+                .setPositiveButton(R.string.btnAccept){dialog ,it ->
+                    btnAccept()
+                    dialog.dismiss()
+                }
+                .setNegativeButton(R.string.btnCancel){dialog ,it ->
+                    btnCancel()
+                    dialog.dismiss()
+                }
+            builder.show()
+        }
+
         fun dialogCustom(activity: Activity, text: String, btnAccept: () -> Unit?={}) {
             val builder = MaterialAlertDialogBuilder(activity)
             builder.setMessage(text)
