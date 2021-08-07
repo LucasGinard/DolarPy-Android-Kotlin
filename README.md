@@ -1,5 +1,8 @@
 # 💸DolarPy Android Kotlin💸
-### 📲Descarga/Download: [Aqui/Here](https://play.google.com/store/apps/details?id=com.lucasginard.dolarpy)
+### 📲Descarga/Download: 
+### <img src="https://img.utdstc.com/icon/c8c/d91/c8cd914e915d70dea2eabf58b1c03089fbe19c59729be8aec12170db47dd8f81:200" alt="drawing" width="20" height="20"/>PlayStore:[Aqui/Here](https://play.google.com/store/apps/details?id=com.lucasginard.dolarpy)
+
+### <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Huawei_AppGallery.svg/1200px-Huawei_AppGallery.svg.png" alt="drawing" width="20" height="20"/>AppGallery:[Aqui/Here](https://appgallery.huawei.com/#/app/C104598987?sharePrepath=ag&locale=es_US&source=appshare&subsource=C104598987)
 
 ![](presentacion_readme/presentacionImg.png)
 
