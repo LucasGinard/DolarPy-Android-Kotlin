@@ -145,6 +145,7 @@ class cotizacionFragment : Fragment() {
             it.dolarpy.mydcambios.name = "MYD CAMBIOS"
             it.dolarpy.set.name = "SET"
             it.dolarpy.vision.name = "Visión Banco"
+            it.dolarpy.eurocambios.name = "Euro Cambios"
             Tools.listBase.clear()
             Tools.listBase.add(it.dolarpy.amambay)
             Tools.listBase.add(it.dolarpy.bbva)
@@ -159,6 +160,7 @@ class cotizacionFragment : Fragment() {
             Tools.listBase.add(it.dolarpy.mydcambios)
             Tools.listBase.add(it.dolarpy.set)
             Tools.listBase.add(it.dolarpy.vision)
+            Tools.listBase.add(it.dolarpy.eurocambios)
             Tools.lastUpdate = it.update
             _binding.etMonto.visibility = View.VISIBLE
             _binding.recycler.visibility = View.VISIBLE

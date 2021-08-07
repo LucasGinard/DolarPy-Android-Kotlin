@@ -96,6 +96,7 @@ class MainActivity : AppCompatActivity() {
             it.dolarpy.mydcambios.name = "MYD CAMBIOS"
             it.dolarpy.set.name = "SET"
             it.dolarpy.vision.name = "Visión Banco"
+            it.dolarpy.eurocambios.name = "Euro Cambios"
             Tools.listBase.clear()
             Tools.listBase.add(it.dolarpy.amambay)
             Tools.listBase.add(it.dolarpy.bbva)
@@ -110,6 +111,7 @@ class MainActivity : AppCompatActivity() {
             Tools.listBase.add(it.dolarpy.mydcambios)
             Tools.listBase.add(it.dolarpy.set)
             Tools.listBase.add(it.dolarpy.vision)
+            Tools.listBase.add(it.dolarpy.eurocambios)
             Tools.lastUpdate = it.update
             deleteDolarList()
             SPLASH_DISPLAY_LENGTH = 0
