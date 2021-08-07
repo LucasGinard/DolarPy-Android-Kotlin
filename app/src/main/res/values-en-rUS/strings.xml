@@ -29,5 +29,6 @@
     <string name="tvTitleConfig">🛠️Settings</string>
     <string name="dialogLanguage">If you change the language, the window will update</string>
     <string name="dialogMode">If you change the mode, the app will restart</string>
+    <string name="textErrorAll">Error occurred try again</string>
 
 </resources>

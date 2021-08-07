@@ -1,5 +1,6 @@
 package com.lucasginard.dolarpy.view.home.fragments
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,13 +9,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.lucasginard.dolarpy.BuildConfig
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.utils.Tools
 import com.lucasginard.dolarpy.databinding.FragmentInfoBinding
 import com.lucasginard.dolarpy.utils.DialogConfig
+import com.lucasginard.dolarpy.utils.Tools
 
 
 class infoFragment : Fragment() {
@@ -64,7 +66,11 @@ class infoFragment : Fragment() {
                     putExtra(Intent.EXTRA_SUBJECT, "Report Bug/Error")
                     putExtra(Intent.EXTRA_TEXT, _binding.tvArea.editText?.text)
                 }
-                startActivity(intent)
+                try {
+                    startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(context,getString(R.string.textErrorAll),Toast.LENGTH_LONG).show()
+                }
             }
         }
 
