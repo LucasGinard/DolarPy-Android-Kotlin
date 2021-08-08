@@ -23,6 +23,7 @@ class infoFragment : Fragment() {
 
     private lateinit var _binding:FragmentInfoBinding
     private lateinit var preferences: SharedPreferences
+    private lateinit var dialog:DialogConfig
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,7 +89,7 @@ class infoFragment : Fragment() {
 
         _binding.btnConfigure.setOnClickListener {
             Tools.rotarImagen(_binding.btnConfigure)
-            val dialog = DialogConfig(requireContext(),activity,preferences)
+            dialog = DialogConfig(requireContext(),activity,preferences)
             dialog.show()
         }
     }
@@ -102,6 +103,13 @@ class infoFragment : Fragment() {
         }
     }
 
+
+    override fun onPause() {
+        super.onPause()
+        if (::dialog.isInitialized){
+            dialog.dismiss()
+        }
+    }
 
     companion object {
         @JvmStatic

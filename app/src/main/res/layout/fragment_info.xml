@@ -86,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
-                android:textColor="#176EFF"
+                android:textColor="@color/link"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -223,14 +223,14 @@
                     android:layout_height="27dp"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/ic_code"
-                    app:tint="#176EFF" />
+                    app:tint="@color/link" />
 
                 <TextView
                     android:id="@+id/tvGitHub"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/textGitHub"
-                    android:textColor="#176EFF"
+                    android:textColor="@color/link"
                     android:textSize="20sp" />
 
                 <ImageView
@@ -239,7 +239,7 @@
                     android:layout_height="27dp"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/ic_code"
-                    app:tint="#176EFF" />
+                    app:tint="@color/link" />
 
             </LinearLayout>
 

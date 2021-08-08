@@ -33,4 +33,9 @@
     <string name="dialogLanguage">Si cambia el idioma, la pantalla se actualizará</string>
     <string name="dialogMode">Si cambia el modo se reiniciara la app</string>
     <string name="textErrorAll">Se produjo un error intente de nuevo</string>
+    <string name="dolarBuyTitle">Compra</string>
+    <string name="dolarSellTitle">Venta</string>
+    <string name="tvOrder">Ordenar por: </string>
+    <string name="tvmore">Mayor</string>
+    <string name="tvless">Menor</string>
 </resources>

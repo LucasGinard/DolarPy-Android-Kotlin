@@ -3,10 +3,14 @@ package com.lucasginard.dolarpy.view
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.MenuRes
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -21,6 +25,7 @@ import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.database.DolarEntity
 import com.lucasginard.dolarpy.databinding.FragmentCotizacionBinding
 import com.lucasginard.dolarpy.domain.MainRepository
+import com.lucasginard.dolarpy.utils.setTint
 import com.lucasginard.dolarpy.view.adapter.adapterDolar
 import com.lucasginard.dolarpy.view.viewModel.MainViewModel
 import com.lucasginard.dolarpy.view.viewModel.MyViewModelFactory
@@ -43,6 +48,7 @@ class cotizacionFragment : Fragment() {
     private val sharedName = "UpdateSave"
     private var listaSave = ArrayList<com_ven>()
     private var lista = ArrayList<com_ven>()
+    private var isBuy = true
     private var monto = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,6 +86,11 @@ class cotizacionFragment : Fragment() {
             _binding.tvLastUpdate.text = "${getText(R.string.lastUpdate)} ${Tools.lastUpdate}"
             saveStringUpdate(Tools.lastUpdate)
         }
+        backgroundTint()
+        if (requireContext().resources.configuration.uiMode and
+            Configuration.UI_MODE_NIGHT_MASK ==  Configuration.UI_MODE_NIGHT_NO){
+            _binding.btnConfigOrder.setTint(R.color.secondColor)
+        }
     }
 
     private fun configureOnClickListener() {
@@ -95,10 +106,62 @@ class cotizacionFragment : Fragment() {
         _binding.btnRefresh.setOnClickListener {
             getApi()
         }
+
+        _binding.rbMore.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+                adapter.setOrderUp(isBuy)
+                backgroundTint(true)
+            }
+        }
+
+        _binding.rbLess.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+                adapter.setOrderDown(isBuy)
+                backgroundTint()
+            }
+        }
+
+        _binding.btnConfigOrder.setOnClickListener {
+            if (_binding.linearConfig.visibility == View.GONE){
+                _binding.linearConfig.visibility = View.VISIBLE
+                _binding.btnConfigOrder.setBackgroundResource(R.drawable.ic_arrow_up)
+            }else{
+                _binding.linearConfig.visibility = View.GONE
+                _binding.btnConfigOrder.setBackgroundResource(R.drawable.ic_arrow_drop_down_circle)
+            }
+        }
+
+        _binding.tvSetOrder.setOnClickListener {
+            showMenu(it,R.menu.item_spinner_buy)
+        }
+    }
+
+    private fun showMenu(v: View, @MenuRes menuRes: Int) {
+        val popup = PopupMenu(requireContext(), v)
+        popup.menuInflater.inflate(menuRes, popup.menu)
+
+        popup.setOnMenuItemClickListener { menuItem: MenuItem ->
+            if (menuItem.itemId == R.id.nav_sell){
+                _binding.tvSetOrder.text = getString(R.string.dolarSellTitle)
+                adapter.setOrderDown(false)
+                isBuy = false
+            }
+            if (menuItem.itemId == R.id.nav_buy){
+                _binding.tvSetOrder.text = getString(R.string.dolarBuyTitle)
+                adapter.setOrderDown()
+                isBuy = true
+            }
+            return@setOnMenuItemClickListener true
+        }
+        popup.setOnDismissListener {
+
+        }
+        popup.show()
     }
 
     private fun configureRecycler(){
         adapter = adapterDolar(lista)
+        adapter.setOrderDown()
          _binding.rvDolar.layoutManager = GridLayoutManager(
                  requireContext(),
                  2,
@@ -238,6 +301,16 @@ class cotizacionFragment : Fragment() {
     private fun deleteDolarList(){
         GlobalScope.launch {
             DolarApp.database.dolarDao().deleteDates()
+        }
+    }
+
+    private fun backgroundTint(boolean: Boolean = false){
+        if (!boolean){
+            _binding.rbMore.setTint(R.color.common_google_signin_btn_text_light_focused)
+            _binding.rbLess.setTint(R.color.primaryColor)
+        }else{
+            _binding.rbMore.setTint(R.color.primaryColor)
+            _binding.rbLess.setTint(R.color.common_google_signin_btn_text_light_focused)
         }
     }
 

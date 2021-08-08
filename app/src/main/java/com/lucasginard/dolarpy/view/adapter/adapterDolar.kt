@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.utils.Tools
 import com.lucasginard.dolarpy.com_ven
+import com.lucasginard.dolarpy.utils.Tools
 
 class adapterDolar (var localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter<dolarViewHolder>() {
 
@@ -62,6 +62,34 @@ class adapterDolar (var localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter
     fun clearCotizacion(){
         auxLocalesDolar?.clear()
         auxLocalesDolar?.addAll(Tools.listBase)
+        notifyDataSetChanged()
+    }
+
+    fun setOrderUp(isBuy:Boolean = true){
+        val aux = Tools.listBase
+        val resu = if (isBuy){
+            aux.sortedByDescending{it.compra}
+        }else{
+            aux.sortedByDescending{it.venta}
+        }
+        auxLocalesDolar?.clear()
+        auxLocalesDolar?.addAll(resu)
+        Tools.listBase.clear()
+        Tools.listBase.addAll(resu)
+        notifyDataSetChanged()
+    }
+
+    fun setOrderDown(isBuy:Boolean = true){
+        val aux = Tools.listBase
+        val resu = if (isBuy){
+            aux.sortedBy{it.compra}
+        }else{
+            aux.sortedBy{it.venta}
+        }
+        auxLocalesDolar?.clear()
+        auxLocalesDolar?.addAll(resu)
+        Tools.listBase.clear()
+        Tools.listBase.addAll(resu)
         notifyDataSetChanged()
     }
 

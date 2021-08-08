@@ -40,5 +40,8 @@ class dolarViewHolder(view: View): RecyclerView.ViewHolder(view) {
             binding.tvVentaM.textSize = 14F
             binding.tvRefM.textSize = 14F
         }
+        if(Resources.getSystem().displayMetrics.heightPixels <= 2060 ){
+            setMargin(binding.CardViewDolar,left = 40,right = 10,top = 25)
+        }
     }
 }
