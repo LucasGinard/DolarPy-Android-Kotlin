@@ -1,6 +1,12 @@
 # 💸DolarPy Android Kotlin💸
-🌐WebService: https://dolar.melizeche.com/api/1.0/
+### 📲Descarga/Download: 
+### <img src="https://img.utdstc.com/icon/c8c/d91/c8cd914e915d70dea2eabf58b1c03089fbe19c59729be8aec12170db47dd8f81:200" alt="drawing" width="20" height="20"/>PlayStore:[Aqui/Here](https://play.google.com/store/apps/details?id=com.lucasginard.dolarpy)
 
+### <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Huawei_AppGallery.svg/1200px-Huawei_AppGallery.svg.png" alt="drawing" width="20" height="20"/>AppGallery:[Aqui/Here](https://appgallery.huawei.com/#/app/C104598987?sharePrepath=ag&locale=es_US&source=appshare&subsource=C104598987)
+
+![](presentacion_readme/presentacionImg.png)
+
+🌐WebService: https://dolar.melizeche.com/api/1.0/
 
 Versión Android en Kotlin de 💸DolarPy💸: https://dolar.melizeche.com/
 
@@ -16,3 +22,7 @@ Versión Android en Kotlin de 💸DolarPy💸: https://dolar.melizeche.com/
 * [ViewBinding](https://developer.android.com/topic/libraries/view-binding)
 * [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - v1.3.6
 * [Room](https://developer.android.com/jetpack/androidx/releases/room) - v2.3.0
+
+## App Corriendo 	🏃 (Running app)
+![](presentacion_readme/app1_light.gif)
+![](presentacion_readme/app1_night.gif)
