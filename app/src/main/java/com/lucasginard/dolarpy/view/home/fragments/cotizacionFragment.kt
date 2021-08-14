@@ -22,6 +22,7 @@ import com.lucasginard.dolarpy.database.DolarEntity
 import com.lucasginard.dolarpy.databinding.FragmentCotizacionBinding
 import com.lucasginard.dolarpy.domain.MainRepository
 import com.lucasginard.dolarpy.utils.Tools
+import com.lucasginard.dolarpy.utils.setOnClick
 import com.lucasginard.dolarpy.utils.setTint
 import com.lucasginard.dolarpy.view.adapter.adapterDolar
 import com.lucasginard.dolarpy.view.viewModel.MainViewModel
@@ -123,7 +124,7 @@ class cotizacionFragment : Fragment() {
             showMenu(it,R.menu.item_spinner_buy)
         }
 
-        _binding.linearConfig.setOnLongClickListener {
+        _binding.btnConfigOrder.setOnClick {
             if (_binding.linearConfig.visibility == View.GONE){
                 _binding.linearConfig.visibility = View.VISIBLE
                 _binding.btnConfigOrder.setBackgroundResource(R.drawable.ic_arrow_up)
@@ -131,7 +132,17 @@ class cotizacionFragment : Fragment() {
                 _binding.linearConfig.visibility = View.GONE
                 _binding.btnConfigOrder.setBackgroundResource(R.drawable.ic_arrow_drop_down_circle)
             }
+        }
+
+        _binding.linearConfig.setOnLongClickListener {
             _binding.btnConfigOrder.performClick()
+            if (_binding.linearConfig.visibility == View.GONE){
+                _binding.linearConfig.visibility = View.VISIBLE
+                _binding.btnConfigOrder.setBackgroundResource(R.drawable.ic_arrow_up)
+            }else{
+                _binding.linearConfig.visibility = View.GONE
+                _binding.btnConfigOrder.setBackgroundResource(R.drawable.ic_arrow_drop_down_circle)
+            }
             true
         }
     }

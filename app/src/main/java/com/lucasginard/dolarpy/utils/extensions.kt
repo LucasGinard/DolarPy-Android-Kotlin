@@ -1,9 +1,12 @@
 package com.lucasginard.dolarpy.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.util.Log
+import android.view.MotionEvent
+import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.RadioButton
@@ -44,4 +47,14 @@ fun Context.setAppLocale(language: String) {
         config,
         this.resources.displayMetrics
     )
+}
+
+@SuppressLint("ClickableViewAccessibility")
+fun View.setOnClick(clickEvent: () -> Unit) {
+    this.setOnTouchListener { _, event ->
+        if (event.action == MotionEvent.ACTION_UP) {
+            clickEvent.invoke()
+        }
+        false
+    }
 }

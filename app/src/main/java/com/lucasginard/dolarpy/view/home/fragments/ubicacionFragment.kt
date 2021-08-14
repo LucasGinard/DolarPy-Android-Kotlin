@@ -36,6 +36,7 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
         Pair("Bonanza Cambios S.A",LatLng(-25.5109695,-54.6146669)),
         Pair("BCP",LatLng(-25.2780422,-57.5778163)),
         Pair("Cambios Alberdi",LatLng(-25.3147567,-57.5814258)),
+        Pair("Euro Cambios",LatLng(-25.2952722,-57.5804687)),
         )
 
     override fun onCreate(savedInstanceState: Bundle?) {
