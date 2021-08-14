@@ -5,10 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.widget.doAfterTextChanged
@@ -19,12 +16,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lucasginard.dolarpy.DolarApp
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.utils.Tools
 import com.lucasginard.dolarpy.com_ven
 import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.database.DolarEntity
 import com.lucasginard.dolarpy.databinding.FragmentCotizacionBinding
 import com.lucasginard.dolarpy.domain.MainRepository
+import com.lucasginard.dolarpy.utils.Tools
 import com.lucasginard.dolarpy.utils.setTint
 import com.lucasginard.dolarpy.view.adapter.adapterDolar
 import com.lucasginard.dolarpy.view.viewModel.MainViewModel
@@ -33,7 +30,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.collections.ArrayList
 
 
 class cotizacionFragment : Fragment() {
@@ -90,6 +86,8 @@ class cotizacionFragment : Fragment() {
         if (requireContext().resources.configuration.uiMode and
             Configuration.UI_MODE_NIGHT_MASK ==  Configuration.UI_MODE_NIGHT_NO){
             _binding.btnConfigOrder.setTint(R.color.secondColor)
+        }else{
+            _binding.btnConfigOrder.setTint(R.color.white)
         }
     }
 
@@ -121,7 +119,11 @@ class cotizacionFragment : Fragment() {
             }
         }
 
-        _binding.btnConfigOrder.setOnClickListener {
+        _binding.tvSetOrder.setOnClickListener {
+            showMenu(it,R.menu.item_spinner_buy)
+        }
+
+        _binding.linearConfig.setOnLongClickListener {
             if (_binding.linearConfig.visibility == View.GONE){
                 _binding.linearConfig.visibility = View.VISIBLE
                 _binding.btnConfigOrder.setBackgroundResource(R.drawable.ic_arrow_up)
@@ -129,10 +131,8 @@ class cotizacionFragment : Fragment() {
                 _binding.linearConfig.visibility = View.GONE
                 _binding.btnConfigOrder.setBackgroundResource(R.drawable.ic_arrow_drop_down_circle)
             }
-        }
-
-        _binding.tvSetOrder.setOnClickListener {
-            showMenu(it,R.menu.item_spinner_buy)
+            _binding.btnConfigOrder.performClick()
+            true
         }
     }
 
@@ -143,13 +143,15 @@ class cotizacionFragment : Fragment() {
         popup.setOnMenuItemClickListener { menuItem: MenuItem ->
             if (menuItem.itemId == R.id.nav_sell){
                 _binding.tvSetOrder.text = getString(R.string.dolarSellTitle)
-                adapter.setOrderDown(false)
                 isBuy = false
+                adapter.setOrderDown(isBuy)
+                saveOrder(isBuy)
             }
             if (menuItem.itemId == R.id.nav_buy){
                 _binding.tvSetOrder.text = getString(R.string.dolarBuyTitle)
                 adapter.setOrderDown()
                 isBuy = true
+                saveOrder(isBuy)
             }
             return@setOnMenuItemClickListener true
         }
@@ -161,14 +163,19 @@ class cotizacionFragment : Fragment() {
 
     private fun configureRecycler(){
         adapter = adapterDolar(lista)
+        val saveOrder = preference.getBoolean("isBuy",true)
         adapter.setOrderDown()
-         _binding.rvDolar.layoutManager = GridLayoutManager(
-                 requireContext(),
-                 2,
-                 RecyclerView.VERTICAL,
-                 false
-         )
-         _binding .rvDolar.adapter = adapter
+        if (!saveOrder){
+            _binding.tvSetOrder.text = getString(R.string.dolarSellTitle)
+            adapter.setOrderDown(false)
+        }
+        _binding.rvDolar.layoutManager = GridLayoutManager(
+            requireContext(),
+            2,
+            RecyclerView.VERTICAL,
+            false
+        )
+        _binding .rvDolar.adapter = adapter
     }
 
     @SuppressLint("SetTextI18n")
@@ -298,6 +305,11 @@ class cotizacionFragment : Fragment() {
         editor.apply()
     }
 
+    private fun saveOrder(isBuy:Boolean) {
+        val editor = preference.edit()
+        editor.putBoolean("isBuy",isBuy)
+        editor.apply()
+    }
     private fun deleteDolarList(){
         GlobalScope.launch {
             DolarApp.database.dolarDao().deleteDates()

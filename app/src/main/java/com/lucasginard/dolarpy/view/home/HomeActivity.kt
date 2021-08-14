@@ -1,14 +1,15 @@
 package com.lucasginard.dolarpy.view.home
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.utils.setBackground
 import com.lucasginard.dolarpy.databinding.ActivityHomeBinding
+import com.lucasginard.dolarpy.utils.OnHorizontalSwipeListener
 import com.lucasginard.dolarpy.view.cotizacionFragment
 import com.lucasginard.dolarpy.view.home.fragments.infoFragment
 import com.lucasginard.dolarpy.view.home.fragments.ubicacionFragment
@@ -37,6 +38,7 @@ class HomeActivity : AppCompatActivity() {
         if (savedInstanceState != null) {
             idSave = savedInstanceState.getInt("idSave")
         }
+        listenHorizontalSwipe(bindding.fragmentHome)
     }
 
     private fun configureUI() {
@@ -58,6 +60,47 @@ class HomeActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         outState.putInt("idSave", idSave);
     }
+
+    fun listenHorizontalSwipe(view: View) {
+        view.setOnTouchListener(object : OnHorizontalSwipeListener(view.context) {
+
+            override fun onRightSwipe() {
+                when(bindding.navView.selectedItemId ){
+                    R.id.nav_coti ->{
+                        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+                        ft.replace(bindding.fragmentHome.id, infoFragment.newInstance())
+                        bindding.navView.selectedItemId = R.id.nav_info
+                        ft.commit()
+                    }
+                    R.id.nav_ubi ->{
+                        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+                        ft.replace(bindding.fragmentHome.id, cotizacionFragment.newInstance())
+                        bindding.navView.selectedItemId = R.id.nav_coti
+                        ft.commit()
+                    }
+                }
+
+            }
+
+            override fun onLeftSwipe() {
+                when(bindding.navView.selectedItemId){
+                    R.id.nav_info ->{
+                        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+                        ft.replace(bindding.fragmentHome.id, cotizacionFragment.newInstance())
+                        bindding.navView.selectedItemId = R.id.nav_coti
+                        ft.commit()
+                    }
+                    R.id.nav_coti ->{
+                        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+                        ft.replace(bindding.fragmentHome.id, ubicacionFragment.newInstance())
+                        bindding.navView.selectedItemId = R.id.nav_ubi
+                        ft.commit()
+                    }
+                }
+            }
+        })
+    }
+
 
     private fun BottomNavigationView.setOnNavigationItemSelectedListener() {
         setOnNavigationItemSelectedListener {
