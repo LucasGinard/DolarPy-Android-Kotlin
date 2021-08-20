@@ -10,7 +10,6 @@ data class dolarpyResponse(
 data class dolarpy(
         val amambay: com_ven,
         val comven: com_ven,
-        val bbva: com_ven,
         val bcp: com_ven,
         val bonanza: com_ven,
         val cambiosalberdi: com_ven,
@@ -23,6 +22,7 @@ data class dolarpy(
         val mydcambios: com_ven,
         val set: com_ven,
         val vision: com_ven,
+        val gnbfusion: com_ven
 )
 
 data class com_ven(
