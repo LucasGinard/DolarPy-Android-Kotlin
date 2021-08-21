@@ -83,8 +83,7 @@ class MainActivity : AppCompatActivity() {
     private fun getApi(){
         viewModel = ViewModelProvider(this, MyViewModelFactory(MainRepository(retrofitService))).get(MainViewModel::class.java)
         viewModel.getDolarList.observe(this, Observer {
-            it.dolarpy.amambay.name = "AMAMBAY"
-            it.dolarpy.bbva.name = "BBVA"
+            it.dolarpy.amambay.name = "AMANBAY"
             it.dolarpy.bcp.name = "BCP"
             it.dolarpy.bonanza.name = "BONANZA"
             it.dolarpy.cambiosalberdi.name = "CAMBIOS ALBERDI"
@@ -96,15 +95,16 @@ class MainActivity : AppCompatActivity() {
             it.dolarpy.mydcambios.name = "MYD CAMBIOS"
             it.dolarpy.set.name = "SET"
             it.dolarpy.vision.name = "Visión Banco"
+            it.dolarpy.gnbfusion.name = "GNB FUSIÓN"
             it.dolarpy.eurocambios.name = "Euro Cambios"
             Tools.listBase.clear()
             Tools.listBase.add(it.dolarpy.amambay)
-            Tools.listBase.add(it.dolarpy.bbva)
             Tools.listBase.add(it.dolarpy.bcp)
             Tools.listBase.add(it.dolarpy.bonanza)
             Tools.listBase.add(it.dolarpy.cambiosalberdi)
             Tools.listBase.add(it.dolarpy.cambioschaco)
             Tools.listBase.add(it.dolarpy.interfisa)
+            Tools.listBase.add(it.dolarpy.gnbfusion)
             Tools.listBase.add(it.dolarpy.lamoneda)
             Tools.listBase.add(it.dolarpy.maxicambios)
             Tools.listBase.add(it.dolarpy.mundialcambios)

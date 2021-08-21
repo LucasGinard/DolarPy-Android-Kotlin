@@ -24,7 +24,7 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
     private var mapView: MapView? = null
     private var empresasCotizacion  = mapOf(
         Pair("Vision Banco Central",LatLng(-25.2894519,-57.571821)),
-        Pair("BBVA",LatLng(-25.288306,-57.6262421)),
+        Pair("GNB FUSIÓN",LatLng(-25.288306,-57.6262421)),
         Pair("Cambios Chaco",LatLng(-25.2935472,-57.6420617)),
         Pair("Cambios M&D",LatLng(-25.2941856,-57.5815143)),
         Pair("Mundial Cambios",LatLng(-25.2822143,-57.6549689)),
