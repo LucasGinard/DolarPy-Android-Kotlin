@@ -118,8 +118,6 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.errorMessage.observe(this, Observer {
-            val tintRed = ContextCompat.getColor(this, R.color.danger)
-            bindding.progressBar.setTint(tintRed)
             Tools.flatCheck = true
         })
         viewModel.getAllDolar()

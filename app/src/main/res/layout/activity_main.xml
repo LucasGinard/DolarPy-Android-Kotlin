@@ -8,28 +8,26 @@
     android:background="@drawable/background_light"
     tools:context=".view.MainActivity">
 
-    <ImageView
-        android:id="@+id/ivIcon"
-        android:layout_width="234dp"
-        android:layout_height="269dp"
-        android:contentDescription="@string/app_name"
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/logoAnim"
+        android:layout_width="259dp"
+        android:layout_height="200dp"
+        android:src="@drawable/icon_animation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_foreground" />
+        app:layout_constraintTop_toTopOf="parent"></pl.droidsonroids.gif.GifImageView>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
+
+    <pl.droidsonroids.gif.GifImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
+        android:layout_height="100dp"
+        android:src="@drawable/loading_splash"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivIcon"
+        app:layout_constraintTop_toBottomOf="@+id/logoAnim"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

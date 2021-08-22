@@ -1,5 +1,9 @@
 package com.lucasginard.dolarpy.view
 
+import android.R.attr.animationDuration
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
@@ -22,7 +26,6 @@ import com.lucasginard.dolarpy.database.DolarEntity
 import com.lucasginard.dolarpy.databinding.FragmentCotizacionBinding
 import com.lucasginard.dolarpy.domain.MainRepository
 import com.lucasginard.dolarpy.utils.Tools
-import com.lucasginard.dolarpy.utils.setOnClick
 import com.lucasginard.dolarpy.utils.setTint
 import com.lucasginard.dolarpy.view.adapter.adapterDolar
 import com.lucasginard.dolarpy.view.viewModel.MainViewModel
@@ -124,7 +127,8 @@ class cotizacionFragment : Fragment() {
             showMenu(it,R.menu.item_spinner_buy)
         }
 
-        _binding.btnConfigOrder.setOnClick {
+        _binding.btnConfigOrder.setOnClickListener {
+            Tools.animationY(_binding.linearConfig)
             if (_binding.linearConfig.visibility == View.GONE){
                 _binding.linearConfig.visibility = View.VISIBLE
                 _binding.btnConfigOrder.setBackgroundResource(R.drawable.ic_arrow_up)
@@ -135,7 +139,6 @@ class cotizacionFragment : Fragment() {
         }
 
         _binding.linearConfig.setOnLongClickListener {
-            _binding.btnConfigOrder.performClick()
             if (_binding.linearConfig.visibility == View.GONE){
                 _binding.linearConfig.visibility = View.VISIBLE
                 _binding.btnConfigOrder.setBackgroundResource(R.drawable.ic_arrow_up)

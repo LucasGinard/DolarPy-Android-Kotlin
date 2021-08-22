@@ -1,5 +1,7 @@
 package com.lucasginard.dolarpy.utils
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
@@ -42,6 +44,14 @@ open class Tools {
             )
             animation.duration = 500
             view.startAnimation(animation)
+        }
+
+        fun animationY(view: View){
+            val iconAnim = ObjectAnimator.ofPropertyValuesHolder(view,
+                PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, view.height.toFloat(), 0f),
+                PropertyValuesHolder.ofFloat(View.ALPHA, 0f, 1f))
+            iconAnim.duration = 400
+            iconAnim.start()
         }
 
         fun dialogCustom(activity: Activity, text: String, btnAccept: () -> Unit?={}, btnCancel: () -> Unit?={} ) {
