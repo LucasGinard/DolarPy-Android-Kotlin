@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
@@ -148,6 +149,11 @@ class cotizacionFragment : Fragment() {
             }
             true
         }
+
+        _binding.refreshList.setOnRefreshListener {
+            getApi()
+            _binding.refreshList.isRefreshing = false
+        }
     }
 
     private fun showMenu(v: View, @MenuRes menuRes: Int) {
@@ -177,12 +183,7 @@ class cotizacionFragment : Fragment() {
 
     private fun configureRecycler(){
         adapter = adapterDolar(lista)
-        val saveOrder = preference.getBoolean("isBuy",true)
-        adapter.setOrderDown()
-        if (!saveOrder){
-            _binding.tvSetOrder.text = getString(R.string.dolarSellTitle)
-            adapter.setOrderDown(false)
-        }
+        orderList()
         _binding.rvDolar.layoutManager = GridLayoutManager(
             requireContext(),
             2,
@@ -260,6 +261,7 @@ class cotizacionFragment : Fragment() {
                 saveStringUpdate(Tools.lastUpdate)
             }
             getListSave(Tools.listBase)
+            orderList()
         })
 
         viewModel.errorMessage.observe(requireActivity(), Observer {
@@ -338,6 +340,21 @@ class cotizacionFragment : Fragment() {
             _binding.rbMore.setTint(R.color.primaryColor)
             _binding.rbLess.setTint(R.color.common_google_signin_btn_text_light_focused)
         }
+    }
+
+    private fun orderList(){
+        val saveOrder = preference.getBoolean("isBuy",true)
+        adapter.setOrderDown()
+        _binding.rbLess.isChecked = true
+        if (!saveOrder){
+            _binding.tvSetOrder.text = getString(R.string.dolarSellTitle)
+            adapter.setOrderDown(false)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adapter.notifyDataSetChanged()
     }
 
     companion object {
