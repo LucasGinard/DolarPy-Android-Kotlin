@@ -50,6 +50,7 @@ class cotizacionFragment : Fragment() {
     private var listaSave = ArrayList<com_ven>()
     private var lista = ArrayList<com_ven>()
     private var isBuy = true
+    private var isLess = true
     private var monto = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,6 +115,8 @@ class cotizacionFragment : Fragment() {
             if (isChecked){
                 adapter.setOrderUp(isBuy)
                 backgroundTint(true)
+                isLess = false
+                saveOrder("isLess",isLess)
             }
         }
 
@@ -121,6 +124,8 @@ class cotizacionFragment : Fragment() {
             if (isChecked){
                 adapter.setOrderDown(isBuy)
                 backgroundTint()
+                isLess = true
+                saveOrder("isLess",isLess)
             }
         }
 
@@ -164,14 +169,14 @@ class cotizacionFragment : Fragment() {
             if (menuItem.itemId == R.id.nav_sell){
                 _binding.tvSetOrder.text = getString(R.string.dolarSellTitle)
                 isBuy = false
-                adapter.setOrderDown(isBuy)
-                saveOrder(isBuy)
+                saveOrder("isBuy",isBuy)
+                orderList()
             }
             if (menuItem.itemId == R.id.nav_buy){
                 _binding.tvSetOrder.text = getString(R.string.dolarBuyTitle)
-                adapter.setOrderDown()
                 isBuy = true
-                saveOrder(isBuy)
+                saveOrder("isBuy",isBuy)
+                orderList()
             }
             return@setOnMenuItemClickListener true
         }
@@ -272,6 +277,7 @@ class cotizacionFragment : Fragment() {
                 _binding.pgLoading.visibility = View.GONE
                 _binding.tvConnect.visibility = View.VISIBLE
             }
+            _binding.pgLoading.visibility = View.GONE
         })
         viewModel.getAllDolar()
     }
@@ -297,6 +303,7 @@ class cotizacionFragment : Fragment() {
                     getDolaresIngresados()
                     _binding.tvLastUpdate.text = "${getString(R.string.tvUpdateSave)}${preference.getString("lastUpdate","")}"
                 }
+                orderList()
             }
         }
     }
@@ -321,9 +328,9 @@ class cotizacionFragment : Fragment() {
         editor.apply()
     }
 
-    private fun saveOrder(isBuy:Boolean) {
+    private fun saveOrder(key:String,valueSave:Boolean) {
         val editor = preference.edit()
-        editor.putBoolean("isBuy",isBuy)
+        editor.putBoolean(key,valueSave)
         editor.apply()
     }
     private fun deleteDolarList(){
@@ -343,12 +350,17 @@ class cotizacionFragment : Fragment() {
     }
 
     private fun orderList(){
-        val saveOrder = preference.getBoolean("isBuy",true)
-        adapter.setOrderDown()
-        _binding.rbLess.isChecked = true
-        if (!saveOrder){
-            _binding.tvSetOrder.text = getString(R.string.dolarSellTitle)
-            adapter.setOrderDown(false)
+        isBuy = preference.getBoolean("isBuy",true)
+        isLess = preference.getBoolean("isLess",true)
+        if (isLess){
+            adapter.setOrderDown(isBuy)
+        }else{
+            adapter.setOrderUp(isBuy)
+        }
+        if (!isBuy) _binding.tvSetOrder.text = getString(R.string.dolarSellTitle)
+        if (!isLess){
+            _binding.rbMore.isChecked = true
+            backgroundTint(true)
         }
     }
 

@@ -54,7 +54,7 @@ open class Tools {
             iconAnim.start()
         }
 
-        fun dialogCustom(activity: Activity, text: String, btnAccept: () -> Unit?={}, btnCancel: () -> Unit?={} ) {
+        fun dialogCustom(activity: Activity, text: String, btnAccept: () -> Unit, btnCancel: () -> Unit ) {
             val builder = MaterialAlertDialogBuilder(activity)
             builder.setMessage(text)
                 .setPositiveButton(R.string.btnAccept){dialog ,it ->
@@ -68,7 +68,7 @@ open class Tools {
             builder.show()
         }
 
-        fun dialogCustom(activity: Activity, text: String, btnAccept: () -> Unit?={}) {
+        fun dialogCustom(activity: Activity, text: String, btnAccept: () -> Unit) {
             val builder = MaterialAlertDialogBuilder(activity)
             builder.setMessage(text)
                     .setPositiveButton(R.string.btnAccept){dialog ,it ->
