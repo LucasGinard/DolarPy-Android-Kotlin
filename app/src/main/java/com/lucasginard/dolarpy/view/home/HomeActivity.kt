@@ -1,6 +1,9 @@
 package com.lucasginard.dolarpy.view.home
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
@@ -10,6 +13,7 @@ import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.utils.setBackground
 import com.lucasginard.dolarpy.databinding.ActivityHomeBinding
 import com.lucasginard.dolarpy.utils.OnHorizontalSwipeListener
+import com.lucasginard.dolarpy.utils.setAppLocale
 import com.lucasginard.dolarpy.view.cotizacionFragment
 import com.lucasginard.dolarpy.view.home.fragments.infoFragment
 import com.lucasginard.dolarpy.view.home.fragments.ubicacionFragment
@@ -18,6 +22,7 @@ import java.util.*
 
 class HomeActivity : AppCompatActivity() {
 
+    private lateinit var preferences: SharedPreferences
     private lateinit var bindding:ActivityHomeBinding
     private var idSave:Int = R.id.nav_coti
 
@@ -43,6 +48,22 @@ class HomeActivity : AppCompatActivity() {
 
     private fun configureUI() {
         bindding.contraintBase.setBackground()
+        preferences = this.getSharedPreferences("saveSettings", Context.MODE_PRIVATE)
+        if (preferences.getBoolean("flatSaveLenguaje",false)){
+            val lenguaje = preferences.getString("saveLenguaje",Locale.getDefault().language)
+            if (Locale.getDefault().language != lenguaje){
+                when(lenguaje){
+                    "es" ->{
+                        this.setAppLocale("es")
+                        this.recreate()
+                    }
+                    else ->{
+                        this.setAppLocale("en")
+                        this.recreate()
+                    }
+                }
+            }
+        }
     }
 
     override fun onBackPressed() {

@@ -3,16 +3,16 @@ package com.lucasginard.dolarpy.view
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lucasginard.dolarpy.DolarApp
-import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.databinding.ActivityMainBinding
 import com.lucasginard.dolarpy.domain.MainRepository
@@ -50,30 +50,22 @@ class MainActivity : AppCompatActivity() {
     private fun configureUI(){
         bindding.contraintBase.setBackground()
         preferences = this.getSharedPreferences("saveSettings", Context.MODE_PRIVATE)
-        if (preferences.getBoolean("flatSaveLenguaje",false)){
-            val lenguaje = preferences.getString("saveLenguaje","")
-            if (Locale.getDefault().language != lenguaje){
-                when(lenguaje){
-                    "es" ->{
-                        this.setAppLocale("es")
-                        this.recreate()
-                    }
-                    else ->{
-                        this.setAppLocale("en")
-                        this.recreate()
-                    }
-                }
-            }
-        }
+        val config = this.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         if (preferences.getBoolean("flatSaveMode",false)){
             val saveMode = preferences.getInt("saveMode",3)
             if (saveMode != 3){
-                when(saveMode){
-                    1 ->{
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    }
-                    0 ->{
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                if (Tools.flatTheme){
+                    when(saveMode){
+                        1 ->{
+                            if (config != AppCompatDelegate.MODE_NIGHT_YES){
+                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                            }
+                        }
+                        0 ->{
+                            if (config != AppCompatDelegate.MODE_NIGHT_NO){
+                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                            }
+                        }
                     }
                 }
             }

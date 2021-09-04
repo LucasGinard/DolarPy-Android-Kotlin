@@ -1,15 +1,10 @@
 package com.lucasginard.dolarpy.view
 
-import android.R.attr.animationDuration
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu

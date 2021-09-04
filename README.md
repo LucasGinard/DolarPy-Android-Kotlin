@@ -20,8 +20,10 @@ Versión Android en Kotlin de 💸DolarPy💸: https://dolar.melizeche.com/
 ## Librerias Utilizadas 📚 (Libraries used)
 * [RetroFit](https://square.github.io/retrofit/) - v2.9.0
 * [ViewBinding](https://developer.android.com/topic/libraries/view-binding)
-* [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - v1.3.6
+* [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - v1.4.1
 * [Room](https://developer.android.com/jetpack/androidx/releases/room) - v2.3.0
+* [LiveData & Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle) - v2.3.1
+* [Android Gif Drawable](https://github.com/koral--/android-gif-drawable) - v1.2.23
 
 ## App Corriendo 	🏃 (Running app)
 ![](presentacion_readme/app1_light.gif)

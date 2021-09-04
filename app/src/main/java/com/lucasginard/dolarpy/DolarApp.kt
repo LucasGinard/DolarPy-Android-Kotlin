@@ -15,7 +15,7 @@ class DolarApp : Application() {
         super.onCreate()
         database =  Room.databaseBuilder(this, DolarDatabase::class.java, "dolar-db").build()
         if(BuildConfig.DEBUG){
-            FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(false);
+            FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(false)
         }
     }
 

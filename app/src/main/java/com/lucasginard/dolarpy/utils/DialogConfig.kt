@@ -3,6 +3,8 @@ package com.lucasginard.dolarpy.utils
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
+import android.content.Intent.getIntent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.graphics.Color
@@ -13,9 +15,12 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.lucasginard.dolarpy.R
+import com.lucasginard.dolarpy.view.home.HomeActivity
 import java.util.*
+
 
 class DialogConfig(context: Context,var activity: Activity?,var preferences: SharedPreferences): AlertDialog(context) {
 
@@ -103,13 +108,13 @@ class DialogConfig(context: Context,var activity: Activity?,var preferences: Sha
                 if (isChecked){
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     saveConfigMode(preferences,1,true)
-                    activity.onBackPressed()
-                    dismiss()
+                    Tools.flatTheme = false
+                    activity.finish()
                 }else{
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     saveConfigMode(preferences,0,true)
-                    activity.onBackPressed()
-                    dismiss()
+                    Tools.flatTheme = false
+                    activity.finish()
                 }
             },{
                 saveMode(preferences,switchMode)
