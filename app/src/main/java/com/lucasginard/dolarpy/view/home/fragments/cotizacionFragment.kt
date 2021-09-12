@@ -198,7 +198,7 @@ class cotizacionFragment : Fragment() {
         _binding.etMontoIngresado.doAfterTextChanged {
             if (!it.isNullOrEmpty()){
                 monto = _binding.etMontoIngresado.text.toString()
-                adapter.calcularCotizacion(monto.toInt())
+                adapter.calcularCotizacion(monto.toDouble())
                 adapter.notifyDataSetChanged()
             }else{
                 adapter.clearCotizacion()

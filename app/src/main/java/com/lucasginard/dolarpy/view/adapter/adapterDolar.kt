@@ -36,7 +36,7 @@ class adapterDolar (var localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter
         }
     }
 
-    fun calcularCotizacion(ingresado:Int ?= null){
+    fun calcularCotizacion(ingresado:Double ?= null){
         val listItems = auxLocalesDolar
         val itemaux = ArrayList<com_ven>()
         for ((i,x) in listItems!!.withIndex()){
