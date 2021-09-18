@@ -14,7 +14,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.lucasginard.dolarpy.DolarApp
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.com_ven
 import com.lucasginard.dolarpy.data.apiService
@@ -65,6 +64,7 @@ class cotizacionFragment : Fragment() {
     }
 
     private fun configureUI(){
+        viewModel = ViewModelProvider(this, MyViewModelFactory(MainRepository(retrofitService))).get(MainViewModel::class.java)
         preference = requireActivity().getSharedPreferences(sharedName,Context.MODE_PRIVATE)
         if (Tools.flatCheck){
             _binding.etMonto.visibility = View.GONE
@@ -128,8 +128,7 @@ class cotizacionFragment : Fragment() {
             showMenu(it,R.menu.item_spinner_buy)
         }
 
-        _binding.btnConfigOrder.setOnClickListener {
-            Tools.animationY(_binding.linearConfig)
+        val visibilityFilter = {
             if (_binding.linearConfig.visibility == View.GONE){
                 _binding.linearConfig.visibility = View.VISIBLE
                 _binding.btnConfigOrder.setBackgroundResource(R.drawable.ic_arrow_up)
@@ -138,15 +137,13 @@ class cotizacionFragment : Fragment() {
                 _binding.btnConfigOrder.setBackgroundResource(R.drawable.ic_arrow_drop_down_circle)
             }
         }
+        _binding.btnConfigOrder.setOnClickListener {
+            Tools.animationY(_binding.linearConfig)
+            visibilityFilter()
+        }
 
         _binding.linearConfig.setOnLongClickListener {
-            if (_binding.linearConfig.visibility == View.GONE){
-                _binding.linearConfig.visibility = View.VISIBLE
-                _binding.btnConfigOrder.setBackgroundResource(R.drawable.ic_arrow_up)
-            }else{
-                _binding.linearConfig.visibility = View.GONE
-                _binding.btnConfigOrder.setBackgroundResource(R.drawable.ic_arrow_drop_down_circle)
-            }
+            visibilityFilter()
             true
         }
 
@@ -191,6 +188,14 @@ class cotizacionFragment : Fragment() {
             false
         )
         _binding .rvDolar.adapter = adapter
+        if (Tools.flatRecyclerSave){
+            _binding.tvConnect.visibility = View.GONE
+            _binding.etMonto.visibility = View.VISIBLE
+            _binding.recycler.visibility = View.VISIBLE
+            _binding.tvLastUpdate.visibility = View.VISIBLE
+            _binding.btnRefresh.visibility = View.VISIBLE
+            _binding.tvLastUpdate.text = "${getString(R.string.tvUpdateSave)}${preference.getString("lastUpdate","")}"
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -214,9 +219,8 @@ class cotizacionFragment : Fragment() {
     }
 
     private fun getApi(){
-        viewModel = ViewModelProvider(this, MyViewModelFactory(MainRepository(retrofitService))).get(MainViewModel::class.java)
         viewModel.getDolarList.observe(requireActivity(), Observer {
-            deleteDolarList()
+            viewModel.deleteDolarList()
             it.dolarpy.amambay.name = "AMANBAY"
             it.dolarpy.bcp.name = "BCP"
             it.dolarpy.bonanza.name = "BONANZA"
@@ -262,6 +266,7 @@ class cotizacionFragment : Fragment() {
             }
             getListSave(Tools.listBase)
             orderList()
+            Tools.flatRecyclerSave = false
         })
 
         viewModel.errorMessage.observe(requireActivity(), Observer {
@@ -279,7 +284,7 @@ class cotizacionFragment : Fragment() {
 
     private fun getDolarSave() {
         GlobalScope.launch {
-            listDolarSave = DolarApp.database.dolarDao().getAllDolar()
+            listDolarSave = viewModel.getAllDolarListSave()
             if (Tools.listBase.isEmpty()){
                 val List = ArrayList<com_ven>()
                 for (x in listDolarSave){
@@ -297,23 +302,16 @@ class cotizacionFragment : Fragment() {
                     adapter.notifyDataSetChanged()
                     getDolaresIngresados()
                     _binding.tvLastUpdate.text = "${getString(R.string.tvUpdateSave)}${preference.getString("lastUpdate","")}"
+                    Tools.flatRecyclerSave = true
+                    orderList()
                 }
-                orderList()
             }
         }
     }
 
     private fun getListSave(list:ArrayList<com_ven>){
         for (x in list){
-            addDolar(DolarEntity(name = x.name!!,buy = x.compra,sell= x.venta))
-        }
-    }
-
-    private fun addDolar(dolar: DolarEntity){
-        GlobalScope.launch {
-            val id = DolarApp.database.dolarDao().addDolar(dolar)
-            val recoveryDolar = DolarApp.database.dolarDao().getDolarById(id)
-            listDolarSave.add(recoveryDolar)
+            viewModel.addDolar(DolarEntity(name = x.name!!,buy = x.compra,sell= x.venta),listDolarSave)
         }
     }
 
@@ -327,11 +325,6 @@ class cotizacionFragment : Fragment() {
         val editor = preference.edit()
         editor.putBoolean(key,valueSave)
         editor.apply()
-    }
-    private fun deleteDolarList(){
-        GlobalScope.launch {
-            DolarApp.database.dolarDao().deleteDates()
-        }
     }
 
     private fun backgroundTint(boolean: Boolean = false){

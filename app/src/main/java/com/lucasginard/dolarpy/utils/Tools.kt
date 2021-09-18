@@ -18,6 +18,7 @@ open class Tools {
         var flatCheck = false
         var flatSave = true
         var flatTheme = true
+        var flatRecyclerSave = false
         var lastUpdate =""
 
         fun setMargin(view: View, left: Int =0, right: Int  =0, top: Int  =0, bottom: Int  =0) {

@@ -7,12 +7,10 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.lucasginard.dolarpy.DolarApp
 import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.databinding.ActivityMainBinding
 import com.lucasginard.dolarpy.domain.MainRepository
@@ -20,8 +18,6 @@ import com.lucasginard.dolarpy.utils.*
 import com.lucasginard.dolarpy.view.home.HomeActivity
 import com.lucasginard.dolarpy.view.viewModel.MainViewModel
 import com.lucasginard.dolarpy.view.viewModel.MyViewModelFactory
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -105,7 +101,7 @@ class MainActivity : AppCompatActivity() {
             Tools.listBase.add(it.dolarpy.vision)
             Tools.listBase.add(it.dolarpy.eurocambios)
             Tools.lastUpdate = it.update
-            deleteDolarList()
+            viewModel.deleteDolarList()
             SPLASH_DISPLAY_LENGTH = 0
         })
 
@@ -113,12 +109,6 @@ class MainActivity : AppCompatActivity() {
             Tools.flatCheck = true
         })
         viewModel.getAllDolar()
-    }
-
-    private fun deleteDolarList(){
-        GlobalScope.launch {
-            DolarApp.database.dolarDao().deleteDates()
-        }
     }
 
     override fun onResume() {
