@@ -76,21 +76,21 @@ class infoFragment : Fragment() {
         }
 
         _binding.linearGit.setOnClickListener {
-            val uri: Uri = Uri.parse("https://github.com/melizeche/dolarPy")
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            startActivity(intent)
+            Tools.goToURL("https://github.com/melizeche/dolarPy",requireContext())
         }
 
         _binding.tvTwitter.setOnClickListener {
-            val uri: Uri = Uri.parse("https://twitter.com/DolarPy")
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            startActivity(intent)
+            Tools.goToURL("https://twitter.com/DolarPy",requireContext())
         }
 
         _binding.btnConfigure.setOnClickListener {
             Tools.rotarImagen(_binding.btnConfigure)
             dialog = DialogConfig(requireContext(),activity,preferences)
             dialog.show()
+        }
+
+        _binding.tvLicense.setOnClickListener {
+            Tools.goToURL("https://www.apache.org/licenses/LICENSE-2.0.txt",requireContext())
         }
     }
 

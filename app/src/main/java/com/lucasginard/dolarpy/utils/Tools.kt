@@ -3,6 +3,9 @@ package com.lucasginard.dolarpy.utils
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.RotateAnimation
@@ -67,6 +70,12 @@ open class Tools {
                         dialog.dismiss()
                     }
             builder.show()
+        }
+
+        fun goToURL(url:String,context:Context){
+            val uri: Uri = Uri.parse(url)
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            context.startActivity(intent)
         }
     }
 }
