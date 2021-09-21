@@ -201,7 +201,11 @@ class cotizacionFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun getDolaresIngresados(){
         _binding.etMontoIngresado.doAfterTextChanged {
-            if (!it.isNullOrEmpty()){
+            if(_binding.etMontoIngresado.text.toString() == "."){
+                _binding.etMontoIngresado.setText("0.")
+                _binding.etMontoIngresado.setSelection(2)
+            }
+            if (!it.isNullOrEmpty() && _binding.etMontoIngresado.text.toString() != "0."){
                 monto = _binding.etMontoIngresado.text.toString()
                 adapter.calcularCotizacion(monto.toDouble())
                 adapter.notifyDataSetChanged()
