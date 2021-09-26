@@ -101,7 +101,6 @@ class MainActivity : AppCompatActivity() {
             Tools.listBase.add(it.dolarpy.vision)
             Tools.listBase.add(it.dolarpy.eurocambios)
             Tools.lastUpdate = it.update
-            viewModel.deleteDolarList()
             SPLASH_DISPLAY_LENGTH = 0
         })
 

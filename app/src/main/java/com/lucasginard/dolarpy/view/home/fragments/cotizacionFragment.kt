@@ -224,7 +224,6 @@ class cotizacionFragment : Fragment() {
 
     private fun getApi(){
         viewModel.getDolarList.observe(requireActivity(), Observer {
-            viewModel.deleteDolarList()
             it.dolarpy.amambay.name = "AMANBAY"
             it.dolarpy.bcp.name = "BCP"
             it.dolarpy.bonanza.name = "BONANZA"
@@ -314,8 +313,14 @@ class cotizacionFragment : Fragment() {
     }
 
     private fun getListSave(list:ArrayList<com_ven>){
-        for (x in list){
+        if(preference.getString("lastUpdate","") != ""){
+            for (x in list){
+            viewModel.updateDolar(DolarEntity(name = x.name!!,buy = x.compra,sell= x.venta))
+            }
+        }else{
+            for (x in list){
             viewModel.addDolar(DolarEntity(name = x.name!!,buy = x.compra,sell= x.venta),listDolarSave)
+            }
         }
     }
 

@@ -31,20 +31,16 @@ class MainViewModel constructor(private val repository: MainRepository)  : ViewM
     }
 
     fun getAllDolarListSave():MutableList<DolarEntity> {
-        return DolarApp.database.dolarDao().getAllDolar()
+        return repository.getSaveDolar()
     }
 
     fun addDolar(dolar: DolarEntity,list:MutableList<DolarEntity>){
-        GlobalScope.launch {
-            val id = DolarApp.database.dolarDao().addDolar(dolar)
-            val recoveryDolar = DolarApp.database.dolarDao().getDolarById(id)
-            list.add(recoveryDolar)
-        }
+        repository.addSave(dolar,list)
     }
 
-    fun deleteDolarList(){
+    fun updateDolar(dolar: DolarEntity){
         GlobalScope.launch {
-            DolarApp.database.dolarDao().deleteDates()
+            DolarApp.database.dolarDao().updateDolar(dolar)
         }
     }
 }
