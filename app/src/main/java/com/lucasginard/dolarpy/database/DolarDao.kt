@@ -16,6 +16,4 @@ interface DolarDao {
     @Update
     fun updateDolar(dolarEntity: DolarEntity)
 
-    @Query("DELETE FROM dolar_entity")
-    fun deleteDates()
 }

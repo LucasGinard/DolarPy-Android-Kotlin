@@ -40,7 +40,7 @@ class MainViewModel constructor(private val repository: MainRepository)  : ViewM
 
     fun updateDolar(dolar: DolarEntity){
         GlobalScope.launch {
-            DolarApp.database.dolarDao().updateDolar(dolar)
+            repository.updateDolar(dolar)
         }
     }
 }
