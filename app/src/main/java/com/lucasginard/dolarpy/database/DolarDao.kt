@@ -14,6 +14,6 @@ interface DolarDao {
     fun getDolarById(id: Long): DolarEntity
 
     @Update
-    fun updateDolar(dolarEntity: DolarEntity)
+    suspend fun updateDolar(dolarEntity: DolarEntity):Int
 
 }

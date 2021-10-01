@@ -5,12 +5,12 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -223,7 +223,7 @@ class cotizacionFragment : Fragment() {
     }
 
     private fun getApi(){
-        viewModel.getDolarList.observe(requireActivity(), Observer {
+        viewModel.getDolarList.observe(requireActivity(), {
             it.dolarpy.amambay.name = "AMANBAY"
             it.dolarpy.bcp.name = "BCP"
             it.dolarpy.bonanza.name = "BONANZA"
@@ -272,7 +272,7 @@ class cotizacionFragment : Fragment() {
             Tools.flatRecyclerSave = false
         })
 
-        viewModel.errorMessage.observe(requireActivity(), Observer {
+        viewModel.errorMessage.observe(requireActivity(), {
             Tools.dialogCustom(requireActivity(), getString(R.string.textErrorNet),{})
             if (_binding.etMonto.visibility == View.VISIBLE && Tools.listBase.isNotEmpty() && !Tools.flatCheck){
                 getApi()
@@ -314,12 +314,38 @@ class cotizacionFragment : Fragment() {
 
     private fun getListSave(list:ArrayList<com_ven>){
         if(preference.getString("lastUpdate","") != ""){
-            for (x in list){
-            viewModel.updateDolar(DolarEntity(name = x.name!!,buy = x.compra,sell= x.venta))
+            GlobalScope.launch {
+                listDolarSave = viewModel.getAllDolarListSave()
+                withContext (Dispatchers.Main) {
+                    updateList(list)
+                }
             }
         }else{
             for (x in list){
-            viewModel.addDolar(DolarEntity(name = x.name!!,buy = x.compra,sell= x.venta),listDolarSave)
+                viewModel.addDolar(DolarEntity(name = x.name!!,buy = x.compra,sell= x.venta),listDolarSave)
+            }
+        }
+    }
+
+    private fun updateList(list: ArrayList<com_ven>) {
+        for(x in list){
+            Log.d("valorTest", "Nombre: ${x.name}/${x.compra}/${x.venta}")
+        }
+        if (listDolarSave.isNotEmpty()){
+            var flat = false
+            var idDolar = 0
+            for (x in list){
+                for (listSave in listDolarSave){
+                    if (x.name == listSave.name){
+                        flat = true
+                        idDolar = listSave.id
+                    }
+                }
+                if (flat){
+                    viewModel.updateDolar(DolarEntity(id = idDolar,name = x.name!!,buy = x.compra,sell = x.venta))
+                }else{
+                    viewModel.addDolar(DolarEntity(name = x.name!!,buy = x.compra,sell= x.venta),listDolarSave)
+                }
             }
         }
     }
