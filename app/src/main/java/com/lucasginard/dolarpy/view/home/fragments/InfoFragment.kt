@@ -19,7 +19,7 @@ import com.lucasginard.dolarpy.utils.DialogConfig
 import com.lucasginard.dolarpy.utils.Tools
 
 
-class infoFragment : Fragment() {
+class InfoFragment : Fragment() {
 
     private lateinit var _binding:FragmentInfoBinding
     private lateinit var preferences: SharedPreferences
@@ -114,7 +114,7 @@ class infoFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            infoFragment().apply {
+            InfoFragment().apply {
                 arguments = Bundle().apply {
 
                 }

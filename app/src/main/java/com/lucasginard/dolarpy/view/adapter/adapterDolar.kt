@@ -42,7 +42,7 @@ class adapterDolar (var localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter
         for ((i,x) in listItems!!.withIndex()){
             val item = com_ven("",0.0,0.0,null)
             if (ingresado != null) {
-                item.name = auxLocalesDolar?.get(i)?.name
+                item.name = x.name
                 item.compra = ingresado * Tools.listBase[i].compra
                 item.venta  = ingresado * Tools.listBase[i].venta
                 if (Tools.listBase[i].referencialDiario != null){
@@ -65,7 +65,7 @@ class adapterDolar (var localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter
         notifyDataSetChanged()
     }
 
-    fun setOrderUp(isBuy:Boolean = true){
+    fun setOrderUp(isBuy:Boolean = true,calculate:String?=""){
         val aux = Tools.listBase
         val resu = if (isBuy){
             aux.sortedByDescending{it.compra}
@@ -76,10 +76,11 @@ class adapterDolar (var localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter
         auxLocalesDolar?.addAll(resu)
         Tools.listBase.clear()
         Tools.listBase.addAll(resu)
+        if(calculate != "" && calculate?.isNotEmpty() == true) calcularCotizacion(calculate.toDouble())
         notifyDataSetChanged()
     }
 
-    fun setOrderDown(isBuy:Boolean = true){
+    fun setOrderDown(isBuy:Boolean = true,calculate:String?=""){
         val aux = Tools.listBase
         val resu = if (isBuy){
             aux.sortedBy{it.compra}
@@ -90,6 +91,7 @@ class adapterDolar (var localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter
         auxLocalesDolar?.addAll(resu)
         Tools.listBase.clear()
         Tools.listBase.addAll(resu)
+        if(calculate != "" && calculate?.isNotEmpty() == true) calcularCotizacion(calculate.toDouble())
         notifyDataSetChanged()
     }
 

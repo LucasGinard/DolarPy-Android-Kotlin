@@ -1,4 +1,4 @@
-package com.lucasginard.dolarpy.view
+package com.lucasginard.dolarpy.view.home.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class cotizacionFragment : Fragment() {
+class CotizacionFragment : Fragment() {
 
     private lateinit var listDolarSave: MutableList<DolarEntity>
     private lateinit var preference: SharedPreferences
@@ -108,7 +108,7 @@ class cotizacionFragment : Fragment() {
 
         _binding.rbMore.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked){
-                adapter.setOrderUp(isBuy)
+                adapter.setOrderUp(isBuy,monto)
                 backgroundTint(true)
                 isLess = false
                 saveOrder("isLess",isLess)
@@ -117,7 +117,7 @@ class cotizacionFragment : Fragment() {
 
         _binding.rbLess.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked){
-                adapter.setOrderDown(isBuy)
+                adapter.setOrderDown(isBuy,monto)
                 backgroundTint()
                 isLess = true
                 saveOrder("isLess",isLess)
@@ -376,9 +376,9 @@ class cotizacionFragment : Fragment() {
         isBuy = preference.getBoolean("isBuy",true)
         isLess = preference.getBoolean("isLess",true)
         if (isLess){
-            adapter.setOrderDown(isBuy)
+            adapter.setOrderDown(isBuy,monto)
         }else{
-            adapter.setOrderUp(isBuy)
+            adapter.setOrderUp(isBuy,monto)
         }
         if (!isBuy) _binding.tvSetOrder.text = getString(R.string.dolarSellTitle)
         if (!isLess){
@@ -393,7 +393,7 @@ class cotizacionFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = cotizacionFragment().apply {
+        fun newInstance() = CotizacionFragment().apply {
             arguments = Bundle().apply {
             }
         }

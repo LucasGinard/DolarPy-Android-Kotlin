@@ -13,9 +13,9 @@ import com.lucasginard.dolarpy.utils.setBackground
 import com.lucasginard.dolarpy.databinding.ActivityHomeBinding
 import com.lucasginard.dolarpy.utils.OnHorizontalSwipeListener
 import com.lucasginard.dolarpy.utils.setAppLocale
-import com.lucasginard.dolarpy.view.cotizacionFragment
-import com.lucasginard.dolarpy.view.home.fragments.infoFragment
-import com.lucasginard.dolarpy.view.home.fragments.ubicacionFragment
+import com.lucasginard.dolarpy.view.home.fragments.CotizacionFragment
+import com.lucasginard.dolarpy.view.home.fragments.InfoFragment
+import com.lucasginard.dolarpy.view.home.fragments.UbicacionFragment
 import java.util.*
 
 
@@ -36,7 +36,7 @@ class HomeActivity : AppCompatActivity() {
 
         val fm: FragmentManager = supportFragmentManager
         val ft: FragmentTransaction = fm.beginTransaction()
-        ft.replace(bindding.fragmentHome.id, cotizacionFragment.newInstance())
+        ft.replace(bindding.fragmentHome.id, CotizacionFragment.newInstance())
         ft.commit()
 
         if (savedInstanceState != null) {
@@ -88,13 +88,13 @@ class HomeActivity : AppCompatActivity() {
                 when(bindding.navView.selectedItemId ){
                     R.id.nav_coti ->{
                         val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                        ft.replace(bindding.fragmentHome.id, infoFragment.newInstance())
+                        ft.replace(bindding.fragmentHome.id, InfoFragment.newInstance())
                         bindding.navView.selectedItemId = R.id.nav_info
                         ft.commit()
                     }
                     R.id.nav_ubi ->{
                         val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                        ft.replace(bindding.fragmentHome.id, cotizacionFragment.newInstance())
+                        ft.replace(bindding.fragmentHome.id, CotizacionFragment.newInstance())
                         bindding.navView.selectedItemId = R.id.nav_coti
                         ft.commit()
                     }
@@ -106,13 +106,13 @@ class HomeActivity : AppCompatActivity() {
                 when(bindding.navView.selectedItemId){
                     R.id.nav_info ->{
                         val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                        ft.replace(bindding.fragmentHome.id, cotizacionFragment.newInstance())
+                        ft.replace(bindding.fragmentHome.id, CotizacionFragment.newInstance())
                         bindding.navView.selectedItemId = R.id.nav_coti
                         ft.commit()
                     }
                     R.id.nav_coti ->{
                         val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                        ft.replace(bindding.fragmentHome.id, ubicacionFragment.newInstance())
+                        ft.replace(bindding.fragmentHome.id, UbicacionFragment.newInstance())
                         bindding.navView.selectedItemId = R.id.nav_ubi
                         ft.commit()
                     }
@@ -129,17 +129,17 @@ class HomeActivity : AppCompatActivity() {
 
             when(it.itemId){
                 R.id.nav_ubi ->{
-                    ft.replace(bindding.fragmentHome.id, ubicacionFragment.newInstance())
+                    ft.replace(bindding.fragmentHome.id, UbicacionFragment.newInstance())
                     ft.commit()
                     idSave = it.itemId
                 }
                 R.id.nav_coti ->{
-                    ft.replace(bindding.fragmentHome.id, cotizacionFragment.newInstance())
+                    ft.replace(bindding.fragmentHome.id, CotizacionFragment.newInstance())
                     ft.commit()
                     idSave = it.itemId
                 }
                 R.id.nav_info ->{
-                    ft.replace(bindding.fragmentHome.id, infoFragment.newInstance())
+                    ft.replace(bindding.fragmentHome.id, InfoFragment.newInstance())
                     ft.commit()
                     idSave = it.itemId
                 }

@@ -17,7 +17,7 @@ import com.lucasginard.dolarpy.utils.Tools
 import com.lucasginard.dolarpy.utils.setTint
 
 
-class ubicacionFragment : Fragment(), OnMapReadyCallback {
+class UbicacionFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var _binding :FragmentUbicacionBinding
     private lateinit var GoogleMap: GoogleMap
@@ -122,7 +122,7 @@ class ubicacionFragment : Fragment(), OnMapReadyCallback {
 
     companion object {
         fun newInstance() =
-            ubicacionFragment().apply {
+            UbicacionFragment().apply {
                 arguments = Bundle().apply {
 
                 }
