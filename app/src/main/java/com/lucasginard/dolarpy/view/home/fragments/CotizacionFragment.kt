@@ -210,6 +210,7 @@ class CotizacionFragment : Fragment() {
                 adapter.calcularCotizacion(monto.toDouble())
                 adapter.notifyDataSetChanged()
             }else{
+                monto = ""
                 adapter.clearCotizacion()
             }
 
