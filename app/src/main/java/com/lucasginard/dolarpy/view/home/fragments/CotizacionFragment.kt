@@ -329,9 +329,6 @@ class CotizacionFragment : Fragment() {
     }
 
     private fun updateList(list: ArrayList<com_ven>) {
-        for(x in list){
-            Log.d("valorTest", "Nombre: ${x.name}/${x.compra}/${x.venta}")
-        }
         if (listDolarSave.isNotEmpty()){
             var flat = false
             var idDolar = 0
