@@ -2,30 +2,16 @@ package com.lucasginard.dolarpy.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.ColorStateList
 import android.content.res.Configuration
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.RadioButton
-import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.lucasginard.dolarpy.R
 import java.util.*
 
-fun RadioButton.setTint(color:Int = R.color.primaryColor){
+fun View.setTint(color:Int = R.color.primaryColor){
     this.backgroundTintList = ContextCompat.getColorStateList(this.context , color)
-}
-
-fun ImageView.setTint(color:Int = R.color.primaryColor){
-    this.backgroundTintList = ContextCompat.getColorStateList(this.context , color)
-}
-
-fun ProgressBar.setTint(@ColorInt color: Int) {
-    indeterminateTintList = ColorStateList.valueOf(color)
 }
 
 fun ConstraintLayout.setBackground(){

@@ -71,7 +71,7 @@ class DialogConfig(context: Context,var activity: Activity?,var preferences: Sha
             },{
                 saveLanguage(change,arrayLenguaje)
                 change.clearFocus()
-            })
+            },false)
         }
     }
 
@@ -118,7 +118,7 @@ class DialogConfig(context: Context,var activity: Activity?,var preferences: Sha
                 }
             },{
                 saveMode(preferences,switchMode)
-            })
+            },false)
         }
     }
 

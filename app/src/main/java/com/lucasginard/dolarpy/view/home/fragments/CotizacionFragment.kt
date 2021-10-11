@@ -387,7 +387,9 @@ class CotizacionFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        adapter.notifyDataSetChanged()
+        if(Tools.listBase.isEmpty()){
+            getApi()
+        }else  adapter.notifyDataSetChanged()
     }
 
     companion object {

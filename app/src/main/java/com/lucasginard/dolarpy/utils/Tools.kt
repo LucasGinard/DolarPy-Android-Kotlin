@@ -48,7 +48,7 @@ open class Tools {
             iconAnim.start()
         }
 
-        fun dialogCustom(activity: Activity, text: String, btnAccept: () -> Unit, btnCancel: () -> Unit ) {
+        fun dialogCustom(activity: Activity, text: String, btnAccept: () -> Unit, btnCancel: () -> Unit ,exitOnTap:Boolean = true) {
             val builder = MaterialAlertDialogBuilder(activity)
             builder.setMessage(text)
                 .setPositiveButton(R.string.btnAccept){dialog ,it ->
@@ -59,6 +59,7 @@ open class Tools {
                     btnCancel()
                     dialog.dismiss()
                 }
+                .setCancelable(exitOnTap)
             builder.show()
         }
 
