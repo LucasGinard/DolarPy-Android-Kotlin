@@ -274,7 +274,9 @@ class CotizacionFragment : Fragment() {
         })
 
         viewModel.errorMessage.observe(requireActivity(), {
-            Tools.dialogCustom(requireActivity(), getString(R.string.textErrorNet),{})
+            if (this.activity != null){
+                Tools.dialogCustom(requireActivity(), getString(R.string.textErrorNet),{})
+            }
             if (_binding.etMonto.visibility == View.VISIBLE && Tools.listBase.isNotEmpty() && !Tools.flatCheck){
                 getApi()
                 _binding.recycler.visibility = View.GONE
