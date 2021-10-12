@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
@@ -21,6 +20,7 @@ import com.lucasginard.dolarpy.database.DolarEntity
 import com.lucasginard.dolarpy.databinding.FragmentCotizacionBinding
 import com.lucasginard.dolarpy.domain.MainRepository
 import com.lucasginard.dolarpy.utils.Tools
+import com.lucasginard.dolarpy.utils.isAttachedToActivity
 import com.lucasginard.dolarpy.utils.setTint
 import com.lucasginard.dolarpy.view.adapter.adapterDolar
 import com.lucasginard.dolarpy.view.viewModel.MainViewModel
@@ -265,7 +265,9 @@ class CotizacionFragment : Fragment() {
             saveStringUpdate(it.update)
             if (Tools.lastUpdate != ""){
                 _binding.tvLastUpdate.visibility = View.VISIBLE
-                _binding.tvLastUpdate.text = "${getText(R.string.lastUpdate)} ${Tools.lastUpdate}"
+                if(activity?.isAttachedToActivity() == true){
+                    _binding.tvLastUpdate.text = "${getText(R.string.lastUpdate)} ${Tools.lastUpdate}"
+                }
                 saveStringUpdate(Tools.lastUpdate)
             }
             getListSave(Tools.listBase)

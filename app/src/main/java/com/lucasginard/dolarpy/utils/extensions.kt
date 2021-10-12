@@ -1,6 +1,7 @@
 package com.lucasginard.dolarpy.utils
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
 import android.view.MotionEvent
@@ -43,4 +44,8 @@ fun View.setOnClick(clickEvent: () -> Unit) {
         }
         false
     }
+}
+
+fun Activity.isAttachedToActivity(): Boolean {
+    return this.isAttachedToActivity()
 }
