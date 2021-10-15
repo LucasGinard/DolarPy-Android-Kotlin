@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     private var SPLASH_DISPLAY_LENGTH = 7000
     private val retrofitService = apiService.getInstance()
-    private lateinit var preferences: SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,10 +44,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun configureUI(){
         bindding.contraintBase.setBackground()
-        preferences = this.getSharedPreferences("saveSettings", Context.MODE_PRIVATE)
         val config = this.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        if (preferences.getBoolean("flatSaveMode",false)){
-            val saveMode = preferences.getInt("saveMode",3)
+        if (viewModel.getFlatModeTheme()){
+            val saveMode = viewModel.getMode()
             if (saveMode != 3){
                 if (Tools.flatTheme){
                     when(saveMode){

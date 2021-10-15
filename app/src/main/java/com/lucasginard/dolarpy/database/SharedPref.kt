@@ -5,21 +5,34 @@ import android.content.SharedPreferences
 
 class SharedPref (context: Context) {
     val prefCotizacionScreen = "UpdateSave"
+    val prefSplashScreen = "saveSettings"
+
     val sharedNameUpdate = "lastUpdate"
     val sharedNameIsLess = "isLess"
     val sharedNameIsBuy = "isBuy"
+    val sharedFlatMode = "flatSaveMode"
+    val sharedSaveMode = "saveMode"
 
-    val prefs: SharedPreferences = context.getSharedPreferences(prefCotizacionScreen, 0)
+    val prefsCotizacion: SharedPreferences = context.getSharedPreferences(prefCotizacionScreen, 0)
+    val prefsSplash: SharedPreferences = context.getSharedPreferences(prefSplashScreen, 0)
 
     var updateSave: String
-        get() = prefs.getString(sharedNameUpdate, "").toString()
-        set(value) = prefs.edit().putString(sharedNameUpdate, value).apply()
+        get() = prefsCotizacion.getString(sharedNameUpdate, "").toString()
+        set(value) = prefsCotizacion.edit().putString(sharedNameUpdate, value).apply()
 
     var isLess: Boolean
-        get() = prefs.getBoolean(sharedNameIsLess, true)
-        set(value) = prefs.edit().putBoolean(sharedNameIsLess, value).apply()
+        get() = prefsCotizacion.getBoolean(sharedNameIsLess, true)
+        set(value) = prefsCotizacion.edit().putBoolean(sharedNameIsLess, value).apply()
 
     var isBuy: Boolean
-        get() = prefs.getBoolean(sharedNameIsBuy, true)
-        set(value) = prefs.edit().putBoolean(sharedNameIsBuy, value).apply()
+        get() = prefsCotizacion.getBoolean(sharedNameIsBuy, true)
+        set(value) = prefsCotizacion.edit().putBoolean(sharedNameIsBuy, value).apply()
+
+    var flatMode: Boolean
+        get() = prefsSplash.getBoolean(sharedFlatMode, false)
+        set(value) = prefsCotizacion.edit().putBoolean(sharedFlatMode, value).apply()
+
+    var saveMode: Int
+        get() = prefsSplash.getInt(sharedSaveMode, 3)
+        set(value) = prefsCotizacion.edit().putInt(sharedSaveMode, value).apply()
 }

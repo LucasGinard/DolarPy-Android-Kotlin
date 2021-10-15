@@ -44,4 +44,21 @@ class MainRepository constructor(private val retrofitService: apiService) {
     fun saveIsLess(isLess:Boolean){
         DolarApp.sharedPref.isLess = isLess
     }
+
+    fun getFlatMode():Boolean{
+        return DolarApp.sharedPref.flatMode
+    }
+
+    fun saveFlatMode(mode:Boolean){
+        DolarApp.sharedPref.flatMode = mode
+    }
+
+    fun getMode():Int{
+        return DolarApp.sharedPref.saveMode
+    }
+
+    fun saveMode(mode:Int){
+        DolarApp.sharedPref.saveMode = mode
+    }
+
 }

@@ -67,4 +67,20 @@ class MainViewModel constructor(private val repository: MainRepository)  : ViewM
     fun setIsLess(isLess:Boolean){
         repository.saveIsLess(isLess)
     }
+
+    fun getFlatModeTheme():Boolean{
+        return repository.getFlatMode()
+    }
+
+    fun setFlatMode(mode:Boolean){
+        repository.saveFlatMode(mode)
+    }
+
+    fun getMode():Int{
+        return repository.getMode()
+    }
+
+    fun saveMode(mode:Int){
+        DolarApp.sharedPref.saveMode = mode
+    }
 }
