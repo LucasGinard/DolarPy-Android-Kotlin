@@ -34,13 +34,11 @@ import kotlinx.coroutines.withContext
 class CotizacionFragment : Fragment() {
 
     private lateinit var listDolarSave: MutableList<DolarEntity>
-    private lateinit var preference: SharedPreferences
     private lateinit var _binding :FragmentCotizacionBinding
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: adapterDolar
 
     private val retrofitService = apiService.getInstance()
-    private val sharedName = "UpdateSave"
     private var listaSave = ArrayList<com_ven>()
     private var lista = ArrayList<com_ven>()
     private var isBuy = true
@@ -65,7 +63,6 @@ class CotizacionFragment : Fragment() {
 
     private fun configureUI(){
         viewModel = ViewModelProvider(this, MyViewModelFactory(MainRepository(retrofitService))).get(MainViewModel::class.java)
-        preference = requireActivity().getSharedPreferences(sharedName,Context.MODE_PRIVATE)
         if (Tools.flatCheck){
             _binding.etMonto.visibility = View.GONE
             _binding.recycler.visibility = View.GONE
@@ -81,7 +78,7 @@ class CotizacionFragment : Fragment() {
         if (Tools.lastUpdate != ""){
             _binding.tvLastUpdate.visibility = View.VISIBLE
             _binding.tvLastUpdate.text = "${getText(R.string.lastUpdate)} ${Tools.lastUpdate}"
-            saveStringUpdate(Tools.lastUpdate)
+            viewModel.setLastUpdateText(Tools.lastUpdate)
         }
         backgroundTint()
         if (requireContext().resources.configuration.uiMode and
@@ -111,7 +108,7 @@ class CotizacionFragment : Fragment() {
                 adapter.setOrderUp(isBuy,monto)
                 backgroundTint(true)
                 isLess = false
-                saveOrder("isLess",isLess)
+                viewModel.setIsLess(isLess)
             }
         }
 
@@ -120,7 +117,7 @@ class CotizacionFragment : Fragment() {
                 adapter.setOrderDown(isBuy,monto)
                 backgroundTint()
                 isLess = true
-                saveOrder("isLess",isLess)
+                viewModel.setIsLess(isLess)
             }
         }
 
@@ -161,13 +158,13 @@ class CotizacionFragment : Fragment() {
             if (menuItem.itemId == R.id.nav_sell){
                 _binding.tvSetOrder.text = getString(R.string.dolarSellTitle)
                 isBuy = false
-                saveOrder("isBuy",isBuy)
+                viewModel.setIsBuy(isBuy)
                 orderList()
             }
             if (menuItem.itemId == R.id.nav_buy){
                 _binding.tvSetOrder.text = getString(R.string.dolarBuyTitle)
                 isBuy = true
-                saveOrder("isBuy",isBuy)
+                viewModel.setIsBuy(isBuy)
                 orderList()
             }
             return@setOnMenuItemClickListener true
@@ -194,7 +191,7 @@ class CotizacionFragment : Fragment() {
             _binding.recycler.visibility = View.VISIBLE
             _binding.tvLastUpdate.visibility = View.VISIBLE
             _binding.btnRefresh.visibility = View.VISIBLE
-            _binding.tvLastUpdate.text = "${getString(R.string.tvUpdateSave)}${preference.getString("lastUpdate","")}"
+            _binding.tvLastUpdate.text = "${getString(R.string.tvUpdateSave)}${viewModel.getLastUpdateText()}"
         }
     }
 
@@ -262,13 +259,14 @@ class CotizacionFragment : Fragment() {
             _binding.btnRefresh.visibility = View.GONE
             Tools.flatCheck = false
             getDolaresIngresados()
-            saveStringUpdate(it.update)
             if (Tools.lastUpdate != ""){
                 _binding.tvLastUpdate.visibility = View.VISIBLE
                 if(activity?.isAttachedToActivity() == true){
                     _binding.tvLastUpdate.text = "${getText(R.string.lastUpdate)} ${Tools.lastUpdate}"
                 }
-                saveStringUpdate(Tools.lastUpdate)
+                viewModel.setLastUpdateText(Tools.lastUpdate)
+            }else{
+                viewModel.setLastUpdateText(it.update)
             }
             getListSave(Tools.listBase)
             orderList()
@@ -309,7 +307,7 @@ class CotizacionFragment : Fragment() {
                     _binding.btnRefresh.visibility = View.VISIBLE
                     adapter.notifyDataSetChanged()
                     getDolaresIngresados()
-                    _binding.tvLastUpdate.text = "${getString(R.string.tvUpdateSave)}${preference.getString("lastUpdate","")}"
+                    _binding.tvLastUpdate.text = "${getString(R.string.tvUpdateSave)}${viewModel.getLastUpdateText()}"
                     Tools.flatRecyclerSave = true
                     orderList()
                 }
@@ -318,7 +316,7 @@ class CotizacionFragment : Fragment() {
     }
 
     private fun getListSave(list:ArrayList<com_ven>){
-        if(preference.getString("lastUpdate","") != ""){
+        if(viewModel.getLastUpdateText() != ""){
             GlobalScope.launch {
                 listDolarSave = viewModel.getAllDolarListSave()
                 withContext (Dispatchers.Main) {
@@ -352,18 +350,6 @@ class CotizacionFragment : Fragment() {
         }
     }
 
-    private fun saveStringUpdate(name:String) {
-        val editor = preference.edit()
-        editor.putString("lastUpdate",name)
-        editor.apply()
-    }
-
-    private fun saveOrder(key:String,valueSave:Boolean) {
-        val editor = preference.edit()
-        editor.putBoolean(key,valueSave)
-        editor.apply()
-    }
-
     private fun backgroundTint(boolean: Boolean = false){
         if (!boolean){
             _binding.rbMore.setTint(R.color.common_google_signin_btn_text_light_focused)
@@ -375,8 +361,8 @@ class CotizacionFragment : Fragment() {
     }
 
     private fun orderList(){
-        isBuy = preference.getBoolean("isBuy",true)
-        isLess = preference.getBoolean("isLess",true)
+        isBuy = viewModel.getIsBuy()
+        isLess = viewModel.getIsLess()
         if (isLess){
             adapter.setOrderDown(isBuy,monto)
         }else{

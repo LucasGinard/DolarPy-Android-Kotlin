@@ -21,4 +21,27 @@ class MainRepository constructor(private val retrofitService: apiService) {
         DolarApp.database.dolarDao().updateDolar(dolar)
     }
 
+    fun getUpdateText():String{
+        return DolarApp.sharedPref.updateSave
+    }
+
+    fun saveUpdateText(update:String){
+         DolarApp.sharedPref.updateSave = update
+    }
+
+    fun getIsBuySave():Boolean{
+        return DolarApp.sharedPref.isBuy
+    }
+
+    fun saveIsBuy(isBuy:Boolean){
+        DolarApp.sharedPref.isBuy = isBuy
+    }
+
+    fun getIsLessSave():Boolean{
+        return DolarApp.sharedPref.isLess
+    }
+
+    fun saveIsLess(isLess:Boolean){
+        DolarApp.sharedPref.isLess = isLess
+    }
 }

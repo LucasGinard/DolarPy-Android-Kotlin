@@ -43,4 +43,28 @@ class MainViewModel constructor(private val repository: MainRepository)  : ViewM
             repository.updateDolar(dolar)
         }
     }
+
+    fun getLastUpdateText():String{
+        return repository.getUpdateText()
+    }
+
+    fun setLastUpdateText(update:String){
+        repository.saveUpdateText(update)
+    }
+
+    fun getIsBuy():Boolean{
+        return repository.getIsBuySave()
+    }
+
+    fun setIsBuy(isBuy:Boolean){
+        repository.saveIsBuy(isBuy)
+    }
+
+    fun getIsLess():Boolean{
+        return repository.getIsLessSave()
+    }
+
+    fun setIsLess(isLess:Boolean){
+        repository.saveIsLess(isLess)
+    }
 }
