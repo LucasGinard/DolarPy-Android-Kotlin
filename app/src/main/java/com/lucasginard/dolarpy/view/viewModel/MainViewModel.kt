@@ -81,6 +81,22 @@ class MainViewModel constructor(private val repository: MainRepository)  : ViewM
     }
 
     fun saveMode(mode:Int){
-        DolarApp.sharedPref.saveMode = mode
+        repository.saveMode(mode)
+    }
+
+    fun getFlatLenguaje():Boolean{
+        return repository.FlatLenguaje()
+    }
+
+    fun setFlatLenguaje(flat:Boolean){
+        repository.saveFlatLenguaje(flat)
+    }
+
+    fun getSaveLenguaje():String{
+        return repository.SaveLenguaje()
+    }
+
+    fun setSaveLenguaje(lenguaje:String){
+        repository.saveLenguaje(lenguaje)
     }
 }

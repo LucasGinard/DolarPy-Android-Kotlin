@@ -12,18 +12,25 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.lucasginard.dolarpy.BuildConfig
 import com.lucasginard.dolarpy.R
+import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.databinding.FragmentInfoBinding
+import com.lucasginard.dolarpy.domain.MainRepository
 import com.lucasginard.dolarpy.utils.DialogConfig
 import com.lucasginard.dolarpy.utils.Tools
+import com.lucasginard.dolarpy.view.viewModel.MainViewModel
+import com.lucasginard.dolarpy.view.viewModel.MyViewModelFactory
 
 
 class InfoFragment : Fragment() {
 
+    private val retrofitService = apiService.getInstance()
     private lateinit var _binding:FragmentInfoBinding
-    private lateinit var preferences: SharedPreferences
+    private lateinit var viewModel: MainViewModel
     private lateinit var dialog:DialogConfig
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +49,7 @@ class InfoFragment : Fragment() {
     private fun configureUI(){
         Tools.rotarImagen(_binding.ivIcon)
         _binding.tvVersion.text = "${getString(R.string.tvVersion)}${BuildConfig.VERSION_NAME}"
-        preferences = requireActivity().getSharedPreferences("saveSettings", Context.MODE_PRIVATE)
+        viewModel = ViewModelProvider(this, MyViewModelFactory(MainRepository(retrofitService))).get(MainViewModel::class.java)
     }
 
     private fun configureOnClickListener(){
@@ -59,7 +66,7 @@ class InfoFragment : Fragment() {
         }
 
         _binding.btnSend.setOnClickListener {
-            var emails = arrayOf("contactolucasginard@gmail.com")
+            val emails = arrayOf("contactolucasginard@gmail.com")
             if(isValid()){
                 val intent = Intent(Intent.ACTION_SENDTO).apply {
                     data = Uri.parse("mailto:")
@@ -85,7 +92,7 @@ class InfoFragment : Fragment() {
 
         _binding.btnConfigure.setOnClickListener {
             Tools.rotarImagen(_binding.btnConfigure)
-            dialog = DialogConfig(requireContext(),activity,preferences)
+            dialog = DialogConfig(requireContext(),activity,viewModel)
             dialog.show()
         }
 

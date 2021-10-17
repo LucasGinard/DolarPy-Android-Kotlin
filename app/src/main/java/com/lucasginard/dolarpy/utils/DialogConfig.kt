@@ -3,9 +3,6 @@ package com.lucasginard.dolarpy.utils
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
-import android.content.Intent.getIntent
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -15,14 +12,13 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.view.home.HomeActivity
+import com.lucasginard.dolarpy.view.viewModel.MainViewModel
 import java.util.*
 
 
-class DialogConfig(context: Context,var activity: Activity?,var preferences: SharedPreferences): AlertDialog(context) {
+class DialogConfig(context: Context,var activity: Activity?,var viewModel: MainViewModel): AlertDialog(context) {
 
     init {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -32,16 +28,16 @@ class DialogConfig(context: Context,var activity: Activity?,var preferences: Sha
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_layout)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        showDialogConfigure(activity,preferences)
+        showDialogConfigure(activity)
     }
 
 
-    private fun showDialogConfigure(activity: Activity?,preferences: SharedPreferences) {
+    private fun showDialogConfigure(activity: Activity?) {
         val change = findViewById<AutoCompleteTextView>(R.id.lenguaje)
-        configureLenguaje(activity,change,preferences)
+        configureLenguaje(activity,change)
 
         val switchMode = findViewById<SwitchMaterial>(R.id.switchMode)
-        configureMode(switchMode,activity,preferences)
+        configureMode(switchMode,activity)
 
         val btnAccept = findViewById<Button>(R.id.btnAceppt)
         btnAccept.setOnClickListener {
@@ -49,7 +45,7 @@ class DialogConfig(context: Context,var activity: Activity?,var preferences: Sha
         }
     }
 
-    private fun configureLenguaje(activity: Activity?,change:AutoCompleteTextView,preferences: SharedPreferences){
+    private fun configureLenguaje(activity: Activity?,change:AutoCompleteTextView){
         val arrayLenguaje = listOf("English ","Español")
         val adapter = ArrayAdapter(activity!!, R.layout.support_simple_spinner_dropdown_item,arrayLenguaje)
         change.setAdapter(adapter)
@@ -59,12 +55,14 @@ class DialogConfig(context: Context,var activity: Activity?,var preferences: Sha
                 when (position){
                     0 ->{
                         activity.setAppLocale("en")
-                        saveConfigLenguaje(preferences,"en",true)
+                        viewModel.setSaveLenguaje("en")
+                        viewModel.setFlatLenguaje(true)
                         activity.recreate()
                     }
                     1 ->{
                         activity.setAppLocale("es")
-                        saveConfigLenguaje(preferences,"es",true)
+                        viewModel.setSaveLenguaje("es")
+                        viewModel.setFlatLenguaje(true)
                         activity.recreate()
                     }
                 }
@@ -76,8 +74,8 @@ class DialogConfig(context: Context,var activity: Activity?,var preferences: Sha
     }
 
     private fun saveLanguage(change:AutoCompleteTextView,arrayLenguaje: List<String>){
-        if (preferences.getBoolean("flatSaveLenguaje",false)){
-            when(preferences.getString("saveLenguaje","")){
+        if (viewModel.getFlatLenguaje()){
+            when(viewModel.getSaveLenguaje()){
                 "es" ->{
                     change.setText(arrayLenguaje[1],false)
                     dismiss()
@@ -101,49 +99,35 @@ class DialogConfig(context: Context,var activity: Activity?,var preferences: Sha
         }
     }
 
-    private fun configureMode(switchMode: SwitchMaterial,activity: Activity?,preferences: SharedPreferences) {
-        saveMode(preferences,switchMode)
+    private fun configureMode(switchMode: SwitchMaterial,activity: Activity?) {
+        saveMode(switchMode)
         switchMode.setOnCheckedChangeListener { buttonView, isChecked ->
             Tools.dialogCustom(activity!!,activity.getString(R.string.dialogMode),{
                 if (isChecked){
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    saveConfigMode(preferences,1,true)
+                    viewModel.saveMode(1)
+                    viewModel.setFlatMode(true)
                     Tools.flatTheme = false
                     activity.finish()
                 }else{
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    saveConfigMode(preferences,0,true)
+                    viewModel.saveMode(0)
+                    viewModel.setFlatMode(true)
                     Tools.flatTheme = false
                     activity.finish()
                 }
             },{
-                saveMode(preferences,switchMode)
+                saveMode(switchMode)
             },false)
         }
     }
 
-    private fun saveConfigLenguaje(preferences: SharedPreferences,lenguaje:String,flatLenguaje:Boolean){
-        val editor = preferences.edit()
-        editor.putBoolean("flatSaveLenguaje",flatLenguaje)
-        editor.putString("saveLenguaje",lenguaje)
-        editor.apply()
-    }
-
-    private fun saveMode(preferences: SharedPreferences,switchMode: SwitchMaterial?){
+    private fun saveMode(switchMode: SwitchMaterial?){
         val config = activity!!.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        when(preferences.getInt("saveMode",3)){
+        when(viewModel.getMode()){
             1 -> switchMode!!.isChecked = true
             0 -> switchMode!!.isChecked = false
             else -> switchMode!!.isChecked = config == Configuration.UI_MODE_NIGHT_YES
-        }
-    }
-
-    companion object{
-        fun saveConfigMode(preferences: SharedPreferences,mode:Int,flatMode:Boolean){
-            val editor = preferences.edit()
-            editor.putBoolean("flatSaveMode",flatMode)
-            editor.putInt("saveMode",mode)
-            editor.apply()
         }
     }
 }

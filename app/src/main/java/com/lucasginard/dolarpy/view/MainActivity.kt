@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configureUI(){
+        viewModel = ViewModelProvider(this, MyViewModelFactory(MainRepository(retrofitService))).get(MainViewModel::class.java)
         bindding.contraintBase.setBackground()
         val config = this.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         if (viewModel.getFlatModeTheme()){
@@ -67,7 +68,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getApi(){
-        viewModel = ViewModelProvider(this, MyViewModelFactory(MainRepository(retrofitService))).get(MainViewModel::class.java)
         viewModel.getDolarList.observe(this, Observer {
             it.dolarpy.amambay.name = "AMANBAY"
             it.dolarpy.bcp.name = "BCP"

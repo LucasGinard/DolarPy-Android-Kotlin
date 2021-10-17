@@ -61,4 +61,20 @@ class MainRepository constructor(private val retrofitService: apiService) {
         DolarApp.sharedPref.saveMode = mode
     }
 
+    fun FlatLenguaje():Boolean{
+        return DolarApp.sharedPref.flatLenguaje
+    }
+
+    fun saveFlatLenguaje(flat:Boolean){
+        DolarApp.sharedPref.flatLenguaje = flat
+    }
+
+    fun SaveLenguaje():String{
+        return DolarApp.sharedPref.saveLenguaje
+    }
+
+    fun saveLenguaje(lenguaje:String){
+        DolarApp.sharedPref.saveLenguaje = lenguaje
+    }
+
 }
