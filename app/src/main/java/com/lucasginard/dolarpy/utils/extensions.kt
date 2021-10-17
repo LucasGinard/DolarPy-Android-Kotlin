@@ -35,17 +35,3 @@ fun Context.setAppLocale(language: String) {
         this.resources.displayMetrics
     )
 }
-
-@SuppressLint("ClickableViewAccessibility")
-fun View.setOnClick(clickEvent: () -> Unit) {
-    this.setOnTouchListener { _, event ->
-        if (event.action == MotionEvent.ACTION_UP) {
-            clickEvent.invoke()
-        }
-        false
-    }
-}
-
-fun Activity.isAttachedToActivity(): Boolean {
-    return this.isAttachedToActivity()
-}

@@ -1,8 +1,6 @@
 package com.lucasginard.dolarpy.view.home.fragments
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.*
@@ -20,7 +18,6 @@ import com.lucasginard.dolarpy.database.DolarEntity
 import com.lucasginard.dolarpy.databinding.FragmentCotizacionBinding
 import com.lucasginard.dolarpy.domain.MainRepository
 import com.lucasginard.dolarpy.utils.Tools
-import com.lucasginard.dolarpy.utils.isAttachedToActivity
 import com.lucasginard.dolarpy.utils.setTint
 import com.lucasginard.dolarpy.view.adapter.adapterDolar
 import com.lucasginard.dolarpy.view.viewModel.MainViewModel
@@ -261,7 +258,7 @@ class CotizacionFragment : Fragment() {
             getDolaresIngresados()
             if (Tools.lastUpdate != ""){
                 _binding.tvLastUpdate.visibility = View.VISIBLE
-                if(activity?.isAttachedToActivity() == true){
+                if(activity != null){
                     _binding.tvLastUpdate.text = "${getText(R.string.lastUpdate)} ${Tools.lastUpdate}"
                 }
                 viewModel.setLastUpdateText(Tools.lastUpdate)
