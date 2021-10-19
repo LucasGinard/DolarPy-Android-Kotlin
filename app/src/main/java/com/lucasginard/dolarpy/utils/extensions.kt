@@ -1,14 +1,12 @@
 package com.lucasginard.dolarpy.utils
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
-import android.view.MotionEvent
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.lucasginard.dolarpy.R
+import java.text.DecimalFormat
 import java.util.*
 
 fun View.setTint(color:Int = R.color.primaryColor){
@@ -34,4 +32,9 @@ fun Context.setAppLocale(language: String) {
         config,
         this.resources.displayMetrics
     )
+}
+
+fun Number.conversionToDecimal(): String {
+    val df =  DecimalFormat("#,###")
+    return df.format(this)
 }
