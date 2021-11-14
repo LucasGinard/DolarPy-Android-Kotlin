@@ -1,6 +1,6 @@
 package com.lucasginard.dolarpy.data
 
-import com.lucasginard.dolarpy.dolarpyResponse
+import com.lucasginard.dolarpy.data.model.dolarpyResponse
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

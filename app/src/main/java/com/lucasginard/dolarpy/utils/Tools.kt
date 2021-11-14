@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.RotateAnimation
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.com_ven
+import com.lucasginard.dolarpy.data.model.com_ven
 import kotlin.collections.ArrayList
 
 

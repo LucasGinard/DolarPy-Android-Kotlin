@@ -4,10 +4,9 @@ import android.content.res.Resources
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.lucasginard.dolarpy.utils.Tools.Companion.setMargin
-import com.lucasginard.dolarpy.com_ven
+import com.lucasginard.dolarpy.data.model.com_ven
 import com.lucasginard.dolarpy.databinding.ItemDolarBinding
 import com.lucasginard.dolarpy.utils.conversionToDecimal
-import java.text.DecimalFormat
 
 
 class dolarViewHolder(view: View): RecyclerView.ViewHolder(view) {

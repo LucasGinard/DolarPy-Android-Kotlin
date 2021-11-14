@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.com_ven
+import com.lucasginard.dolarpy.data.model.com_ven
 import com.lucasginard.dolarpy.data.apiService
 import com.lucasginard.dolarpy.database.DolarEntity
 import com.lucasginard.dolarpy.databinding.FragmentCotizacionBinding

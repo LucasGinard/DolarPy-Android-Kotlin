@@ -1,12 +1,15 @@
-package com.lucasginard.dolarpy
+package com.lucasginard.dolarpy.data.model
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class dolarpyResponse(
         @SerializedName("dolarpy") var dolarpy: dolarpy,
         @SerializedName("updated") var update: String
 )
 
+@Keep
 data class dolarpy(
         val amambay: com_ven,
         val comven: com_ven,
@@ -25,6 +28,7 @@ data class dolarpy(
         val gnbfusion: com_ven
 )
 
+@Keep
 data class com_ven(
         var name: String? = "",
         var compra: Double,

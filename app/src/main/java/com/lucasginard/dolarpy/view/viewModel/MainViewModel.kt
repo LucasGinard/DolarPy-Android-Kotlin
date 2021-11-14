@@ -2,9 +2,8 @@ package com.lucasginard.dolarpy.view.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.lucasginard.dolarpy.DolarApp
 import com.lucasginard.dolarpy.database.DolarEntity
-import com.lucasginard.dolarpy.dolarpyResponse
+import com.lucasginard.dolarpy.data.model.dolarpyResponse
 import com.lucasginard.dolarpy.domain.MainRepository
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

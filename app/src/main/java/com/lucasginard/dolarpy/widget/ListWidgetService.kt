@@ -8,9 +8,9 @@ import android.content.Context
 import android.view.View
 import android.widget.RemoteViewsService
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.com_ven
+import com.lucasginard.dolarpy.data.model.com_ven
 import com.lucasginard.dolarpy.data.apiService
-import com.lucasginard.dolarpy.dolarpyResponse
+import com.lucasginard.dolarpy.data.model.dolarpyResponse
 import com.lucasginard.dolarpy.utils.conversionToDecimal
 import retrofit2.Call
 import retrofit2.Callback
