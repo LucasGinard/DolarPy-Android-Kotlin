@@ -76,13 +76,13 @@ class UbicacionFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    override fun onMapReady(googleMap: GoogleMap?) {
-        googleMap.let {
-            GoogleMap = it!!
+    override fun onMapReady(p0: GoogleMap) {
+        p0.let {
+            GoogleMap = it
         }
         val py = LatLng(-25.294589, -57.578563)
-        googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(py, 6f))
-        googleMap?.uiSettings?.isMapToolbarEnabled = false
+        p0.animateCamera(CameraUpdateFactory.newLatLngZoom(py, 6f))
+        p0.uiSettings.isMapToolbarEnabled = false
         for (x in empresasCotizacion){
             GoogleMap.addMarker(
                 MarkerOptions()
@@ -91,7 +91,7 @@ class UbicacionFragment : Fragment(), OnMapReadyCallback {
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_maps))
             )
         }
-        googleMap?.setOnInfoWindowClickListener {
+        p0.setOnInfoWindowClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/place/${it.position.latitude},${it.position.longitude}"))
             startActivity(intent)
             return@setOnInfoWindowClickListener

@@ -15,7 +15,9 @@
         android:theme="@style/Theme.DolarPy"
         android:usesCleartextTraffic="true">
 
-        <receiver android:name=".widget.ListWidgetProvider">
+        <receiver
+            android:name=".widget.ListWidgetProvider"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -29,7 +31,9 @@
         <activity
             android:name=".view.home.HomeActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".view.MainActivity">
+        <activity
+            android:name=".view.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
