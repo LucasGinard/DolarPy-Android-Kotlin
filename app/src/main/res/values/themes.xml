@@ -21,4 +21,10 @@
     </style>
 
     <style name="Theme.DolarPy.AppWidgetContainer" parent="Theme.DolarPy.AppWidgetContainerParent" />
+
+    <style name="Theme.AppSplash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#EAF3FA</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.DolarPy</item>
+    </style>
 </resources>

@@ -73,7 +73,8 @@ dependencies {
     implementation "androidx.room:room-runtime:2.3.0"
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
     kapt "androidx.room:room-compiler:2.3.0"
-    //Gif Animation
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
+    //Splash
+    implementation 'androidx.core:core-splashscreen:1.0.0-rc01'
+
 
 }

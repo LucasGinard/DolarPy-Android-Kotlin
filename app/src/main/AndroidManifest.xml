@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DolarPy"
+        android:theme="@style/Theme.AppSplash"
         android:usesCleartextTraffic="true">
 
         <receiver
@@ -30,9 +30,7 @@
             android:exported="false" />
         <activity
             android:name=".view.home.HomeActivity"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name=".view.MainActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
