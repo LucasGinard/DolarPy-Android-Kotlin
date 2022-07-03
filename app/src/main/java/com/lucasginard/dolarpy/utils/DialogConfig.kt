@@ -108,13 +108,11 @@ class DialogConfig(context: Context,var activity: Activity?,var viewModel: MainV
                     viewModel.saveMode(1)
                     viewModel.setFlatMode(true)
                     Tools.flatTheme = false
-                    activity.finish()
                 }else{
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     viewModel.saveMode(0)
                     viewModel.setFlatMode(true)
                     Tools.flatTheme = false
-                    activity.finish()
                 }
             },{
                 saveMode(switchMode)

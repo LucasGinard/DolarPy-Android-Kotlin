@@ -78,38 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:shimmer_auto_start="true">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:columnCount="2"
-                            android:layout_marginTop="8dp"
-                            android:padding="3dp">
-                            <include layout="@layout/item_dolar_loading"/>
-                            <include layout="@layout/item_dolar_loading"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:columnCount="2"
-                            android:layout_marginTop="8dp"
-                            android:padding="3dp">
-                            <include layout="@layout/item_dolar_loading"/>
-                            <include layout="@layout/item_dolar_loading"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:columnCount="2"
-                            android:layout_marginTop="8dp"
-                            android:padding="3dp">
-                            <include layout="@layout/item_dolar_loading"/>
-                            <include layout="@layout/item_dolar_loading"/>
-                        </LinearLayout>
-                    </LinearLayout>
+                    <include layout="@layout/list_loading"/>
                 </com.facebook.shimmer.ShimmerFrameLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvDolar"
