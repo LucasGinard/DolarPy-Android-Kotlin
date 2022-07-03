@@ -11,6 +11,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.data.apiService
@@ -34,7 +36,6 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var bindding:ActivityHomeBinding
     private lateinit var viewModel: MainViewModel
 
-    private var idSave:Int = R.id.nav_coti
     private val retrofitService = apiService.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,20 +43,8 @@ class HomeActivity : AppCompatActivity() {
         installSplashScreen()
         bindding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(bindding.root)
+        configureNav()
         configureUI()
-
-        bindding.navView.setOnNavigationItemSelectedListener()
-        bindding.navView.selectedItemId = R.id.nav_coti
-
-        val fm: FragmentManager = supportFragmentManager
-        val ft: FragmentTransaction = fm.beginTransaction()
-        ft.replace(bindding.fragmentHome.id, CotizacionFragment.newInstance())
-        ft.commit()
-
-        if (savedInstanceState != null) {
-            idSave = savedInstanceState.getInt("idSave")
-        }
-        listenHorizontalSwipe(bindding.fragmentHome)
     }
 
     private fun configureUI() {
@@ -108,80 +97,12 @@ class HomeActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         configureUI()
-        bindding.navView.selectedItemId = idSave
-        bindding.navView.setOnNavigationItemSelectedListener()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt("idSave", idSave);
-    }
-
-    fun listenHorizontalSwipe(view: View) {
-        view.setOnTouchListener(object : OnHorizontalSwipeListener(view.context) {
-
-            override fun onRightSwipe() {
-                when(bindding.navView.selectedItemId ){
-                    R.id.nav_coti ->{
-                        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                        ft.replace(bindding.fragmentHome.id, InfoFragment.newInstance())
-                        bindding.navView.selectedItemId = R.id.nav_info
-                        ft.commit()
-                    }
-                    R.id.nav_ubi ->{
-                        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                        ft.replace(bindding.fragmentHome.id, CotizacionFragment.newInstance())
-                        bindding.navView.selectedItemId = R.id.nav_coti
-                        ft.commit()
-                    }
-                }
-
-            }
-
-            override fun onLeftSwipe() {
-                when(bindding.navView.selectedItemId){
-                    R.id.nav_info ->{
-                        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                        ft.replace(bindding.fragmentHome.id, CotizacionFragment.newInstance())
-                        bindding.navView.selectedItemId = R.id.nav_coti
-                        ft.commit()
-                    }
-                    R.id.nav_coti ->{
-                        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                        ft.replace(bindding.fragmentHome.id, UbicacionFragment.newInstance())
-                        bindding.navView.selectedItemId = R.id.nav_ubi
-                        ft.commit()
-                    }
-                }
-            }
-        })
     }
 
 
-    private fun BottomNavigationView.setOnNavigationItemSelectedListener() {
-        setOnNavigationItemSelectedListener {
-            val fm: FragmentManager = supportFragmentManager
-            val ft: FragmentTransaction = fm.beginTransaction()
-
-            when(it.itemId){
-                R.id.nav_ubi ->{
-                    ft.replace(bindding.fragmentHome.id, UbicacionFragment.newInstance())
-                    ft.commit()
-                    idSave = it.itemId
-                }
-                R.id.nav_coti ->{
-                    ft.replace(bindding.fragmentHome.id, CotizacionFragment.newInstance())
-                    ft.commit()
-                    idSave = it.itemId
-                }
-                R.id.nav_info ->{
-                    ft.replace(bindding.fragmentHome.id, InfoFragment.newInstance())
-                    ft.commit()
-                    idSave = it.itemId
-                }
-            }
-            return@setOnNavigationItemSelectedListener true
-        }
+    private fun configureNav() {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentHome) as NavHostFragment
+        bindding.navView.setupWithNavController(navHostFragment.navController)
     }
 
 }

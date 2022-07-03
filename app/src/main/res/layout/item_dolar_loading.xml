@@ -5,74 +5,41 @@
     android:layout_width="170dp"
     android:layout_height="160dp"
     android:layout_margin="5dp"
-    app:cardBackgroundColor="@color/primaryColor"
+    app:cardBackgroundColor="#C8C8C9"
     app:cardElevation="8sp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/linearCompra"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
+            android:background="#BCBCBD"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tvCompra"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:text="@string/dolarBuy"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+        </FrameLayout>
 
-            <TextView
-                android:id="@+id/tvCompraM"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="₲7000.0"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/linearVenta"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#BCBCBD"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearCompra">
-
-            <TextView
-                android:id="@+id/tvVenta"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:text="@string/dolarSell"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tvVentaM"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="₲7000.0"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/linearRef"
@@ -112,12 +79,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/white"
+            android:background="#BCBCBD"
             android:paddingLeft="10sp"
             android:paddingTop="10sp"
             android:paddingBottom="10sp"
-            android:text="Casa de Cambios"
-            android:textColor="@color/primaryColor"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

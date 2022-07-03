@@ -3,6 +3,7 @@ package com.lucasginard.dolarpy.view.home.fragments
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
@@ -27,7 +28,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
 class CotizacionFragment : Fragment() {
 
     private lateinit var listDolarSave: MutableList<DolarEntity>
@@ -41,10 +41,6 @@ class CotizacionFragment : Fragment() {
     private var isBuy = true
     private var isLess = true
     private var monto = ""
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -218,7 +214,7 @@ class CotizacionFragment : Fragment() {
     }
 
     private fun getApi(){
-        viewModel.getDolarList.observe(requireActivity(), {
+        viewModel.getDolarList.observe(requireActivity()) {
             it.dolarpy.amambay.name = "AMANBAY"
             it.dolarpy.bcp.name = "BCP"
             it.dolarpy.bonanza.name = "BONANZA"
@@ -254,34 +250,37 @@ class CotizacionFragment : Fragment() {
             _binding.tvConnect.visibility = View.GONE
             _binding.pgLoading.visibility = View.GONE
             _binding.btnRefresh.visibility = View.GONE
+            _binding.listLoading.visibility = View.GONE
+            _binding.rvDolar.visibility = View.VISIBLE
             Tools.flatCheck = false
             getDolaresIngresados()
-            if (Tools.lastUpdate != ""){
+            if (Tools.lastUpdate != "") {
                 _binding.tvLastUpdate.visibility = View.VISIBLE
-                if(activity != null){
-                    _binding.tvLastUpdate.text = "${getText(R.string.lastUpdate)} ${Tools.lastUpdate}"
+                if (activity != null) {
+                    _binding.tvLastUpdate.text =
+                        "${getText(R.string.lastUpdate)} ${Tools.lastUpdate}"
                 }
                 viewModel.setLastUpdateText(Tools.lastUpdate)
-            }else{
+            } else {
                 viewModel.setLastUpdateText(it.update)
             }
             getListSave(Tools.listBase)
             orderList()
             Tools.flatRecyclerSave = false
-        })
+        }
 
-        viewModel.errorMessage.observe(requireActivity(), {
-            if (this.activity != null){
-                Tools.dialogCustom(requireActivity(), getString(R.string.textErrorNet),{})
+        viewModel.errorMessage.observe(requireActivity()) {
+            if (this.activity != null) {
+                Tools.dialogCustom(requireActivity(), getString(R.string.textErrorNet), {})
             }
-            if (_binding.etMonto.visibility == View.VISIBLE && Tools.listBase.isNotEmpty() && !Tools.flatCheck){
+            if (_binding.etMonto.visibility == View.VISIBLE && Tools.listBase.isNotEmpty() && !Tools.flatCheck) {
                 getApi()
                 _binding.recycler.visibility = View.GONE
                 _binding.pgLoading.visibility = View.GONE
                 _binding.tvConnect.visibility = View.VISIBLE
             }
             _binding.pgLoading.visibility = View.GONE
-        })
+        }
         viewModel.getAllDolar()
     }
 
@@ -376,7 +375,18 @@ class CotizacionFragment : Fragment() {
         super.onResume()
         if(Tools.listBase.isEmpty()){
             getApi()
-        }else  adapter.notifyDataSetChanged()
+        }else{
+            _binding.rvDolar.visibility = View.VISIBLE
+            _binding.listLoading.visibility = View.GONE
+        }
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        savedInstanceState?.let {
+            _binding.etMontoIngresado.setText(it.getString("amountEdit") ?: "")
+            getDolaresIngresados()
+        }
     }
 
     companion object {

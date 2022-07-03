@@ -19,7 +19,6 @@ class ListWidgetProvider : AppWidgetProvider() {
             if (extras != null) {
                 val appWidgetIds = extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_IDS)
                 if (appWidgetIds != null && appWidgetIds.isNotEmpty()) {
-                    Toast.makeText(context, "REFRESH Test", Toast.LENGTH_SHORT).show()
                     this.onUpdate(context!!, AppWidgetManager.getInstance(context), appWidgetIds)
                 }
             }

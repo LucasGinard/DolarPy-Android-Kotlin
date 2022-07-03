@@ -7,7 +7,17 @@
 
     <fragment
         android:id="@+id/fragment_inicio"
-        android:name="com.lucasginard.dolarpy.view.fragment_inicio"
+        android:name="com.lucasginard.dolarpy.view.home.fragments.CotizacionFragment"
         android:label="fragment_inicio"
         tools:layout="@layout/fragment_cotizacion" />
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.lucasginard.dolarpy.view.home.fragments.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" />
+    <fragment
+        android:id="@+id/ubicacionFragment"
+        android:name="com.lucasginard.dolarpy.view.home.fragments.UbicacionFragment"
+        android:label="fragment_ubicacion"
+        tools:layout="@layout/fragment_ubicacion" />
 </navigation>
