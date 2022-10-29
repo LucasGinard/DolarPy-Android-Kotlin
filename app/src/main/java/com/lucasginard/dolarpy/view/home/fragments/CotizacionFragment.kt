@@ -85,7 +85,6 @@ class CotizacionFragment : Fragment() {
     private fun configureOnClickListener() {
         _binding.tvReconnect.setOnClickListener {
             getApi()
-            _binding.pgLoading.visibility = View.VISIBLE
         }
 
         _binding.tvDataSave.setOnClickListener {
@@ -248,7 +247,6 @@ class CotizacionFragment : Fragment() {
             _binding.etMonto.visibility = View.VISIBLE
             _binding.recycler.visibility = View.VISIBLE
             _binding.tvConnect.visibility = View.GONE
-            _binding.pgLoading.visibility = View.GONE
             _binding.btnRefresh.visibility = View.GONE
             _binding.listLoading.visibility = View.GONE
             _binding.rvDolar.visibility = View.VISIBLE
@@ -272,14 +270,16 @@ class CotizacionFragment : Fragment() {
         viewModel.errorMessage.observe(requireActivity()) {
             if (this.activity != null) {
                 Tools.dialogCustom(requireActivity(), getString(R.string.textErrorNet), {})
+                _binding.listLoading.visibility = View.GONE
+                _binding.recycler.visibility = View.GONE
+                _binding.tvConnect.visibility = View.VISIBLE
             }
             if (_binding.etMonto.visibility == View.VISIBLE && Tools.listBase.isNotEmpty() && !Tools.flatCheck) {
                 getApi()
+                _binding.listLoading.visibility = View.GONE
                 _binding.recycler.visibility = View.GONE
-                _binding.pgLoading.visibility = View.GONE
                 _binding.tvConnect.visibility = View.VISIBLE
             }
-            _binding.pgLoading.visibility = View.GONE
         }
         viewModel.getAllDolar()
     }
@@ -299,6 +299,7 @@ class CotizacionFragment : Fragment() {
                     _binding.tvConnect.visibility = View.GONE
                     _binding.etMonto.visibility = View.VISIBLE
                     _binding.recycler.visibility = View.VISIBLE
+                    _binding.rvDolar.visibility = View.VISIBLE
                     _binding.tvLastUpdate.visibility = View.VISIBLE
                     _binding.btnRefresh.visibility = View.VISIBLE
                     adapter.notifyDataSetChanged()
