@@ -7,6 +7,8 @@ import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.view.View
 import android.widget.RemoteViewsService
+import com.google.gson.Gson
+import com.google.gson.JsonElement
 import com.lucasginard.dolarpy.R
 import com.lucasginard.dolarpy.data.model.com_ven
 import com.lucasginard.dolarpy.data.apiService
@@ -125,34 +127,15 @@ class ListWidgetService : RemoteViewsService() {
             ) {
                 if(mWidgetItems.isEmpty()){
                     list.clear()
-                    response.body()!!.dolarpy.amambay.name = "AMANBAY"
-                    response.body()!!.dolarpy.bcp.name = "BCP"
-                    response.body()!!.dolarpy.bonanza.name = "BONANZA"
-                    response.body()!!.dolarpy.cambiosalberdi.name = "CAMBIOS ALBERDI"
-                    response.body()!!.dolarpy.cambioschaco.name = "CAMBIOS CHACO"
-                    response.body()!!.dolarpy.interfisa.name = "INTERFISA"
-                    response.body()!!.dolarpy.lamoneda.name = "LA MONEDA"
-                    response.body()!!.dolarpy.maxicambios.name = "MAXICAMBIOS"
-                    response.body()!!.dolarpy.mundialcambios.name = "MUNDIAL CAMBIOS"
-                    response.body()!!.dolarpy.mydcambios.name = "MYD CAMBIOS"
-                    response.body()!!.dolarpy.set.name = "SET"
-                    response.body()!!.dolarpy.vision.name = "Visión Banco"
-                    response.body()!!.dolarpy.gnbfusion.name = "GNB FUSIÓN"
-                    response.body()!!.dolarpy.eurocambios.name = "Euro Cambios"
-                    list.add(response.body()!!.dolarpy.amambay)
-                    list.add(response.body()!!.dolarpy.bcp)
-                    list.add(response.body()!!.dolarpy.bonanza)
-                    list.add(response.body()!!.dolarpy.cambiosalberdi)
-                    list.add(response.body()!!.dolarpy.cambioschaco)
-                    list.add(response.body()!!.dolarpy.interfisa)
-                    list.add(response.body()!!.dolarpy.gnbfusion)
-                    list.add(response.body()!!.dolarpy.lamoneda)
-                    list.add(response.body()!!.dolarpy.maxicambios)
-                    list.add(response.body()!!.dolarpy.mundialcambios)
-                    list.add(response.body()!!.dolarpy.mydcambios)
-                    list.add(response.body()!!.dolarpy.set)
-                    list.add(response.body()!!.dolarpy.vision)
-                    list.add(response.body()!!.dolarpy.eurocambios)
+                    val json = response.body()?.dolarpy
+                    if (json != null){
+                        val entrySet: Set<Map.Entry<String, JsonElement?>> = json.entrySet()
+                        for ((key) in entrySet) {
+                            val gson = Gson().fromJson(json.get(key),com_ven::class.java)
+                            gson.name = key
+                            list.add(gson)
+                        }
+                    }
                     updateLast = response.body()!!.update
                     val aux = list.sortedBy{it.compra}
                     for (x in aux){

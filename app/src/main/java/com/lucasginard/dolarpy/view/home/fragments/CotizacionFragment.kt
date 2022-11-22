@@ -3,7 +3,6 @@ package com.lucasginard.dolarpy.view.home.fragments
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
@@ -12,9 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.JsonElement
 import com.lucasginard.dolarpy.R
-import com.lucasginard.dolarpy.data.model.com_ven
 import com.lucasginard.dolarpy.data.apiService
+import com.lucasginard.dolarpy.data.model.com_ven
 import com.lucasginard.dolarpy.database.DolarEntity
 import com.lucasginard.dolarpy.databinding.FragmentCotizacionBinding
 import com.lucasginard.dolarpy.domain.MainRepository
@@ -27,6 +28,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 class CotizacionFragment : Fragment() {
 
@@ -214,35 +216,13 @@ class CotizacionFragment : Fragment() {
 
     private fun getApi(){
         viewModel.getDolarList.observe(requireActivity()) {
-            it.dolarpy.amambay.name = "AMANBAY"
-            it.dolarpy.bcp.name = "BCP"
-            it.dolarpy.bonanza.name = "BONANZA"
-            it.dolarpy.cambiosalberdi.name = "CAMBIOS ALBERDI"
-            it.dolarpy.cambioschaco.name = "CAMBIOS CHACO"
-            it.dolarpy.interfisa.name = "INTERFISA"
-            it.dolarpy.lamoneda.name = "LA MONEDA"
-            it.dolarpy.maxicambios.name = "MAXICAMBIOS"
-            it.dolarpy.mundialcambios.name = "MUNDIAL CAMBIOS"
-            it.dolarpy.mydcambios.name = "MYD CAMBIOS"
-            it.dolarpy.set.name = "SET"
-            it.dolarpy.vision.name = "Visión Banco"
-            it.dolarpy.eurocambios.name = "Euro Cambios"
-            it.dolarpy.gnbfusion.name = "GNB FUSIÓN"
-            Tools.listBase.clear()
-            Tools.listBase.add(it.dolarpy.amambay)
-            Tools.listBase.add(it.dolarpy.gnbfusion)
-            Tools.listBase.add(it.dolarpy.bcp)
-            Tools.listBase.add(it.dolarpy.bonanza)
-            Tools.listBase.add(it.dolarpy.cambiosalberdi)
-            Tools.listBase.add(it.dolarpy.cambioschaco)
-            Tools.listBase.add(it.dolarpy.interfisa)
-            Tools.listBase.add(it.dolarpy.lamoneda)
-            Tools.listBase.add(it.dolarpy.maxicambios)
-            Tools.listBase.add(it.dolarpy.mundialcambios)
-            Tools.listBase.add(it.dolarpy.mydcambios)
-            Tools.listBase.add(it.dolarpy.set)
-            Tools.listBase.add(it.dolarpy.vision)
-            Tools.listBase.add(it.dolarpy.eurocambios)
+            val json = it.dolarpy
+            val entrySet: Set<Map.Entry<String, JsonElement?>> = json.entrySet()
+            for ((key) in entrySet) {
+                val gson = Gson().fromJson(json.get(key),com_ven::class.java)
+                gson.name = key
+                Tools.listBase.add(gson)
+            }
             Tools.lastUpdate = it.update
             _binding.etMonto.visibility = View.VISIBLE
             _binding.recycler.visibility = View.VISIBLE
