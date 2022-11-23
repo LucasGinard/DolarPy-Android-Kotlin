@@ -13,11 +13,11 @@ class dolarViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val binding = ItemDolarBinding.bind(view)
     fun bind(local: com_ven){
         binding.tvLocal.text = local.name
-        if (local.referencialDiario != null && local.name == "BCP"){
+        if (local.referencial_diario != null){
             binding.linearRef.visibility = View.VISIBLE
             binding.tvCompraM.text = "₲${(local.compra.conversionToDecimal())}"
             binding.tvVentaM.text =  "₲${local.venta.conversionToDecimal()}"
-            binding.tvRefM.text = "₲${local.referencialDiario?.conversionToDecimal()}"
+            binding.tvRefM.text = "₲${local.referencial_diario?.conversionToDecimal()}"
             setMargin(binding.linearCompra, left = 8, top = 20)
             setMargin(binding.linearVenta,  left = 8, top = 50)
         }else{

@@ -45,8 +45,8 @@ class adapterDolar (var localesDolar: ArrayList<com_ven>) : RecyclerView.Adapter
                 item.name = x.name
                 item.compra = ingresado * Tools.listBase[i].compra
                 item.venta  = ingresado * Tools.listBase[i].venta
-                if (Tools.listBase[i].referencialDiario != null){
-                    item.referencialDiario = ingresado * Tools.listBase[i].referencialDiario!!
+                if (Tools.listBase[i].referencial_diario != null){
+                    item.referencial_diario = ingresado * Tools.listBase[i].referencial_diario!!
                 }
             }
             itemaux.add(item)
