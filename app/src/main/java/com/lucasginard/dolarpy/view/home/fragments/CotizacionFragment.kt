@@ -217,6 +217,7 @@ class CotizacionFragment : Fragment() {
     private fun getApi(){
         viewModel.getDolarList.observe(requireActivity()) {
             val json = it.dolarpy
+            Tools.listBase.clear()
             val entrySet: Set<Map.Entry<String, JsonElement?>> = json.entrySet()
             for ((key) in entrySet) {
                 val gson = Gson().fromJson(json.get(key),com_ven::class.java)
