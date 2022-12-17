@@ -192,19 +192,23 @@ class CotizacionFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun getDolaresIngresados(){
         _binding.etMontoIngresado.doAfterTextChanged {
-            if(_binding.etMontoIngresado.text.toString() == "."){
-                _binding.etMontoIngresado.setText("0.")
-                _binding.etMontoIngresado.setSelection(2)
+            try {
+                if(_binding.etMontoIngresado.text.toString() == "."){
+                    _binding.etMontoIngresado.setText("0.")
+                    _binding.etMontoIngresado.setSelection(2)
+                }
+                if (!it.isNullOrEmpty() && _binding.etMontoIngresado.text.toString() != "0."){
+                    monto = _binding.etMontoIngresado.text.toString()
+                    adapter.calcularCotizacion(monto.toDouble())
+                    adapter.notifyDataSetChanged()
+                }else{
+                    monto = ""
+                    adapter.clearCotizacion()
+                }
+                _binding.etMontoIngresado.error = null
+            }catch (e:Exception){
+                _binding.etMontoIngresado.error = ""
             }
-            if (!it.isNullOrEmpty() && _binding.etMontoIngresado.text.toString() != "0."){
-                monto = _binding.etMontoIngresado.text.toString()
-                adapter.calcularCotizacion(monto.toDouble())
-                adapter.notifyDataSetChanged()
-            }else{
-                monto = ""
-                adapter.clearCotizacion()
-            }
-
         }
         Tools.listBase.removeIf { it.venta == 0.0 && it.compra == 0.0 }
         lista.clear()
