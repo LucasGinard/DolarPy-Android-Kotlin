@@ -29,11 +29,11 @@ abstract class OnHorizontalSwipeListener(val context: Context) : View.OnTouchLis
 
         override fun onDown(e: MotionEvent) = true
 
-        override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float)
+        override fun onFling(p0: MotionEvent?, e1: MotionEvent, velocityX: Float, velocityY: Float)
                 : Boolean {
 
-            val deltaY = e2.y - e1.y
-            val deltaX = e2.x - e1.x
+            val deltaY = (p0?.y ?: 0f) - e1.y
+            val deltaX = (p0?.x ?: 0f) - e1.x
             if(deltaY != null && deltaY >0){
                 if (Math.abs(deltaX) < Math.abs(deltaY)) return false
 

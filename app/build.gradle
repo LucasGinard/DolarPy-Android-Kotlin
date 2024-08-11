@@ -9,14 +9,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion "30.0.3"
+    namespace 'com.lucasginard.dolarpy'
+
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.lucasginard.dolarpy"
         minSdkVersion 24
-        targetSdkVersion 33
-        versionCode 14
+        targetSdkVersion 34
+        versionCode 15
         versionName "1.2.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -29,11 +30,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 
     buildFeatures{
@@ -42,7 +44,7 @@ android {
 }
 
 dependencies {
-    def lifecycle_version = "2.4.1"
+    def lifecycle_version = "2.6.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -63,17 +65,17 @@ dependencies {
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     //Firebase
-    implementation 'com.google.firebase:firebase-analytics:21.2.0'
-    implementation 'com.google.firebase:firebase-crashlytics:18.3.2'
+    implementation 'com.google.firebase:firebase-analytics:22.0.2'
+    implementation 'com.google.firebase:firebase-crashlytics:19.0.3'
     //Google Maps
-    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-maps:19.0.0'
     //Room
-    implementation 'androidx.room:room-ktx:2.3.0'
-    implementation "androidx.room:room-runtime:2.3.0"
+    implementation 'androidx.room:room-ktx:2.6.1'
+    implementation "androidx.room:room-runtime:2.6.1"
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
-    kapt "androidx.room:room-compiler:2.3.0"
+    kapt "androidx.room:room-compiler:2.6.1"
     //Splash
-    implementation 'androidx.core:core-splashscreen:1.0.0'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
     //Animation load List
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
