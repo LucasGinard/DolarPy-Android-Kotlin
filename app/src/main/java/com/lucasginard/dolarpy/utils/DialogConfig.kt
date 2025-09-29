@@ -47,7 +47,7 @@ class DialogConfig(context: Context,var activity: Activity?,var viewModel: MainV
 
     private fun configureLenguaje(activity: Activity?,change:AutoCompleteTextView){
         val arrayLenguaje = listOf("English ","Español")
-        val adapter = ArrayAdapter(activity!!, R.layout.support_simple_spinner_dropdown_item,arrayLenguaje)
+        val adapter = ArrayAdapter(activity!!, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,arrayLenguaje)
         change.setAdapter(adapter)
         saveLanguage(change,arrayLenguaje)
         change.setOnItemClickListener { parent, view, position, id ->

@@ -21,6 +21,7 @@ import com.lucasginard.dolarpy.databinding.ActivityHomeBinding
 import com.lucasginard.dolarpy.domain.MainRepository
 import com.lucasginard.dolarpy.utils.OnHorizontalSwipeListener
 import com.lucasginard.dolarpy.utils.Tools
+import com.lucasginard.dolarpy.utils.applySystemBarsInsets
 import com.lucasginard.dolarpy.utils.setAppLocale
 import com.lucasginard.dolarpy.view.home.fragments.CotizacionFragment
 import com.lucasginard.dolarpy.view.home.fragments.InfoFragment
@@ -42,6 +43,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         bindding = ActivityHomeBinding.inflate(layoutInflater)
+        bindding.root.applySystemBarsInsets()
         setContentView(bindding.root)
         configureNav()
         configureUI()

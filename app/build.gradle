@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
-    id 'com.google.secrets_gradle_plugin' version '0.5'
+    id 'com.google.secrets_gradle_plugin' version '0.6.1'
     id 'com.google.firebase.appdistribution'
     id 'kotlin-kapt'
 }
@@ -11,13 +11,13 @@ plugins {
 android {
     namespace 'com.lucasginard.dolarpy'
 
-    compileSdk 34
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.lucasginard.dolarpy"
         minSdkVersion 24
-        targetSdkVersion 34
-        versionCode 15
+        targetSdkVersion 36
+        versionCode 16
         versionName "1.2.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -40,6 +40,7 @@ android {
 
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 }
 

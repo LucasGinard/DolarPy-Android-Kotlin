@@ -334,11 +334,11 @@ class CotizacionFragment : Fragment() {
 
     private fun backgroundTint(boolean: Boolean = false){
         if (!boolean){
-            _binding.rbMore.setTint(R.color.common_google_signin_btn_text_light_focused)
+            _binding.rbMore.setTint(R.color.black_50)
             _binding.rbLess.setTint(R.color.primaryColor)
         }else{
             _binding.rbMore.setTint(R.color.primaryColor)
-            _binding.rbLess.setTint(R.color.common_google_signin_btn_text_light_focused)
+            _binding.rbLess.setTint(R.color.black_50)
         }
     }
 

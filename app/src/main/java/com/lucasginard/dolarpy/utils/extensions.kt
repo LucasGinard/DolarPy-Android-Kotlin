@@ -8,6 +8,9 @@ import androidx.core.content.ContextCompat
 import com.lucasginard.dolarpy.R
 import java.text.DecimalFormat
 import java.util.*
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 
 fun View.setTint(color:Int = R.color.primaryColor){
     this.backgroundTintList = ContextCompat.getColorStateList(this.context , color)
@@ -37,4 +40,14 @@ fun Context.setAppLocale(language: String) {
 fun Number.conversionToDecimal(): String {
     val df =  DecimalFormat("#,###")
     return df.format(this)
+}
+
+fun View.applySystemBarsInsets() {
+    ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->
+        val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+        v.updatePadding(
+            top = systemBars.top
+        )
+        insets
+    }
 }
